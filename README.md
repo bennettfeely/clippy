@@ -1,4 +1,4 @@
-Clippy
+[Clippy](http://bennettfeely.com/clippy)
 ======
 
 Shape up your website with CSS clip-paths.
