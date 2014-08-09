@@ -10,21 +10,20 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 * `rect()`
 * `polygon()`
 * `inset()`
-* 
 
-#### Details:
+#### Details
 * Utilizes [Dragabilly.js](https://github.com/desandro/draggabilly) for the handles which each correspond to a point for CSS clip path. Works really well on touch devices, especially with the `touch-action` property.
 * Using Grunt with SCSS, autoprefixer, minification for CSS, HTML, and soon, jQuery and images.
 * Material design-ish inspiration.
 * Mobile-first design, making things work great on mobile touch devices and will work responsively upwards from there.
 
 
-#### To do:
+#### To do
 
 * Get `circle()` working better when the demo area is not a 1:1 ratio.
 * Start working on  `ellipse()` with much reused from `circle()`, but more complex.
 * Make a favicon.
-* Make a panel card with quick information about 
+* Make a panel card with quick information about the `clip-path` property.
 * Look up browser support and create a panel card with that information.
-* Get more cooler images?
+* Get cooler images?
 
