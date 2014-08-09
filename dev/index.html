@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="percentage">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS clip-path Creator</title>
+  <link rel="stylesheet" type="text/css" href="style.min.css">
+  <link rel="shortcut icon" href="favicon.ico" />
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<main>
+  <header>
+    <a href="http://bennettfeely.com/clip-path">CSS clip-path maker</a>
+
+    <!--
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="bennettfeely">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    -->
+  </header>
+
+  <section class="demo">
+    <div id="box" class="box">
+      <div class="clipboard"></div>
+      <div class="handles"></div>
+    </div>
+  </section>
+
+  <section class="shapes">
+    <ul><!--<h2>Shapes</h2>--></ul>
+  </section>
+
+  <section class="clip-path">
+    <code class="ms block">-ms-clip-path: <span class="functions"></span>;</code>
+    <code class="moz block">-moz-clip-path: <span class="functions"></span>;</code>
+    <code class="webkit block">-webkit-clip-path: <span class="functions"></span>;</code>
+    <code class="unprefixed block show">clip-path: <span class="functions"></span>;</code>
+  </section>
+
+  <section class="options">
+    <div class="panel flex">
+      <h2>Units</h2>
+      <input name="unit" checked value="%" type="radio" id="pct">
+      <label for="pct">Percentage</label>
+      <input name="unit" value="px" type="radio" id="px">
+      <label for="px">Pixels</label>
+    </div>
+
+    <div class="grid panel flex">
+      <h2>Prefix</h2>
+
+      <input name="prefix" value="5" type="checkbox" id="webkit">
+      <label for="webkit">webkit</label>
+
+      <input name="prefix" value="10" type="checkbox" id="moz">
+      <label for="moz">moz</label>
+
+      <input name="prefix" value="25" type="checkbox" id="ms">
+      <label for="ms">ms</label>
+    </div>
+
+    <div class="grid panel flex">
+      <h2>Snap</h2>
+      <input name="grid" checked value="1" type="radio" id="grid-none">
+      <label for="grid-none">None</label>
+
+      <input name="grid" value="5" type="radio" id="grid-5">
+      <label for="grid-5">5</label>
+
+      <input name="grid" value="10" type="radio" id="grid-10">
+      <label for="grid-10">10</label>
+
+      <input name="grid" value="25" type="radio" id="grid-25">
+      <label for="grid-25">25</label>
+    </div>
+
+    <div class="grid panel flex">
+      <h2>Demo Size</h2>
+      <input id="demo_width" value="280" type="number">
+        <h2>&times;</h2>
+      <input id="demo_height" value="280" type="number">
+    </div>
+  </section>
+</main>
+
+<!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<script src="jquery.min.js"></script>
+<script src="draggabilly.min.js"></script>
+<script src="clip.js"></script>
+<!--
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35724550-1', 'bennettfeely.com');
+  ga('send', 'pageview');
+</script>
+-->
+</body>
+</html>

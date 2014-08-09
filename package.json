@@ -1,0 +1,14 @@
+{
+  "name": "clippy",
+  "author": "Bennett Feely",
+  "description": "Create CSS clip-paths",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-autoprefixer": "^1.0.0",
+    "grunt-contrib-htmlmin": "^0.10.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-sass": "^0.7.4",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-remfallback": "0.0.5"
+  }
+}

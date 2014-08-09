@@ -1,0 +1,3210 @@
+/* ==========================================================================
+   Normalize.scss settings
+   ========================================================================== */
+
+/**
+ * Includes legacy browser support IE6/7
+ *
+ * Set to false if you want to drop support for IE6 and IE7
+ */
+
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+/*
+ * Corrects `block` display not defined in IE 8/9.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; /* hello */
+}
+
+/**
+ * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ */
+
+audio,
+canvas,
+video {
+  display: inline-block;
+}
+
+/**
+ * Prevents modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ * 3.Corrects text resizing oddly in IE 6/7 when body `font-size` is set using
+ *    `rem` units.
+ */
+
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+
+/**
+ * Improves readability when focused and also mouse hovered in all browsers.
+ */
+
+a:focus {
+  outline: thin dotted;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+/**
+ * Addresses font sizes and margins set differently in IE 6/7.
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari 5, and Chrome.
+ */
+
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Addresses styling not present in IE 8/9.
+ */
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Addresses margins set differently in IE 6/7.
+ */
+
+/**
+ * Correct font family set oddly in Safari 5 and Chrome.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1rem;
+}
+
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+
+pre {
+  white-space: pre-wrap;
+}
+
+/**
+ *  Set consistent quote types.
+ */
+
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5rem;
+}
+
+sub {
+  bottom: -0.25rem;
+}
+
+/* ==========================================================================
+   rEmbedded content
+   ========================================================================== */
+
+/**
+ * 1. Remove border when inside `a` elrement in IE 8/9.
+ * 2. Improves image quality when scaled in IE 7.
+ */
+
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+
+figure {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35rem 0.625rem 0.75rem;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ * 3. Corrects text not wrapping in Firefox 3.
+ * 4. Corrects alignment displayed oddly in IE 6/7.
+ */
+
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ * 4. Improves appearance and consistency in all browsers.
+ */
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+  line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elrements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ * 4. Removes inner spacing in IE 7 without affecting normal text inputs.
+ *    Known issue: inner spacing remains in IE 6.
+ */
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elrements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ * 3. Removes excess padding in IE 7.
+ *    Known issue: excess padding remains in IE 6.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Generated with FontPrep app http://fontprep.com/ */
+
+@font-face {
+  font-family: 'AlternateGothic2 BT';
+  src: url("../fonts/alternate-gothic2.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/alternate-gothic2.eot?#iefix") format("rembedded-opentype"), url("../fonts/alternate-gothic2.woff") format("woff"), url("../fonts/alternate-gothic2.ttf") format("truetype"), url("../fonts/alternate-gothic2.svg#022c20d3c2b5208bc4ff771e4b5afcc9") format("svg");
+  /* Legacy iOS */
+  font-style: normal;
+  font-weight: 400;
+}
+
+/*
+ * Web Fonts from fontspring.com
+ *
+ * All OpenType features and all extended glyphs have been removed.
+ * Fully installable fonts can be purchased at http://www.fontspring.com
+ *
+ * The fonts included in this stylesheet are subject to the End User License you purchased
+ * from Fontspring. The fonts are protected under domestic and international tradremark and 
+ * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
+ * distributing this font software.
+ *
+ * (c) 2010-2012 Fontspring
+ *
+ *
+ *
+ *
+ * The fonts included are copyrighted by the vendor listed below.
+ *
+ * Vendor:      exljbris Font Foundry
+ * License URL: http://www.fontspring.com/fflicense/exljbris
+ *
+ *
+ */
+
+@font-face {
+  font-family: 'museo_slab500';
+  src: url("../fonts/Museo_Slab_500_2-webfont.eot");
+  src: url("../fonts/Museo_Slab_500_2-webfont.eot?#iefix") format("rembedded-opentype"), url("../fonts/Museo_Slab_500_2-webfont.woff") format("woff"), url("../fonts/Museo_Slab_500_2-webfont.ttf") format("truetype"), url("../fonts/Museo_Slab_500_2-webfont.svg#museo_slab500") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Museo300Regular';
+  src: url("../fonts/Museo300-Regular-webfont.eot");
+  src: url("../fonts/Museo300-Regular-webfont.eot?#iefix") format("rembedded-opentype"), url("../fonts/Museo300-Regular-webfont.woff") format("woff"), url("../fonts/Museo300-Regular-webfont.ttf") format("truetype"), url("../fonts/Museo300-Regular-webfont.svg#Museo300Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Museo500Regular';
+  src: url("../fonts/Museo500-Regular-webfont.eot");
+  src: url("../fonts/Museo500-Regular-webfont.eot?#iefix") format("rembedded-opentype"), url("../fonts/Museo500-Regular-webfont.woff") format("woff"), url("../fonts/Museo500-Regular-webfont.ttf") format("truetype"), url("../fonts/Museo500-Regular-webfont.svg#Museo500Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'bills';
+  src: url("../fonts/bills.eot");
+  src: url("../fonts/bills.eot?#iefix") format("rembedded-opentype"), url("../fonts/bills.woff") format("woff"), url("../fonts/bills.ttf") format("truetype"), url("../fonts/bills.svg#bills") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-ignite-logo,
+.icon-facebook,
+.icon-twitter,
+.icon-pinterest,
+.icon-googleplus,
+.icon-reorder,
+.icon-pointer,
+.icon-arrow-right,
+.icon-arrow-left,
+.icon-angle-down,
+.icon-circle-arrow-down,
+.icon-menus,
+.icon-capacity,
+.icon-hours,
+.icon-search,
+.icon-venue-stretch,
+.icon-angle-up,
+.icon-angle-right,
+.icon-angle-left {
+  font-family: 'bills';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-ignite-logo:before {
+  content: "\e000";
+}
+
+.icon-facebook:before {
+  content: "\e001";
+}
+
+.icon-twitter:before {
+  content: "\e002";
+}
+
+.icon-pinterest:before {
+  content: "\e003";
+}
+
+.icon-googleplus:before {
+  content: "\e004";
+}
+
+.icon-reorder:before {
+  content: "\e005";
+}
+
+.icon-pointer:before {
+  content: "\e006";
+}
+
+.icon-arrow-right:before {
+  content: "\e007";
+}
+
+.icon-arrow-left:before {
+  content: "\e008";
+}
+
+.icon-angle-down:before {
+  content: "\e009";
+}
+
+.icon-circle-arrow-down:before {
+  content: "\e010";
+}
+
+.icon-menus:before {
+  content: "\e011";
+}
+
+.icon-capacity:before {
+  content: "\e012";
+}
+
+.icon-hours:before {
+  content: "\e013";
+}
+
+.icon-search:before {
+  content: "\f002";
+}
+
+.icon-venue-stretch:before {
+  content: "\e00a";
+}
+
+.icon-angle-up:before {
+  content: "\f106";
+}
+
+.icon-angle-right:before {
+  content: "\f105";
+}
+
+.icon-angle-left:before {
+  content: "\f104";
+}
+
+/* TYPOGRAPHY */
+
+/* COLOURS */
+
+/* BORDERS */
+
+/* SPACING */
+
+/* RELATIVE SIZES */
+
+/* BREAKPOINTS */
+
+/* LOGO */
+
+/* IE */
+
+/*------------------------------------*\
+    $FONT SIZE
+\*------------------------------------*/
+
+/*------------------------------------*\
+    $MEDIA QUERY
+\*------------------------------------*/
+
+/*------------------------------------*\
+    $CLEARFIX
+\*------------------------------------*/
+
+.clearfix:after,
+.media:after,
+.wrapper:after,
+.site-header:after,
+.logo-wrapper:after,
+.site-social:after,
+.site-social__list:after,
+.pagination:after,
+.menu-location:after,
+.venue:after,
+.venue__row:after,
+.page--hours-and-locations .booking-widget:after,
+.booking-widget__form:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*------------------------------------*\
+    $IMAGE REPLACrEMENT
+\*------------------------------------*/
+
+.image-replacrement {
+  border: 0;
+  /*font: 0/0 a;*/
+  text-shadow: none;
+  color: transparent;
+  background-color: transparent;
+}
+
+/*------------------------------------*\
+    $JAVASCRIPT MEDIA QUERIES
+\*------------------------------------*/
+
+/**
+ * Sync CSS media queries with perfectly using the following javascript:
+ *
+ 	
+	var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
+	
+	if (size.indexOf("lap-and-up") !=-1) {
+		
+	} else if (size.indexOf("desk") !=-1) {
+		
+	} else if (size.indexOf("desk-wide") !=-1) {
+	
+	}
+		
+ *
+ */
+
+body:after {
+  display: none;
+}
+
+@media only screen and (min-width: 569px) {
+  body:after {
+    content: 'lap-and-up';
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  body:after {
+    content: 'desk lap-and-up';
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  body:after {
+    content: 'desk-wide desk lap-and-up';
+  }
+}
+
+/*------------------------------------*\
+    $LISTS
+\*------------------------------------*/
+
+.clear-list,
+.inline-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.inline-list > * {
+  display: inline-block;
+}
+
+/*------------------------------------*\
+    $MEDIA OBJECT
+\*------------------------------------*/
+
+.media {
+  display: block;
+}
+
+.media__img {
+  float: left;
+  margin-right: 22px;
+}
+
+.media__img--rev {
+  float: right;
+  margin-left: 22px;
+}
+
+.media__img img,
+.media__img--rev img {
+  display: block;
+}
+
+.media__body {
+  overflow: hidden;
+}
+
+.media__body > * {
+  margin-top: 0;
+}
+
+.media__body,
+.media__body > :last-child {
+  margin-bottom: 0;
+}
+
+/*------------------------------------*\
+    $BUTTONS
+\*------------------------------------*/
+
+.button,
+.venue-menus a {
+  display: inline-block;
+  background-color: #ff8400;
+  color: white;
+  padding: 11px;
+}
+
+.button--big {
+  padding: 22px;
+}
+
+/*------------------------------------*\
+    $ICON
+\*------------------------------------*/
+
+.icon--left {
+  margin-right: 5.5px;
+}
+
+.icon--right {
+  margin: 1rem 4rem 10.5rem .5rem;
+}
+
+.icon-rounded {
+  display: inline-block;
+  padding: 5.5px;
+  color: #b3b3b3;
+  border-radius: 44px;
+  background-color: white;
+}
+
+/*------------------------------------*\
+
+    $RESPONSIVE-NAV.JS v1.0.14 by @viljamis
+    
+\*------------------------------------*/
+
+/**
+ * I tried not to touch this as it is not written by me, but I was forced to alter selectors to get rid of the id's in the CSS. 
+ * Changed everything from '#nav' to '.nav' and from '#nav-toggle' to '.nav-toggle'.
+ */
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: block;
+  list-style: none;
+}
+
+.nav li {
+  width: 100%;
+  display: block;
+}
+
+.js .nav {
+  clip: rect(0 0 0 0);
+  max-height: 0;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  zoom: 1;
+}
+
+@media only screen and (min-width: 569px) {
+  .js .nav {
+    position: relative;
+  }
+}
+
+.js .nav.closed {
+  max-height: none;
+}
+
+.nav.opened {
+  max-height: 9999px;
+}
+
+@media only screen and (min-width: 569px) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+/*	----------------------------------------------------------------
+	MaxCycle (Fullscreen Slideshow for use with jQuery Cycle Plugin)
+	----------------------------------------------------------------
+	
+	Dremo at: http://www.aaronvanderzwan.com/maxcycle/
+	Download and Info at: http://github.com/akv2/MaxCycle---jQuery-Plugin/
+	Copyright (c) 2007-2011 Aaron Vanderzwan
+	Dual licensed under the MIT and GPL licenses.
+	
+*/
+
+/* Version: 2.0.73 (12-Oct-2012) */
+
+.mc-hide-scrolls {
+  overflow: hidden;
+}
+
+body .mc-cycle {
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+div.mc-image {
+  /*NOTE: Mozilla flickers when fading and using 'all', so we have to be specific with what property we want to transition:
+   	If you are using fading transitions, use 'opacity: */
+  -webkit-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  /* 	If you are using horizontal slide transitions, use the following CSS: */
+  -webkit-transition: left 1s ease-in-out;
+  -o-transition: left 1s ease-in-out;
+  transition: left 1s ease-in-out;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.mc-old-browser .mc-image {
+  overflow: hidden;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  overflow-x: hidden;
+  font: .875em/1.57143 "Museo500Regular", sans-serif;
+  color: white;
+  background: #222222;
+}
+
+body {
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+blockquote,
+p,
+address,
+table,
+fieldset,
+figure,
+pre,
+.main__content,
+.news__itrem,
+.post__header,
+.post__aside,
+.box-heading,
+.menu-location,
+.menu-nav,
+.menu__itrem,
+.venue,
+#map_canvas,
+#map_canvas_loc,
+.media {
+  margin-bottom: 22px;
+  margin-bottom: 1.57143rem;
+}
+
+.menu-locations,
+#map_accordion ul,
+.lead,
+.landmark {
+  margin-bottom: 44px;
+  margin-bottom: 3.14286rem;
+}
+
+.menu-nav__itrem > a {
+  margin-bottom: 11px;
+  margin-bottom: 0.78571rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.page-title--mobile,
+.book-toggle,
+.nav-toggle,
+.site-nav,
+.splash,
+.pagination,
+.social-bit,
+.post__aside,
+.post__back,
+.menu-locations__itrem,
+#map_accordion li,
+.venue__footer,
+.book-circle__inner {
+  font-family: "AlternateGothic2 BT", sans-serif;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+.alpha {
+  font-size: 36px;
+  font-size: 2.57143rem;
+  line-height: 1.22222;
+}
+
+h2,
+.beta {
+  font-size: 30px;
+  font-size: 2.14286rem;
+  line-height: 1.46667;
+}
+
+h3,
+.gamma {
+  font-size: 24px;
+  font-size: 1.71429rem;
+  line-height: 1.83333;
+}
+
+h4,
+.delta {
+  font-size: 20px;
+  font-size: 1.42857rem;
+  line-height: 1.1;
+}
+
+h5,
+.epsilon {
+  font-size: 16px;
+  font-size: 1.14286rem;
+  line-height: 1.375;
+}
+
+h6,
+.zeta {
+  font-size: 14px;
+  font-size: 1rem;
+  line-height: 1.57143;
+}
+
+a {
+  text-decoration: none;
+  color: #ff8400;
+}
+
+.site-header a {
+  color: white;
+}
+
+.main__content img {
+  max-width: 100%;
+}
+
+/*------------------------------------*\
+    $WRAPPER
+\*------------------------------------*/
+
+.wrapper {
+  min-height: 100%;
+}
+
+@media only screen and (max-width: 568px) {
+  .wrapper {
+    overflow-x: hidden;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .wrapper {
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, transparent 176px);
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, transparent 176px);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 176px);
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .wrapper {
+    padding: 22px;
+  }
+}
+
+/*------------------------------------*\
+    $HEADER
+\*------------------------------------*/
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .site-header {
+    border-bottom: white solid 5px;
+    margin-bottom: 22px;
+    position: relative;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 2rem;
+    z-index: 20;
+    width: 235px;
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+    background: -o-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-height: 600px) {
+  .site-header {
+    position: absolute;
+  }
+}
+
+/*------------------------------------*\
+    $MAIN
+\*------------------------------------*/
+
+@media only screen and (min-width: 1024px) {
+  .main,
+  #footer_nav {
+    margin-left: 235px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .main,
+  #footer_nav {
+    margin-right: 191px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .main__header {
+    display: table;
+    height: 198px;
+  }
+}
+
+.main__content {
+  padding: 22px 11px;
+  position: relative;
+  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  color: #222222;
+}
+
+@media only screen and (min-width: 569px) {
+  .main__content {
+    padding: 33px;
+  }
+}
+
+/*------------------------------------*\
+    $SITE FOOTER
+\*------------------------------------*/
+
+/**
+ * The footer with the animated restaurant logos is a global ModX chunk for all the BR sites,
+ * below is the HTML structure of the chunk. The most outer div is not included in the chunk.
+ * 
+ 	<div class="site-footer" id="footer_wrap">
+ 	
+ 		<!-- this is where the chunk starts -->
+ 		
+ 		<div id="footer">
+ 			<div class="footer_links simply-scroll-container">
+ 				<div class="simply-scroll-clip">
+ 					<div id="footer_links" class="simply-scroll-list">
+ 						<div class="footer_slide_img">
+ 							<a><img></a>
+ 						</div>
+ 						<div class="footer_slide_img">
+ 							<a><img></a>
+ 						</div>
+ 						<div class="footer_slide_img">
+ 							<a><img></a>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div><!-- end #footer_links -->
+ 			<div id="footer_nav">
+ 				<div id="br_logo">
+ 					<a><img></a>
+ 				</div>
+ 				<div id="rest_green">
+ 					<img>
+ 				</div>
+ 				<div id="footer_nav_links">
+ 					<div id="address_ignite">
+ 						<a>Privacy, Terms &amp; Conditions</a>
+ 						<a id="btmNav_copyright">Copyright 2013</a>
+ 						<a id="btmNav_ignite"><span>Restaurant Website Design &amp; SEO by Ignite Hospitality Consultants</span>&nbsp;&nbsp;<img></a>
+		            </div>     
+		        </div><!-- end #footer_nav_links -->
+		    </div><!-- end #footer_nav -->
+		</div><!-- end #footer -->
+		
+		<!-- this is where the chunk ends -->
+		
+    </div>
+ *
+ */
+
+.site-footer {
+  font-size: 12px;
+  font-size: 0.85714rem;
+  line-height: 1.83333;
+  padding: 0 22px;
+  background: #222222;
+}
+
+.site-footer a {
+  color: white;
+  display: inline-block;
+}
+
+.page--bills-bar-burger .site-footer,
+.page--gallery .site-footer {
+  display: none;
+  /* height: $unit * 6;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%; */
+}
+
+#footer_nav {
+  padding-bottom: 55px;
+  position: relative;
+  text-align: center;
+  margin-top: 22px;
+}
+
+#footer_nav #br_logo {
+  left: 22px;
+}
+
+@media only screen and (min-width: 1024px) {
+  #footer_nav #br_logo {
+    left: 0;
+  }
+}
+
+#footer_nav #rest_green {
+  right: 22px;
+}
+
+@media only screen and (min-width: 1024px) {
+  #footer_nav #rest_green {
+    right: 0;
+  }
+}
+
+#footer_nav #btmNav_privacy {
+  margin-top: 66px !important;
+}
+
+@media only screen and (min-width: 569px) {
+  #footer_nav #btmNav_privacy {
+    margin-top: 0 !important;
+  }
+}
+
+#footer_nav #br_logo,
+#footer_nav #rest_green {
+  position: absolute;
+  top: 0;
+}
+
+#footer_nav #footer_nav_links a {
+  margin: 0 11px;
+}
+
+#footer_nav #btmNav_ignite {
+  display: block;
+}
+
+/*------------------------------------*\
+    $PAGE TITLE
+\*------------------------------------*/
+
+.page-title {
+  margin: 0;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  font-size: 34px;
+  font-size: 2.42857rem;
+  line-height: 1.29412;
+}
+
+@media only screen and (max-width: 568px) {
+  .page-title {
+    padding-left: 22px;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .page-title {
+    display: table-cell;
+    vertical-align: middle;
+    text-shadow: 10px 10px 50px black, 10px -10px 50px black;
+    font-size: 70px;
+    font-size: 5rem;
+    line-height: 1.25714;
+  }
+}
+
+.page--gallery .page-title,
+.page--bills-bar-burger-rockefeller-center .page-title,
+.page--bills-bar-burger-meatpacking-district .page-title,
+.page--bills-bar-and-burger-atlantic-city .page-title {
+  font-size: 50px;
+  font-size: 3.57143rem;
+}
+
+.page-title--mobile {
+  font-size: 50px;
+  font-size: 3.57143rem;
+  line-height: 1.32;
+}
+
+@media only screen and (max-width: 568px) {
+  .page-title--mobile {
+    padding-left: 11px;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .page-title--mobile {
+    position: absolute;
+    top: 33px;
+    right: 0;
+    white-space: pre;
+    line-height: 77px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .page-title--mobile {
+    display: none;
+  }
+}
+
+.page--bills-bar-burger .page-title--mobile {
+  display: none;
+}
+
+/*------------------------------------*\
+    $LOGO
+\*------------------------------------*/
+
+@media only screen and (max-width: 568px) {
+  .logo-wrapper {
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+    margin-top: 11px;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .logo-wrapper {
+    float: left;
+    width: 20%;
+    height: 132px;
+  }
+}
+
+.site-logo {
+  display: block;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1023px) {
+  .site-logo {
+    padding: 16px 11px 0;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .site-logo {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .site-logo {
+    vertical-align: middle;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-logo {
+    padding: 22px 0 44px;
+    border-top: 5px solid white;
+  }
+}
+
+.site-logo img {
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 568px) {
+  .site-logo img {
+    max-height: 88px;
+  }
+}
+
+.page--bills-bar-burger .site-logo {
+  border-bottom: 0;
+}
+
+/*------------------------------------*\
+    $TOGGLES
+\*------------------------------------*/
+
+.toggles {
+  border-left: 5px solid white;
+  float: right;
+  width: 50%;
+}
+
+@media only screen and (min-width: 569px) {
+  .toggles {
+    display: none;
+    border-left: none;
+  }
+}
+
+.book-toggle {
+  padding: 5.5px 11px;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  font-size: 23px;
+  font-size: 1.64286rem;
+}
+
+.book-toggle.open {
+  background: white;
+  color: #ff8400;
+}
+
+.book-toggle .icon {
+  font-size: 30px;
+  font-size: 2.14286rem;
+  line-height: 1.46667;
+  font-weight: bold;
+}
+
+.book-drawer {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  color: #222222;
+  background: white;
+  -webkit-transition: max-height 400ms ease-in-out;
+  -o-transition: max-height 400ms ease-in-out;
+  transition: max-height 400ms ease-in-out;
+  z-index: 100;
+}
+
+.book-drawer.open {
+  max-height: 100%;
+}
+
+.nav-toggle {
+  padding: 5.5px 11px;
+  border-top: 5px solid white;
+  text-align: center;
+  cursor: pointer;
+  font-size: 23px;
+  font-size: 1.64286rem;
+  line-height: 1.91304;
+}
+
+.nav-toggle.open,
+.nav-toggle:active {
+  background: white;
+  color: #ff8400;
+}
+
+/*------------------------------------*\
+    $NAVIGATION
+\*------------------------------------*/
+
+/**
+ * Some !important tags are needed to overwrite responsive-nav.js, see sass/vendor/_responsive-nav.scss
+ */
+
+.site-nav {
+  font-size: 22px;
+  font-size: 1.57143rem;
+  line-height: 1;
+}
+
+@media only screen and (max-width: 568px) {
+  .site-nav {
+    background: white;
+    z-index: 2;
+  }
+
+  .site-nav a {
+    color: #474747;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .site-nav {
+    max-height: initial;
+    overflow: visible !important;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .site-nav {
+    border-bottom: white solid 5px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-nav {
+    line-height: 33px;
+    margin-bottom: 22px;
+    font-size: 26px;
+    font-size: 1.85714rem;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .site-nav__inner {
+    padding: 14.66667px 0;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .site-nav__list {
+    position: relative;
+    border-top: 1px solid #b3b3b3;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .site-nav__list:before {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    border-right: 1px solid #b3b3b3;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-nav__list {
+    padding: 11px 0 !important;
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .site-nav__itrem {
+    padding: 22px 11px;
+    width: 50% !important;
+    position: relative;
+    float: left;
+    border-bottom: 1px solid #b3b3b3;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .site-nav__itrem {
+    display: table !important;
+    padding: 0 11px;
+    text-align: center;
+    width: 20% !important;
+    float: left;
+    border-top: 5px solid white;
+    border-right: 5px solid white;
+    height: 66px;
+  }
+
+  .site-nav__itrem:nth-child(5) {
+    border-right: 0;
+  }
+}
+
+.site-nav__itrem a {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.site-nav__itrem a:hover {
+  color: #ff8400;
+}
+
+@media only screen and (min-width: 569px) {
+  .site-nav__itrem--home {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .site-nav__itrem--current,
+  .page--menus-and-food .site-nav__itrem--menus,
+  .page--special-events .site-nav__itrem--events,
+  .page--whats-happening .site-nav__itrem--news,
+  .page--gallery .site-nav__itrem--gallery,
+  .page--about-bills .site-nav__itrem--about,
+  .page--hours-and-locations .site-nav__itrem--locations,
+  .page--bills-bar-burger-rockefeller-center .site-nav__itrem--locations,
+  .page--bills-bar-burger-meatpacking-district .site-nav__itrem--locations,
+  .page--bills-bar-burger-atlantic-city .site-nav__itrem--locations,
+  .page--bills-bar-burger-downtown .site-nav__itrem--locations,
+  .page--book-here .site-nav__itrem--book {
+    background: white;
+  }
+}
+
+.site-nav__itrem--current a,
+.page--menus-and-food .site-nav__itrem--menus a,
+.page--special-events .site-nav__itrem--events a,
+.page--whats-happening .site-nav__itrem--news a,
+.page--gallery .site-nav__itrem--gallery a,
+.page--about-bills .site-nav__itrem--about a,
+.page--hours-and-locations .site-nav__itrem--locations a,
+.page--bills-bar-burger-rockefeller-center .site-nav__itrem--locations a,
+.page--bills-bar-burger-meatpacking-district .site-nav__itrem--locations a,
+.page--bills-bar-burger-atlantic-city .site-nav__itrem--locations a,
+.page--bills-bar-burger-downtown .site-nav__itrem--locations a,
+.page--book-here .site-nav__itrem--book a {
+  color: #ff8400;
+  text-decoration: line-through;
+}
+
+/*------------------------------------*\
+    $EXPANDABLE NAVIGATION
+\*------------------------------------*/
+
+/*------------------------------------*\
+    $CURRENT NAVIGATION ITrEM
+\*------------------------------------*/
+
+/**
+ * At the moment the navigation is not being pulled in dynamicly by Modx and is static instead.
+ */
+
+/*------------------------------------*\
+    $INTRO COPY
+\*------------------------------------*/
+
+@media only screen and (max-width: 1023px) {
+  .intro-copy {
+    display: none;
+  }
+
+  .page--bills-bar-burger .intro-copy {
+    display: block;
+    position: absolute;
+    top: 121px;
+    padding: 22px;
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .intro-copy {
+    display: none;
+  }
+}
+
+/*------------------------------------*\
+    $SITE SOCIAL
+\*------------------------------------*/
+
+.site-social {
+  border-top: 5px solid white;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: 568px) {
+  .site-social {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .site-social {
+    float: left;
+    width: 20%;
+    height: 66px;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-social {
+    position: fixed;
+    width: 191px;
+    left: 22px;
+    bottom: 44px;
+    line-height: 44px;
+    border: 3px solid white;
+    font-size: 12px;
+    font-size: 0.85714rem;
+    line-height: 1.83333;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  .site-social {
+    position: relative;
+    left: auto;
+    bottom: auto;
+  }
+}
+
+.site-social__signup {
+  display: block;
+  border-bottom: 3px solid white;
+  line-height: 33px;
+  text-align: left;
+  text-indent: 11px;
+}
+
+.site-social__signup:hover {
+  color: #ff8400;
+}
+
+@media only screen and (max-width: 1023px) {
+  .site-social__signup {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .site-social__title {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-social__title {
+    float: left;
+    padding: 0 11px;
+    font-family: "museo_slab500", Verdana, sans-serif;
+    line-height: 33px;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .site-social__list {
+    line-height: 61px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-social__list {
+    float: right;
+    line-height: 33px;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .site-social__itrem {
+    width: 33.333%;
+    border-left: 5px solid white;
+    float: left;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .site-social__itrem:first-child {
+    border-left: none;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .site-social__itrem {
+    padding: 0 5.5px;
+    border-left-width: 3px;
+  }
+}
+
+.site-social__itrem .icon {
+  padding: 5.5px;
+  border-radius: 100%;
+  color: #222222;
+  background: white;
+}
+
+.site-social__itrem .icon:hover {
+  background: #ff8400;
+}
+
+/*------------------------------------*\
+    $GALLERY
+\*------------------------------------*/
+
+.gallery-nav {
+  display: none;
+  border: 3px solid white;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 569px) {
+  .gallery-nav {
+    display: inline-block;
+    position: fixed;
+    bottom: 44px;
+    right: 44px;
+  }
+}
+
+@media only screen and (max-height: 380px) {
+  .gallery-nav {
+    position: absolute;
+  }
+}
+
+.gallery-nav__itrem {
+  display: inline-block;
+  padding: 3.66667px 22px;
+  color: white;
+  font-size: 30px;
+  font-size: 2.14286rem;
+  line-height: 1.46667;
+}
+
+.gallery-nav__itrem:hover {
+  color: #ff8400;
+}
+
+.gallery-nav__itrem:first-child {
+  border-right: 3px solid white;
+}
+
+.gallery-select {
+  display: inline-block;
+  min-width: 180px;
+}
+
+@media only screen and (max-width: 568px) {
+  .gallery-select {
+    margin-left: 22px;
+  }
+}
+
+.mc-image[data-href] {
+  cursor: pointer;
+}
+
+.mc-image[data-href=""] {
+  cursor: default;
+}
+
+/*------------------------------------*\
+    $NEWS
+\*------------------------------------*/
+
+.news__itrem {
+  height: 220px;
+}
+
+@media only screen and (min-width: 569px) {
+  .news__itrem {
+    float: left;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .news__itrem--small {
+    width: 33.333%;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .news__itrem--medium {
+    width: 63.667%;
+    margin-left: 3%;
+  }
+}
+
+/*------------------------------------*\
+    $POST EXCERPT
+\*------------------------------------*/
+
+* > .post-excerpt:first-child {
+  height: 100%;
+  width: 100%;
+}
+
+* > .post-excerpt:first-child .post-excerpt__box,
+* > .post-excerpt:first-child .splash {
+  height: 352px;
+}
+
+.post-excerpt__box,
+.splash {
+  display: block;
+  height: 220px;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-excerpt__image {
+  max-width: initial !important;
+  min-width: 100%;
+}
+
+.post-excerpt__title {
+  position: absolute;
+  bottom: 11px;
+  left: 11px;
+  margin-right: 11px;
+  padding: 11px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background: white;
+  background: rgba(255, 255, 255, 0.75);
+  color: #222222;
+  letter-spacing: .1rem;
+  white-space: pre;
+  font-size: 18px;
+  font-size: 1.28571rem;
+  line-height: 1.22222;
+}
+
+/*
+.post-excerpt__more{
+	@extend %heading;
+	color: $black;
+	line-height: $unit * 2;
+	@include font-size(15px, false);
+	&:hover{
+		color: $orange;
+	}
+}
+*/
+
+/*------------------------------------*\
+    $SPLASH
+\*------------------------------------*/
+
+.splash {
+  display: none;
+}
+
+@media only screen and (min-width: 569px) {
+  .splash {
+    display: table;
+    text-align: center;
+    letter-spacing: .1rem;
+  }
+}
+
+.splash--two {
+  margin-bottom: 22px;
+}
+
+.splash__inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.splash__title {
+  margin: 0;
+  line-height: 44px;
+  font-size: 37px;
+  font-size: 2.64286rem;
+}
+
+.splash__title__first-line {
+  display: block;
+  line-height: 88px;
+  font-size: 120px;
+  font-size: 8.57143rem;
+}
+
+.splash__subline {
+  margin: 0;
+  color: #474747;
+  line-height: 22px;
+  font-size: 22px;
+  font-size: 1.57143rem;
+}
+
+/*------------------------------------*\
+    $PAGINATION
+\*------------------------------------*/
+
+.pagination {
+  clear: both;
+  color: #222222;
+  line-height: 44px;
+  background: url("../images/hr.png") repeat-x, url("../images/hr.png") repeat-x bottom;
+}
+
+.pagination a {
+  width: 49%;
+  color: #b3b3b3;
+  font-size: 22px;
+  font-size: 1.57143rem;
+}
+
+.pagination a:last-child {
+  float: right;
+  text-align: right;
+}
+
+/*------------------------------------*\
+    $SOCIAL BIT
+\*------------------------------------*/
+
+.social-bit {
+  clear: both;
+  text-align: center;
+  line-height: 66px;
+  background: url("../images/social-bit.png") center center no-repeat;
+  font-size: 18px;
+  font-size: 1.28571rem;
+}
+
+.social-bit .icon {
+  padding: 5.5px;
+  border-radius: 100%;
+  background: #474747;
+  color: #e1e1e1;
+}
+
+.social-bit .icon:hover {
+  background: #ff8400;
+}
+
+/*------------------------------------*\
+    $POST
+\*------------------------------------*/
+
+.post__header {
+  min-height: 132px;
+  max-height: 396px;
+  position: relative;
+  overflow: hidden;
+}
+
+.post__title {
+  padding: 11px;
+  margin-top: 0;
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  background: #222222;
+  background: rgba(34, 34, 34, 0.9);
+  color: white;
+}
+
+.post__image {
+  width: 100%;
+}
+
+.post__copy {
+  overflow: hidden;
+}
+
+.post__aside {
+  letter-spacing: .1rem;
+  font-size: 18px;
+  font-size: 1.28571rem;
+  line-height: 1.22222;
+}
+
+@media only screen and (min-width: 569px) {
+  .post__aside {
+    float: right;
+    margin-left: 22px;
+  }
+}
+
+.post__back {
+  display: inline-block;
+  background: #ff8400;
+  padding: 11px;
+  white-space: pre;
+}
+
+.post__back a {
+  color: white;
+}
+
+/*------------------------------------*\
+    $POST SOCIAL
+\*------------------------------------*/
+
+.post-social__title {
+  margin: 0;
+  line-height: 44px;
+  font-size: 20px;
+  font-size: 1.42857rem;
+}
+
+.post-social__itrem {
+  display: block;
+  padding: 11px;
+  margin-bottom: 11px;
+  color: white;
+}
+
+.post-social__itrem:after {
+  content: '>';
+  margin-left: 22px;
+}
+
+.post-social__itrem .icon {
+  display: inline-block;
+  padding: 3.66667px;
+  margin-right: 11px;
+  background: white;
+  border-radius: 50px;
+}
+
+.post-social__itrem--twitter {
+  background-color: #4099ff;
+}
+
+.post-social__itrem--twitter .icon {
+  color: #4099ff;
+}
+
+.post-social__itrem--facebook {
+  background-color: #3b5998;
+}
+
+.post-social__itrem--facebook .icon {
+  color: #3b5998;
+}
+
+/*------------------------------------*\
+    $NEWS BREAKOUT
+\*------------------------------------*/
+
+.news-breakout {
+  display: block;
+  margin-top: 22px;
+  text-align: center;
+}
+
+/*------------------------------------*\
+    $EVENT VENUE
+\*------------------------------------*/
+
+.events {
+  margin: 44px 0;
+  text-align: center;
+}
+
+.event-venue {
+  padding: 0 11px;
+  margin-bottom: 22px;
+}
+
+@media only screen and (min-width: 700px) {
+  .event-venue {
+    display: inline-block;
+    width: 33%;
+    margin-bottom: 0;
+    vertical-align: top;
+  }
+}
+
+.event-venue__image {
+  display: inline-block;
+}
+
+.event-venue__title {
+  font-family: "Museo500Regular", sans-serif;
+  letter-spacing: .1rem;
+  white-space: pre;
+  font-size: 16px;
+  font-size: 1.14286rem;
+  line-height: 1.375;
+}
+
+.event-venue__title a {
+  color: #222222;
+}
+
+.event-venue__link {
+  display: inline-block;
+  padding: 11px;
+  color: white;
+  background-color: #ff8400;
+}
+
+.event-venue__link i {
+  display: inline-block;
+  margin-left: 11px;
+}
+
+/*------------------------------------*\
+    $BOX HEADING
+\*------------------------------------*/
+
+.box-heading {
+  padding-bottom: 3px;
+  margin-top: 0;
+  background: url("../images/hr-2.png") repeat-x bottom;
+  font-size: 18px;
+  font-size: 1.28571rem;
+  line-height: 1.22222;
+}
+
+.box-heading span {
+  display: inline-block;
+  padding: 11px 22px;
+  margin-left: 11px;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+/*------------------------------------*\
+    $MENU LOCATIONS
+\*------------------------------------*/
+
+.menu-locations,
+#map_accordion ul {
+  background: url("../images/hr-2.png") top repeat-x, url("../images/hr-2.png") bottom repeat-x;
+  padding: 11px 0;
+}
+
+@media only screen and (min-width: 569px) {
+  .menu-locations,
+  #map_accordion ul {
+    text-align: center;
+  }
+}
+
+.menu-locations__itrem,
+#map_accordion li {
+  letter-spacing: .1rem;
+  font-size: 22px;
+  font-size: 1.57143rem;
+  line-height: 1;
+}
+
+@media only screen and (min-width: 569px) {
+  .menu-locations__itrem,
+  #map_accordion li {
+    display: inline-block;
+    margin: 0 22px;
+  }
+}
+
+.menu-locations__itrem a,
+#map_accordion li a {
+  display: block;
+  color: #b3b3b3;
+  line-height: 44px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .menu-locations__itrem--active {
+    position: relative;
+  }
+
+  .menu-locations__itrem--active::after {
+    display: block;
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    border: transparent 11px solid;
+    border-bottom-color: #2b2b2b;
+    left: 50%;
+    margin-left: -5.5px;
+  }
+}
+
+.menu-locations__itrem--active a {
+  color: #2b2b2b;
+}
+
+/*------------------------------------*\
+    $MENU LOCATION
+\*------------------------------------*/
+
+.menu-location {
+  font-family: "museo_slab500", Verdana, sans-serif;
+}
+
+/*------------------------------------*\
+    $MENU NAV
+\*------------------------------------*/
+
+.menu-nav {
+  float: left;
+  margin-right: 22px;
+}
+
+@media only screen and (min-width: 569px) {
+  .menu-nav {
+    margin-right: 44px;
+  }
+}
+
+.menu-nav__list {
+  text-transform: uppercase;
+}
+
+.menu-nav__itrem > a {
+  display: block;
+  color: #474747;
+}
+
+.menu-nav--sub__list {
+  text-transform: capitalize;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 11px;
+}
+
+@media only screen and (min-width: 569px) {
+  .menu-nav--sub__list {
+    padding-left: 22px;
+  }
+}
+
+.menu-nav--sub__list a {
+  color: #b3b3b3;
+}
+
+.menu-nav--sub__itrem--active a {
+  color: #ff8400;
+}
+
+/*------------------------------------*\
+    $MENU
+\*------------------------------------*/
+
+.menu {
+  overflow: hidden;
+  position: relative;
+}
+
+.menu__title {
+  margin-top: 0;
+  font-family: "Museo500Regular", sans-serif;
+  font-size: 28px;
+  font-size: 2rem;
+}
+
+.menu__itrem__title {
+  text-transform: uppercase;
+}
+
+/*------------------------------------*\
+    $DELIVERY BUTTON
+\*------------------------------------*/
+
+.delivery-button {
+  margin-right: 11px;
+  margin-bottom: 11px;
+  font-size: 13px;
+  font-size: 0.92857rem;
+  line-height: 1.69231;
+}
+
+/*------------------------------------*\
+    $VENUE
+\*------------------------------------*/
+
+.venue__header {
+  height: 308px;
+  margin-bottom: 33px;
+  position: relative;
+  overflow: hidden;
+}
+
+.venue__header .button,
+.venue__header .venue-menus a,
+.venue-menus .venue__header a {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.venue__header img {
+  max-width: initial;
+  min-width: 100%;
+}
+
+.venue__footer {
+  padding: 22px 0 22px;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: url("../images/text-footer.png") left bottom repeat-x;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-size: 1.42857rem;
+  line-height: 1.1;
+}
+
+.venue__footer a {
+  color: white;
+  text-decoration: underline;
+}
+
+.venue__caption {
+  width: 100%;
+  padding: 22px;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #222222;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-family: "museo_slab500", Verdana, sans-serif;
+  color: white;
+  font-size: 17px;
+  font-size: 1.21429rem;
+  line-height: 1.29412;
+}
+
+.venue__row {
+  padding-bottom: 33px;
+  margin-bottom: 33px;
+  background: url("../images/hr-2.png") bottom repeat-x;
+}
+
+.venue__row > :last-child {
+  margin-right: 0;
+}
+
+* > .venue__row:last-child {
+  background: none;
+  padding-bottom: 0;
+}
+
+@media only screen and (max-width: 568px) {
+  .venue__itrem {
+    margin-bottom: 44px;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .venue__itrem {
+    width: 31.3%;
+    float: left;
+    margin-right: 3%;
+  }
+}
+
+.venue__itrem .title {
+  font-size: 22px;
+  font-size: 1.57143rem;
+  line-height: 1;
+}
+
+.venue__itrem > :first-child {
+  margin-top: 0;
+}
+
+@media only screen and (min-width: 569px) {
+  .venue__itrem--double {
+    width: 65.6%;
+  }
+}
+
+.venue-menus {
+  padding-right: 22px !important;
+}
+
+.venue-menus li {
+  margin-bottom: 11px;
+  text-align: center;
+  font-family: "museo_slab500", Verdana, sans-serif;
+  font-size: 12px;
+  font-size: 0.85714rem;
+  line-height: 1.83333;
+}
+
+.venue-menus a {
+  display: block;
+  background-color: #b3b3b3;
+}
+
+.venue-menus a:after {
+  content: ' >';
+}
+
+.venue-opening p:last-child {
+  margin-bottom: 0;
+}
+
+.venue-quote {
+  background: url("../images/venue-quote.png") 11px 44px no-repeat;
+}
+
+.venue-quote blockquote {
+  padding: 33px 22px;
+}
+
+.venue-contact {
+  color: #ff8400;
+}
+
+.venue-contact img {
+  margin-top: 22px;
+}
+
+.venue-contact .title {
+  font-size: 20px;
+  font-size: 1.42857rem;
+  line-height: 1.1;
+  margin-top: 0;
+}
+
+.venue-link {
+  overflow: hidden;
+}
+
+.venue-link a {
+  display: block;
+  position: relative;
+  text-align: center;
+}
+
+.venue-link h2 {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 44px 0;
+  padding: 11px;
+  background: #222222;
+  background-color: rgba(34, 34, 34, 0.7);
+  color: white;
+}
+
+.venue-link img {
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.venue-link--floorplan {
+  position: relative;
+  text-align: center;
+}
+
+.venue-link--floorplan > a:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.venue-link--floorplan h2 {
+  font-size: 22px;
+  font-size: 1.57143rem;
+  line-height: 1;
+}
+
+.venue-link--ad a {
+  text-align: left;
+}
+
+.venue-link--ad .title {
+  margin: 0 0 88px;
+  background-color: transparent;
+  text-shadow: 10px 10px 50px black;
+}
+
+/*------------------------------------*\
+    $LOCATION BOX
+\*------------------------------------*/
+
+.location-box {
+  padding: 44px 0;
+  margin-bottom: 0;
+  border-bottom: 2px dotted #b3b3b3;
+}
+
+.location-box:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.location-box__image {
+  height: 198px;
+  width: 198px;
+  overflow: hidden;
+  float: none;
+  margin: 0 auto 44px;
+}
+
+@media only screen and (max-width: 568px) {
+  .location-box__image {
+    display: block;
+    margin-bottom: 22px;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .location-box__image {
+    float: left;
+    margin-right: 33px;
+    margin-bottom: 0;
+  }
+}
+
+.location-box__image img {
+  border-radius: 198px;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.location-box__title {
+  margin: 0;
+  font-family: "museo_slab500", Verdana, sans-serif;
+  font-size: 16px;
+  font-size: 1.14286rem;
+  line-height: 1.375;
+}
+
+@media only screen and (min-width: 1200px) {
+  .location-box__left,
+  .location-box__right {
+    display: inline-block;
+    width: 48%;
+    padding-right: 22px;
+    vertical-align: top;
+  }
+}
+
+.location-box__right {
+  padding-right: 66px;
+}
+
+.foot-note {
+  padding: 11px 0;
+  border-top: 2px dotted #b3b3b3;
+  border-bottom: 2px dotted #b3b3b3;
+  margin-bottom: 0;
+}
+
+/*------------------------------------*\
+    $BOOKING WIDGET
+\*------------------------------------*/
+
+.booking-widget {
+  width: 360px;
+  height: 242px;
+  padding: 91px 35px 34px 24px;
+  font-size: 14px !important;
+  color: #222222 !important;
+  background: url("../images/booking-widget.png") no-repeat;
+}
+
+@media only screen and (max-width: 360px) {
+  .booking-widget {
+    position: relative;
+    left: -33px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .booking-widget {
+    margin: 22px auto 0;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .booking-widget {
+    margin: 0 auto 22px;
+  }
+}
+
+@media only screen and (min-width: 569px) and (max-width: 1023px) {
+  .page--bills-bar-burger .main .booking-widget,
+  .page--bills-bar-burger #footer_nav .booking-widget {
+    margin-top: 55px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .page--bills-bar-burger .main .booking-widget,
+  .page--bills-bar-burger #footer_nav .booking-widget,
+  .page--gallery .booking-widget {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 569px) {
+  .page--bills-bar-burger .main .booking-widget,
+  .page--bills-bar-burger #footer_nav .booking-widget,
+  .page--gallery .booking-widget {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .page--bills-bar-burger .main .booking-widget,
+  .page--bills-bar-burger #footer_nav .booking-widget,
+  .page--gallery .booking-widget {
+    left: auto;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+  }
+}
+
+.page--hours-and-locations .booking-widget,
+.page--book-here .booking-widget,
+.venue-page .booking-widget {
+  background: url("../images/booking-widget-dark.png") no-repeat;
+}
+
+.page--hours-and-locations .booking-widget {
+  margin: 22px auto 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  .page--hours-and-locations .booking-widget {
+    width: 726px;
+    height: auto;
+    padding: 23px 0 20px 20px;
+    background: url("../images/booking-widget-vertical.png") top left no-repeat;
+  }
+
+  .page--hours-and-locations .booking-widget .rowElrem,
+  .page--hours-and-locations .booking-widget .submit {
+    width: 23%;
+  }
+
+  .page--hours-and-locations .booking-widget .submit {
+    width: auto;
+  }
+
+  .page--hours-and-locations .booking-widget .submit .icon {
+    float: none;
+  }
+}
+
+.booking-widget .rowElrem,
+.booking-widget .submit {
+  display: block;
+  margin: 0 11px 11px 0;
+  width: 45%;
+  float: left;
+  clear: none !important;
+}
+
+.booking-widget .rowElrem {
+  position: relative;
+}
+
+.booking-widget .rowElrem .jqTransformInputInner div {
+  margin: 0;
+}
+
+.booking-widget .rowElrem .icon {
+  position: absolute;
+  z-index: 100;
+  font-size: 18px;
+  top: 20%;
+  right: 8%;
+  color: #222222;
+}
+
+.booking-widget .submit .button,
+.booking-widget .submit .venue-menus a,
+.venue-menus .booking-widget .submit a {
+  display: block;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 34px;
+}
+
+.booking-widget .submit .icon {
+  font-size: 12px;
+  float: right;
+}
+
+.booking-widget .startdate,
+.booking-widget .resttime {
+  height: 35px;
+  background: #fff;
+  border: 1px solid #dfdfdf;
+}
+
+.booking-widget .startdate input,
+.booking-widget .resttime input {
+  text-indent: 12px;
+  outline: none;
+}
+
+@media only screen and (max-width: 720px) {
+  .page--book-here .media__img--rev,
+  .page--bills-bar-burger-rockefeller-center .media__img--rev,
+  .page--bills-bar-burger-meatpacking-district .media__img--rev,
+  .page--bills-bar-and-burger-atlantic-city .media__img--rev {
+    float: none;
+    margin-left: 0;
+  }
+}
+
+/*------------------------------------*\
+    $BOOK BUTTON
+\*------------------------------------*/
+
+.book-circle {
+  font-size: 22px;
+  font-size: 1.57143rem;
+  line-height: 1;
+  display: table;
+  width: 154px;
+  height: 154px;
+  border-radius: 100%;
+  background: #ee3124;
+  color: white;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1023px) {
+  /* 1commentsdif sdf */
+  .book-circle {
+    display: none; /* another comment */
+  }
+}
+
+.main__content .book-circle {
+  position: absolute;
+  top: -176px;
+  right: 22px;
+}
+
+.page--gallery .book-circle {
+  position: absolute;
+  top: 44px;
+  right: 44px;
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .page--gallery .book-circle.is-visible {
+    display: table;
+  }
+}
+
+.book-circle__inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.book-circle__inner .icon {
+  display: block;
+  margin: 0 auto 11px;
+}
+
+/*------------------------------------*\
+    $LEAD
+\*------------------------------------*/
+
+.lead {
+  font-size: 16px;
+  font-size: 1.14286rem;
+  line-height: 1.375;
+}
+
+.venue-lead {
+  padding-bottom: 33px;
+  margin-bottom: 33px;
+  background: url("../images/hr-2.png") repeat-x bottom;
+  line-height: 33px;
+  font-size: 20px;
+  font-size: 1.42857rem;
+}
+
+/*------------------------------------*\
+    $PAGE BACKGROUNDS
+\*------------------------------------*/
+
+/**
+ * Maybe create a mixin for this? Something like:
+ * 
+ 	@mixin background-cover($url, $attachment:false){
+ 		background: url('$url');
+ 		background-size: cover;
+ 		
+ 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='$url', sizingMethod='scale');
+ 		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='$url', sizingMethod='scale')";
+ 		
+ 		@if $attachment == fixed{
+ 			background-attachment: $attachment;
+ 		}
+ 	}
+ 	
+ 	@include background-cover('../images/gallery/meatpacking/large/image2.jpg', fixed); // optional 'background-attachment: fixed'?
+ *
+ */
+
+.page--hours-and-locations,
+.page--menus-and-food,
+.page--bills-bar-burger-rockefeller-center,
+.page--bills-bar-burger-meatpacking-district,
+.page--bills-bar-burger-atlantic-city,
+.page--bills-bar-burger-downtown {
+  background: url("../images/backgrounds/menus-and-food.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.page--special-events {
+  background: url("../images/backgrounds/special-events.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.page--about-bills,
+.page--whats-happening {
+  background: url("../images/backgrounds/news.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.page--book-here {
+  background: url("../images/backgrounds/book-here.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/*------------------------------------*\
+    $JQUERY UI
+\*------------------------------------*/
+
+/**
+ * Jquery UI widgets are not build with the new box-model, so we need to reset it just for Jquery UI
+ */
+
+.ui-widget * {
+  -moz-box-sizing: content-box !important;
+  box-sizing: content-box !important;
+}
+
+/*------------------------------------*\
+    $JQTRANSFORM
+\*------------------------------------*/
+
+/**
+ * The CSS below is used to style form elrements through a Jquery plugin called Jqtransform.
+ * See _jqtransform.scss in the vendor folder.
+ */
+
+.jqTransformSelectWrapper {
+  width: 100% !important;
+}
+
+.jqTransformSelectWrapper div span {
+  display: block !important;
+  width: 135px;
+  color: #222222 !important;
+  text-transform: none;
+}
+
+#opentableRezervtionForm .jqTransformSelectWrapper {
+  color: #222222;
+}
+
+#opentableRezervtionForm .jqTransformSelectWrapper a.jqTransformSelectOpen,
+#navSelect .jqTransformSelectWrapper a.jqTransformSelectOpen {
+  z-index: 999px;
+  font-size: 18px;
+  width: auto;
+  height: auto;
+  top: 12%;
+  right: 7%;
+  color: #222222;
+}
+
+.jqTransformSelectWrapper a.jqTransformSelectOpen::after {
+  font-family: 'bills';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  content: "\e009";
+}
+
+.jqTransformSelectWrapper ul {
+  position: relative;
+  top: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  width: 100% !important;
+  height: 140px;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  background-color: #FFF;
+  list-style-type: none;
+  text-align: left;
+  position: absolute;
+}
+
+.jqTransformSelectWrapper ul a.selected {
+  background: #fff;
+}
+
+.jqTransformSelectWrapper ul a:hover {
+  background: #e4e0e0;
+}
+
+.divElrem {
+  position: relative;
+}
+
+#show_datepicker,
+#show_timepicker {
+  position: absolute;
+  top: 4px;
+  right: 9px;
+}
+
+#show_datepicker:hover,
+#show_timepicker:hover {
+  cursor: pointer;
+}
+
+#ui-timepicker-div {
+  position: relative;
+  margin-top: 35px;
+}
+
+.jqTransformInputInner div input {
+  width: 100% !important;
+  line-height: 22px !important;
+  position: relative !important;
+  z-index: 100 !important;
+  border-radius: 0 !important;
+}
+
+#map_canvas,
+#map_canvas_loc {
+  height: 400px;
+}
+
+#map_tabs {
+  display: none;
+  /* I could not disable this in the snippet so I had to hide it like this */
+}
+
+#map_accordion {
+  margin-top: -25px;
+}
+
+#map_accordion ul {
+  padding: 11px 0;
+  margin: 0 0 22px;
+  list-style: none;
+  background: url("../images/hr-2.png") bottom repeat-x;
+}
+
+#map_accordion li {
+  margin: 0 11px !important;
+}
+
+#map_accordion li a {
+  color: #222222;
+}
+
+.map_print {
+  display: none;
+}
+
+/*------------------------------------*\
+    $VENUE BOX (OLD)
+\*------------------------------------*/
+
+/**
+ * All of the'.venue_'... CSS is copied from the old website 
+ * and is used to style the popup boxes in the google maps widget 
+ */
+
+.venue_box {
+  width: 272px;
+  display: inline;
+  float: left;
+  margin: 0 17px;
+  color: #000;
+  height: 220px !important;
+  /* I had to add a hight with !important to keep it from breaking */
+}
+
+.venue_wrap {
+  width: 252px;
+  text-align: center;
+  background: #fff;
+  font: 0.8rem Arial, Helvetica, sans-serif;
+  padding: 10px;
+}
+
+.venue_image {
+  height: 115px;
+  width: 252px;
+  overflow: hidden;
+}
+
+.venue_image img {
+  height: 115px;
+}
+
+.venue_text {
+  border-bottom: 1px solid #000;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.venue_info {
+  height: 50px;
+  margin-top: 3px;
+}
+
+.venue_mealtime {
+  display: block;
+  clear: both;
+}
+
+.venue_contact {
+  margin-top: 5px;
+}
+
+.venue_contact a {
+  color: #000;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.venue_contact a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.venue_cost {
+  display: none;
+  margin: 2px auto;
+  width: 68px;
+}
+
+.venue_cuisine {
+  display: none;
+}
+
+.venue_address {
+  clear: both;
+}
+
+.venue_actions {
+  background: #ff0066;
+  padding: 2px 0;
+}
+
+.venue_actions a {
+  color: #fff;
+  margin-left: 8px;
+  text-decoration: none;
+}
+
+.venue_actions a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.venue_social {
+  margin: 15px 0 10px 0;
+}
+
+.venue_social a {
+  margin-right: 10px;
+}
+
+@media only screen {
+/*   hihihih */
+	html{
+		color:red; /* hsdfjsdjhf */
+		line-height: 200;
+	}
+}
+
+@media print {
+	html{
+		color:red;
+		line-height: 200;
+	}
+}
+
+@-webkit-keyframes NAME-YOUR-ANIMATION {
+/*   hahahah */
+  0%   { opacity: 0; /* helphelp */ }
+  100% { opacity: 1; }
+}
+@-moz-keyframes NAME-YOUR-ANIMATION {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes NAME-YOUR-ANIMATION {
+  0%   { opacity: 0; font-size: 32323rem; }
+  100% { opacity: 1; }
+}
+@keyframes NAME-YOUR-ANIMATION {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
