@@ -105,6 +105,9 @@ $shapes = $(".shapes ul");
 $functions = $(".functions");
   $clip_path = $(".clip-path");
 
+$demo_width = $("#demo_width");
+$demo_height = $("#demo_height");
+
 $demo = $(".demo");
 
 var start = shape_array.circle[0];
@@ -170,8 +173,6 @@ $(function(){
 
   // Resize width/height of the demo
   $('input[type="number"]').change(function(){
-    $demo_width = $("#demo_width");
-    $demo_height = $("#demo_height");
 
     width = $demo_width.val();
       // max width is the width of the window
@@ -196,9 +197,6 @@ $(function(){
 
       console.log("width: " + width);
       console.log("height: " + height);
-
-      $demo_width.val(width);
-      $demo_height.val(height);
 
       sizes();
 
@@ -370,13 +368,14 @@ function setupDemo(coords) {
     }
 
     if(type == "circle") {
-
       if(i == 0) {
         $handles.append('<div class="radius handle" data-handle="' + i + '" style="top: ' + y_px + '; left: ' + x_px + ';"></div>')
       }
+
       if(i == 1) {
         $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + y_px + '; left: ' + x_px + ';"></div>')
       }
+
 
       var shape = shape_array.circle[0];
       var radius = shape.radius;
@@ -460,7 +459,6 @@ function setupDemo(coords) {
 }
 
 
-
 function readyDrag() {
   // Utilizes the awesome draggabilly.js by Dave Desandro
   // Works real well on touch devices
@@ -486,6 +484,7 @@ function readyDrag() {
 
       // If we are changing a circle we are working differently than with polygon
       if(type == "circle") {
+
         special = instance.element.classList[0];
 
         $position = $(".position.handle");
@@ -498,10 +497,13 @@ function readyDrag() {
 
           var max = Math.max(width, height);
           var min = Math.min(width, height);
-              size = max;
+              max = Math.max(width, height);
+
+          startRadius = getRadius(radius_pos_x, position_pos_x, radius_pos_y, position_pos_y) /100;
       }
 
     }).on("dragMove", function(instance, e, pointer) {
+
 
       // Returns current position of the dragging handle
       var x = instance.position.x;
@@ -513,29 +515,25 @@ function readyDrag() {
         if(special == "position") {
 
           // calculate distance from center center of demo
+
           var x_delta = width/2 - x;
           var y_delta = height/2 - y;
 
-          console.log(x_delta);
+          var max = Math.max(width, height);
 
-          // calculates the radius
-          // this should not be done on dragMove but on
-          // dragStart since position handle is being moved
-          // and the radius is not being changed
-          radius = getRadius(radius_pos_x, position_pos_x, radius_pos_y, position_pos_y);
-          var radius = radius/100;
-
+          // var mod = 1 - (Math.sqrt((280 + 140))/100);
+          var mod = 1;
 
           // Calculate the bestest position on the edge of the circle for the radius handle
           // I don't know how the heck this works but it does,
           // Should've spent more time studying in high school...
           var angle = Math.atan2(y_delta, x_delta);
 
-          var handle_x = (Math.cos(angle) * radius * width) + x;
+          var handle_x = (Math.cos(angle) * startRadius * max * mod) + x;
             if(handle_x < 0) { var handle_x = 0; }
             if(handle_x > width) { var handle_x = width; }
 
-          var handle_y = (Math.sin(angle) * radius * height) + y;
+          var handle_y = (Math.sin(angle) * startRadius * max * mod) + y;
             if(handle_y < 0) { var handle_y = 0; }
             if(handle_y > height) { var handle_y = height; }
 
@@ -552,8 +550,10 @@ function readyDrag() {
           // Calculate the new radius
           var radius = getRadius(x, position_pos_x, y, position_pos_y);
 
+          console.log("startRadius::: " + startRadius);
+
           if(unit == "%") {
-            var radius = radius + '%';
+            var radius = radius+ '%';
           } else {
             var radius = Math.round((radius/100) * width) + "px";
           }
@@ -650,6 +650,9 @@ function sizes() {
   // Adjust for 10px padding on each side because of the handles
   var adjusted_width = parseInt(width) + 20;
   var adjusted_height = parseInt(height) + 20;
+
+  $demo_width.val(width);
+  $demo_height.val(height);
 
   $box.css({
     "width" : adjusted_width,
