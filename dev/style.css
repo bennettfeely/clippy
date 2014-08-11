@@ -41,7 +41,7 @@ header {
       -ms-flex-pack: justify;
           justify-content: space-between;
   background: #fbfcf7;
-  padding: .75rem 1rem .5rem; }
+  padding: .75rem 1rem 0; }
   header a {
     display: inline-block;
     text-decoration: none;
