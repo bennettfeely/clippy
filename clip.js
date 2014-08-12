@@ -464,9 +464,9 @@ function setupDemo(coords) {
         $handles.append('<div class="handle bottom horizontal bar" data-handle="2"></div>');
         $handles.append('<div class="handle left vertical bar" data-handle="3"></div>');
 
-        setHandleBars(coords);
-
         $unprefixed.attr("data-coords", coords[0] + ' ' + coords[1] + ' ' + coords[2] + ' ' + coords[3]);
+
+        setHandleBars();
 
         var top_point = '<code class="point" data-point="0">' + coords[0] + '%</code> ';
         var right_point = '<code class="point" data-point="1">' + coords[1] + '%</code> ';
@@ -484,7 +484,10 @@ function setupDemo(coords) {
 }
 
 
-function setHandleBars(coords, bar) {
+function setHandleBars(bar) {
+
+  var coords = $unprefixed.attr("data-coords").split(" ");
+
   console.log('setHandleBars(' + coords + ');');
 
   var top = coords[0];
@@ -502,10 +505,21 @@ function setHandleBars(coords, bar) {
   var bar_width = right_px - left_px - padding * 2;
   var bar_height = bottom_px - top_px - padding * 2;
 
-  if(bar !== "top") { $(".top.bar").css("top", top_px).css("left", left_px + padding + 10).css("width", bar_width); }
-  if(bar !== "right") { $(".right.bar").css("top", top_px + padding + 10).css("left", right_px).css("height", bar_height); }
-  if(bar !== "bottom") { $(".bottom.bar").css("top", bottom_px).css("left", left_px + padding + 10).css("width", bar_width); }
-  if(bar !== "left") {  $(".left.bar").css("top", top_px + padding + 10).css("left", left_px).css("height", bar_height); }
+  var x_center = (right_px + left_px)/2;
+  var y_center = (top_px + bottom_px)/2;
+
+  if(bar !== "top") {
+    $(".top.bar").css("top", top_px).css("left", x_center);
+  }
+  if(bar !== "right") {
+    $(".right.bar").css("top", y_center).css("left", right_px);
+  }
+  if(bar !== "bottom") {
+    $(".bottom.bar").css("top", bottom_px).css("left", x_center);
+  }
+  if(bar !== "left") {
+    $(".left.bar").css("top", y_center).css("left", left_px);
+  }
 }
 
 
@@ -685,9 +699,11 @@ function readyDrag() {
           if(axis == "y") { $point.text(y); }
 
           var coords = $unprefixed.text().match(/inset(.*?)\)/g).toString();
-          var coords = coords.replace("inset(", "").replace(")","").replace(/%/g, "").split(" ");
+          var coords = coords.replace("inset(", "").replace(")","").replace(/%/g, "");
 
-          setHandleBars(coords, bar);
+          $unprefixed.attr("data-coords", coords);
+
+          setHandleBars(bar);
 
           clipIt();
         });
