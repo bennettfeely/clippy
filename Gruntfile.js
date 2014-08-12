@@ -4,17 +4,6 @@ module.exports = function (grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        remfallback: {
-          options: {
-            log: false,
-            replace: false
-          },
-          your_target: {
-            files: {
-              // 'Sites/dev/style.ie8.css': ['sites/dev/style.css']
-            }
-          }
-        },
         sass: {
             dist: {
                 files: {
