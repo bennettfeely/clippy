@@ -92,6 +92,12 @@ shape_array = {
       name : "Cross",
       coords : [[10,25],[35,25],[35,0],[65,0],[65,25],[90,25],[90,50],[65,50],[65,100],[35,100],[35,50],[10,50]]
     }
+  ],
+  "inset" : [
+    {
+      name : "Inset",
+      coords : [5,20,15,10]
+    }
   ]
 };
 
@@ -104,14 +110,15 @@ $handles = $(".handles");
 $shapes = $(".shapes ul");
 $functions = $(".functions");
   $clip_path = $(".clip-path");
+  $unprefixed = $(".unprefixed");
 
 $demo_width = $("#demo_width");
 $demo_height = $("#demo_height");
 
 $demo = $(".demo");
 
-var start = shape_array.circle[0];
-    start_type = "circle",
+var start = shape_array.inset[0];
+    start_type = "inset",
     start_coords = start.coords,
     start_name = start.name,
 
@@ -214,7 +221,22 @@ function init() {
 
   type = start_type;
 
-  // Setup Circle
+  // Setup insets
+  $.each(shape_array.inset, function(i, shape){
+
+    var top = shape.coords[0] + "%";
+    var right = shape.coords[1] + "%";
+    var bottom = shape.coords[2] + "%";
+    var left = shape.coords[3] + "%";
+
+    var clip_path = 'inset(' + top + ' ' + right + ' ' + bottom + ' ' + left + ')';
+
+    console.log(clip_path);
+
+    appendFigure(clip_path, shape);
+  });
+
+  // Setup circles
   $.each(shape_array.circle, function(i, shape){
     type = "circle";
 
@@ -227,7 +249,7 @@ function init() {
     appendFigure(clip_path, shape);
   });
 
-  // Setup ellipse
+  // Setup ellipses
   $.each(shape_array.ellipse, function(i, shape){
     type = "ellipse";
 
@@ -242,7 +264,7 @@ function init() {
     appendFigure(clip_path, shape);
   });
 
-  // Setup Polygons
+  // Setup polygons
   $.each(shape_array.polygon, function(i, shape){
 
     paths = '';
@@ -306,6 +328,13 @@ function appendFigure(clip_path, shape) {
             + '</figure>';
   }
 
+  if(type == "inset") {
+    var fig = '<figure data-name="' + shape.name + '" data-type="polygon" class="panel" data-coords="' + shape.coords.join(" ") + '">'
+              + '<div style="-ms-clip-path: ' + clip_path + '; -moz-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<figcaption>' + shape.name + '</figcaption>'
+            + '</figure>';
+  }
+
   $shapes.append(fig);
 
   // listen for clicks on the figure buttons
@@ -343,6 +372,13 @@ function appendFigure(clip_path, shape) {
         }
       });
     }
+
+    if(type == "inset") {
+      var shape = shape_array.inset[0];
+
+      setupDemo(shape.coords);
+    }
+
   });
 }
 
@@ -376,7 +412,6 @@ function setupDemo(coords) {
         $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + y_px + '; left: ' + x_px + ';"></div>')
       }
 
-
       var shape = shape_array.circle[0];
       var radius = shape.radius;
       var position_x = shape.position[0];
@@ -405,42 +440,6 @@ function setupDemo(coords) {
       }
     }
 
-    /* Ellipse is not ready yet...
-      if(type == "ellipse") {
-        var shape = shape_array.ellipse[0];
-          var radius_x = shape.radius[0];
-          var radius_y = shape.radius[1];
-          var position_x = shape.position[0];
-          var position_y = shape.position[1];
-
-        if(unit == "%") {
-          var radius_x = radius_x + "%";
-          var radius_y = radius_y + "%";
-          var position_x = position_x + "%";
-          var position_y = position_y + "%";
-        } else {
-          var radius_x = Math.round((radius_x/100) * width) + "px";
-          var radius_y = Math.round((radius_y/100) * width) + "px";
-          var position_x = Math.round((position_x/100) * width) + "px";
-          var position_y = Math.round((position_y/100) * width) + "px";
-        }
-
-        var radius_x = '<code class="point" data-point="' + i + '">' + radius_x + '</code>';
-        var radius_y = '<code class="point" data-point="' + i + '">' + radius_y + '</code>';
-        var position = '<code class="point" data-point="' + i + '">' + position_x + ' ' + position_y + '</code>';
-
-
-        if(i == coords.length - 1) {
-
-          var clip_path_function = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + position + ')';
-          $functions.append(clip_path_function);
-
-          clipIt();
-          readyDrag();
-        }
-      }
-    */
-
     if(type == "polygon") {
       $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + '; left: ' + x_px + ';"></div>')
 
@@ -451,12 +450,64 @@ function setupDemo(coords) {
         clipIt();
         readyDrag();
       } else {
-        $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>, ')
+        $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>, ');
       }
     }
 
+    if(type == "inset") {
+      console.log('setupDemo(); type == "inset"');
+
+      if(i == coords.length - 1) {
+
+        $handles.append('<div class="handle top horizontal bar" data-handle="0"></div>');
+        $handles.append('<div class="handle right vertical bar" data-handle="1"></div>');
+        $handles.append('<div class="handle bottom horizontal bar" data-handle="2"></div>');
+        $handles.append('<div class="handle left vertical bar" data-handle="3"></div>');
+
+        setHandleBars(coords);
+
+        $unprefixed.attr("data-coords", coords[0] + ' ' + coords[1] + ' ' + coords[2] + ' ' + coords[3]);
+
+        var top_point = '<code class="point" data-point="0">' + coords[0] + '%</code> ';
+        var right_point = '<code class="point" data-point="1">' + coords[1] + '%</code> ';
+        var bottom_point = '<code class="point" data-point="2">' + coords[2] + '%</code> ';
+        var left_point = '<code class="point" data-point="3">' + coords[3] + '%</code>';
+
+        var clip_path_function = 'inset(' + top_point + right_point + bottom_point + left_point + ')';
+        $functions.append(clip_path_function);
+
+        clipIt();
+        readyDrag();
+      }
+    }
   });
 }
+
+
+function setHandleBars(coords, bar) {
+  console.log('setHandleBars(' + coords + ');');
+
+  var top = coords[0];
+  var right = coords[1];
+  var bottom = coords[2];
+  var left = coords[3];
+
+  var top_px = Math.round((top/100) * height);
+  var right_px = Math.round((1 - (right/100)) * width);
+  var bottom_px = Math.round((1 - (bottom/100)) * height);
+  var left_px = Math.round((left/100) * width);
+
+  var padding = 20;
+
+  var bar_width = right_px - left_px - padding * 2;
+  var bar_height = bottom_px - top_px - padding * 2;
+
+  if(bar !== "top") { $(".top.bar").css("top", top_px).css("left", left_px + padding + 10).css("width", bar_width); }
+  if(bar !== "right") { $(".right.bar").css("top", top_px + padding + 10).css("left", right_px).css("height", bar_height); }
+  if(bar !== "bottom") { $(".bottom.bar").css("top", bottom_px).css("left", left_px + padding + 10).css("width", bar_width); }
+  if(bar !== "left") {  $(".left.bar").css("top", top_px + padding + 10).css("left", left_px).css("height", bar_height); }
+}
+
 
 
 function readyDrag() {
@@ -469,113 +520,180 @@ function readyDrag() {
   var handles = box.querySelectorAll(".handle");
   var $functions = $(".functions");
 
-  for ( var i = 0, len = handles.length; i < len; i++ ) {
-    var handle = handles[i];
-    new Draggabilly(handle, {
-      containment: true,
-      grid: grid
-    }).on("dragStart", function(instance, e, pointer) {
+  if(type !== "inset") {
+    for ( var i = 0, len = handles.length; i < len; i++ ) {
+      var handle = handles[i];
 
-      i = instance.element.dataset.handle;
-      $point = $('[data-point="' + i + '"]');
+      new Draggabilly(handle, {
+        containment: true,
+        grid: grid
+      }).on("dragStart", function(instance, e, pointer) {
 
-      // .changing triggers the bubble burst animation
-      $point.addClass("changing");
+        i = instance.element.dataset.handle;
+        $point = $('[data-point="' + i + '"]');
 
-      // If we are changing a circle we are working differently than with polygon
-      if(type == "circle") {
+        // .changing triggers the bubble burst animation
+        $point.addClass("changing");
 
-        special = instance.element.classList[0];
+        // If we are changing a circle we are working differently than with polygon
+        if(type == "circle") {
 
-        $position = $(".position.handle");
-          position_pos_x = $position.position().left;
-          position_pos_y = $position.position().top;
+          special = instance.element.classList[0];
 
-        $radius = $(".radius.handle");
-          radius_pos_x = $radius.position().left;
-          radius_pos_y = $radius.position().top;
+          $position = $(".position.handle");
+            position_pos_x = $position.position().left;
+            position_pos_y = $position.position().top;
 
-          var max = Math.max(width, height);
-          var min = Math.min(width, height);
-              max = Math.max(width, height);
+          $radius = $(".radius.handle");
+            radius_pos_x = $radius.position().left;
+            radius_pos_y = $radius.position().top;
 
-          startRadius = getRadius(radius_pos_x, position_pos_x, radius_pos_y, position_pos_y) /100;
-      }
+            var max = Math.max(width, height);
+            var min = Math.min(width, height);
+                max = Math.max(width, height);
 
-    }).on("dragMove", function(instance, e, pointer) {
+            startRadius = getRadius(radius_pos_x, position_pos_x, radius_pos_y, position_pos_y) /100;
+        }
 
+      }).on("dragMove", function(instance, e, pointer) {
 
-      // Returns current position of the dragging handle
-      var x = instance.position.x;
-      var y = instance.position.y;
+        // Returns current position of the dragging handle
+        var x = instance.position.x;
+        var y = instance.position.y;
 
-      if(type == "circle") {
+        if(type == "circle") {
 
-        // Dragging the center position handle
-        if(special == "position") {
+          // Dragging the center position handle
+          if(special == "position") {
 
-          // calculate distance from center center of demo
+            // calculate distance from center center of demo
 
-          var x_delta = width/2 - x;
-          var y_delta = height/2 - y;
+            var x_delta = width/2 - x;
+            var y_delta = height/2 - y;
 
-          var max = Math.max(width, height);
+            var max = Math.max(width, height);
 
-          // var mod = 1 - (Math.sqrt((280 + 140))/100);
-          var mod = 1;
+            // var mod = 1 - (Math.sqrt((280 + 140))/100);
+            var mod = 1;
 
-          // Calculate the bestest position on the edge of the circle for the radius handle
-          // I don't know how the heck this works but it does,
-          // Should've spent more time studying in high school...
-          var angle = Math.atan2(y_delta, x_delta);
+            // Calculate the bestest position on the edge of the circle for the radius handle
+            // I don't know how the heck this works but it does,
+            // Should've spent more time studying in high school...
+            var angle = Math.atan2(y_delta, x_delta);
 
-          var handle_x = (Math.cos(angle) * startRadius * max * mod) + x;
-            if(handle_x < 0) { var handle_x = 0; }
-            if(handle_x > width) { var handle_x = width; }
+            var handle_x = (Math.cos(angle) * startRadius * max * mod) + x;
+              if(handle_x < 0) { var handle_x = 0; }
+              if(handle_x > width) { var handle_x = width; }
 
-          var handle_y = (Math.sin(angle) * startRadius * max * mod) + y;
-            if(handle_y < 0) { var handle_y = 0; }
-            if(handle_y > height) { var handle_y = height; }
+            var handle_y = (Math.sin(angle) * startRadius * max * mod) + y;
+              if(handle_y < 0) { var handle_y = 0; }
+              if(handle_y > height) { var handle_y = height; }
 
-          var radius_position = 'left:' + handle_x + 'px; top:' + handle_y + 'px';
+            var radius_position = 'left:' + handle_x + 'px; top:' + handle_y + 'px';
 
-          $radius.attr("style", radius_position);
+            $radius.attr("style", radius_position);
 
+            setPoint(x, y);
+          }
+
+          // Dragging the radius handle on the edge of the circle
+          if(special == "radius") {
+
+            // Calculate the new radius
+            var radius = getRadius(x, position_pos_x, y, position_pos_y);
+
+            console.log("startRadius::: " + startRadius);
+
+            if(unit == "%") {
+              var radius = radius+ '%';
+            } else {
+              var radius = Math.round((radius/100) * width) + "px";
+            }
+
+            $point.text(radius);
+          }
+        }
+
+        // Dragging a polygon handle, easy...
+        if(type == "polygon") {
           setPoint(x, y);
         }
 
-        // Dragging the radius handle on the edge of the circle
-        if(special == "radius") {
+        clipIt();
 
-          // Calculate the new radius
-          var radius = getRadius(x, position_pos_x, y, position_pos_y);
+      }).on("dragEnd", function(instance) {
 
-          console.log("startRadius::: " + startRadius);
+        // Remove all the bubble animations
+        $(".point").removeClass("changing");
+
+      });
+
+    }
+  }
+
+    if(type == "inset") {
+
+      for ( var i = 0, len = handles.length; i < len; i++ ) {
+        var handle = handles[i];
+        var bar = handle.classList[1];
+
+        // console.log("spot!; " + spot);
+
+        if(bar == "left" || bar == "right") { axis = "x"; }
+        if(bar == "top" || bar == "bottom") { axis = "y"; }
+
+        new Draggabilly(handle, {
+          containment: true,
+          grid: grid,
+          axis: axis
+        }).on("dragStart", function(instance, e, pointer) {
+          i = instance.element.dataset.handle;
+          bar = instance.element.classList[1];
+
+          if(bar == "left" || bar == "right") { axis = "x"; }
+          if(bar == "top" || bar == "bottom") { axis = "y"; }
+
+          $point = $('[data-point="' + i + '"]');
+
+          // .changing triggers the bubble burst animation
+          $point.addClass("changing");
+
+        }).on("dragMove", function(instance, e, pointer) {
+
+          var x = instance.position.x;
+          var y = instance.position.y;
+
+          var snap = 1;
 
           if(unit == "%") {
-            var radius = radius+ '%';
-          } else {
-            var radius = Math.round((radius/100) * width) + "px";
+            var x = (x/width * 100).toFixed(0);
+              if(x < snap) { var x = 0; }
+              if(x > (100 - snap)) { var x = 100; }
+            var y = (y/height * 100).toFixed(0);
+              if(y < snap) { var y = 0; }
+              if(y > (100 - snap)) { var y = 100; }
+
+            if(bar == "right") { var x = Math.abs(100 - x); }
+            if(bar == "bottom") { var y = Math.abs(100 - y); }
           }
 
-          $point.text(radius);
-        }
+          // Add unit if number is not zero
+          if(x !== 0) { var x = x + unit; }
+          if(y !== 0) { var y = y + unit; }
+
+          if(axis == "x") { $point.text(x); }
+          if(axis == "y") { $point.text(y); }
+
+          var coords = $unprefixed.text().match(/inset(.*?)\)/g).toString();
+          var coords = coords.replace("inset(", "").replace(")","").replace(/%/g, "").split(" ");
+
+          setHandleBars(coords, bar);
+
+          clipIt();
+        });
+
       }
-
-      // Dragging a polygon handle, easy...
-      if(type == "polygon") {
-        setPoint(x, y);
-      }
-
-      clipIt();
-
-    }).on("dragEnd", function(instance) {
-
-      // Remove all the bubble animations
-      $(".point").removeClass("changing");
-
-    });
-  }
+    }
 }
 
 

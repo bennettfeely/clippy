@@ -129,6 +129,18 @@ header {
     transition:
       box-shadow 0;
   }
+
+  &.bar {
+    border-radius: 20px;
+
+    &:after {
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+    }
+  }
+
 }
 
 .shapes {
