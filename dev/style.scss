@@ -322,14 +322,19 @@ header {
 }
 
 .options {
+  display: flex;
+  flex-wrap: wrap;
   padding: .25rem .25rem 1.25rem;
 
   .panel {
+    flex: auto;
+    flex: 22rem 0 auto;
+    display: inline-block;
     padding: 1rem 1rem 1rem .5rem;
     background: white;
     border-radius: $radius;
     box-shadow: $shadow;
-    margin: .25rem .25rem .5rem;
+    margin: .25rem .25rem;
   }
 
   .flex {
@@ -341,6 +346,7 @@ header {
 
 h2 {
   display: inline-block;
+  flex: auto;
   font-size: 1.2rem;
   font-weight: 500;
   pointer-events: none;
@@ -367,7 +373,8 @@ input[type="checkbox"] {
 label, input[type="number"], input[type="url"] {
   position: relative;
   text-align: center;
-  flex: 1;
+  flex: auto;
+  min-width: 2rem;
   padding: .5rem .25rem;
   box-shadow:
     inset 0 .125rem $lightgray,
@@ -390,6 +397,7 @@ label, input[type="number"], input[type="url"] {
   &:first-of-type {
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
+    min-width: 3.5rem;
     box-shadow:
       inset .125rem 0 $lightgray,
       inset 0 .125rem $lightgray,
