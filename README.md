@@ -8,7 +8,7 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 * `circle()` Buggy, does not work without a 1:1 size ratio.
 * `ellipse()` Started.
 * `polygon()` Done.
-* `inset()` Done, looking into supporting for <radius> value.
+* `inset()` Done, looking into supporting for `radius` value.
 
 
 #### Details
