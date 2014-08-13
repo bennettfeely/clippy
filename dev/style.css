@@ -196,7 +196,7 @@ header iframe {
 .shapes ul {
   width: 100%;
   overflow-x: auto;
-  padding: .5rem 0 .5rem .5rem;
+  padding: .5rem 0 0 .5rem;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
 }
@@ -206,6 +206,7 @@ header iframe {
   text-align: center;
   padding: .5rem 0;
   margin-right: .5rem;
+  margin-bottom: .5rem;
   background: white;
   width: 4.125rem;
   box-shadow: 0 1px 2px rgba(16, 10, 9, 0.15);
@@ -575,7 +576,7 @@ input[type="url"] {
   -ms-flex: auto;
   flex: auto;
   min-width: 2rem;
-  padding: .5rem;
+  padding: .5rem 1rem;
   box-shadow: inset 0 0.125rem #dcddd9, inset -0.125rem 0 #dcddd9, inset 0 -0.125rem #dcddd9;
   cursor: pointer;
   -webkit-transition: background 0.22s;
@@ -627,7 +628,7 @@ input[type="url"][type="url"]:focus {
   z-index: 100;
   color: #dcddd9;
   outline: 0;
-  box-shadow: inset 0 0 0 0.125rem #100a09, 0 0 0 0.125rem #100a09;
+  box-shadow: inset 0 0 0 0.125rem #100a09, 0 0 0 0.125rem #100a09, 0 0 0 0.25rem white;
 }
 
 .backgrounds {
@@ -672,21 +673,6 @@ input[type="url"][type="url"]:focus {
 @keyframes selected {
   10% {
     opacity: .5;
-  }
-}
-
-@-webkit-keyframes figin {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-  }
-}
-
-@keyframes figin {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    -ms-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
   }
 }
 

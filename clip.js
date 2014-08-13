@@ -135,6 +135,20 @@ $(function(){
   // Reevaluates max width/height on window resize
   $(window).resize(sizes);
 
+  // Switch grid size
+  $('input[type="radio"]').change(function(){
+
+      var grid_x = $('input[name="grid"]:checked').val()*(width/100);
+      var grid_y = $('input[name="grid"]:checked').val()*(height/100);
+
+      grid = [grid_x, grid_y];
+
+    console.log(start_coords);
+
+    setupDemo(start_coords);
+  });
+
+
   // Add/remove prefixes
   // Classes determine if code block is displayed
   $('input[type="checkbox"]').change(function(){
@@ -144,11 +158,13 @@ $(function(){
       $(".ms").removeClass("show");
     }
 
+    /*
     if($("#moz").is(':checked')) {
       $(".moz").addClass("show");
     } else {
       $(".moz").removeClass("show");
     }
+    */
 
     if($("#webkit").is(':checked')) {
       $(".webkit").addClass("show");
@@ -386,6 +402,7 @@ function appendFigure(clip_path, shape) {
 
     if(type == "inset") {
       var shape = shape_array.inset[0];
+          start_coords = shape.coords;
 
       setupDemo(shape.coords);
     }
