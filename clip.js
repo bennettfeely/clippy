@@ -122,7 +122,6 @@ var start = shape_array.circle[0];
     start_coords = start.coords,
     start_name = start.name,
 
-    unit = "%",
     width = 280,
     height = 280,
     grid = [0,0];
@@ -135,26 +134,6 @@ $(function(){
 
   // Reevaluates max width/height on window resize
   $(window).resize(sizes);
-
-  // Switch between px and percentage units
-  $('input[type="radio"]').change(function(){
-    unit = $('input[name="unit"]:checked').val();
-
-    if(unit == "px") {
-      $html.attr("class","pixel");
-
-      grid = [$('input[name="grid"]:checked').val(),$('input[name="grid"]:checked').val()];
-    } else {
-      $html.attr("class","percentage");
-
-      var grid_x = $('input[name="grid"]:checked').val()*(width/100);
-      var grid_y = $('input[name="grid"]:checked').val()*(height/100);
-
-      grid = [grid_x,grid_y];
-    }
-
-    setupDemo(start_coords);
-  });
 
   // Add/remove prefixes
   // Classes determine if code block is displayed
@@ -396,13 +375,8 @@ function setupDemo(coords) {
     var x_px = Math.round((x/100) * width) + "px";
     var y_px = Math.round((y/100) * height) + "px";
 
-    if(unit == "%") {
-      var code_x = x + "%";
-      var code_y = y + "%";
-    } else {
-      var code_x = x_px;
-      var code_y = y_px;
-    }
+    var code_x = x + "%";
+    var code_y = y + "%";
 
     if(type == "circle") {
       if(i == 0) {
@@ -418,15 +392,9 @@ function setupDemo(coords) {
       var position_x = shape.position[0];
       var position_y = shape.position[1];
 
-      if(unit == "%") {
-        var radius = radius + "%";
-        var position_x = position_x + "%";
-        var position_y = position_y + "%";
-      } else {
-        var radius = Math.round((radius/100) * width) + "px";
-        var position_x = Math.round((position_x/100) * width) + "px";
-        var position_y = Math.round((position_y/100) * height) + "px";
-      }
+      var radius = radius + "%";
+      var position_x = position_x + "%";
+      var position_y = position_y + "%";
 
       if(i == coords.length - 1) {
 
@@ -615,14 +583,7 @@ function readyDrag() {
 
             // Calculate the new radius
             var radius = getRadius(x, position_pos_x, y, position_pos_y);
-
-            console.log("startRadius::: " + startRadius);
-
-            if(unit == "%") {
-              var radius = radius+ '%';
-            } else {
-              var radius = Math.round((radius/100) * width) + "px";
-            }
+            var radius = radius + '%';
 
             $point.text(radius);
           }
@@ -679,22 +640,19 @@ function readyDrag() {
 
         var snap = 1;
 
-        if(unit == "%") {
-          var x = (x/width * 100).toFixed(0);
-            if(x < snap) { var x = 0; }
-            if(x > (100 - snap)) { var x = 100; }
-          var y = (y/height * 100).toFixed(0);
-            if(y < snap) { var y = 0; }
-            if(y > (100 - snap)) { var y = 100; }
+        var x = (x/width * 100).toFixed(0);
+          if(x < snap) { var x = 0; }
+          if(x > (100 - snap)) { var x = 100; }
+        var y = (y/height * 100).toFixed(0);
+          if(y < snap) { var y = 0; }
+          if(y > (100 - snap)) { var y = 100; }
 
-          if(bar == "right") { var x = Math.abs(100 - x); }
-          if(bar == "bottom") { var y = Math.abs(100 - y); }
-        }
+        if(bar == "right") { var x = Math.abs(100 - x); }
+        if(bar == "bottom") { var y = Math.abs(100 - y); }
 
         var coords = $unprefixed.text().match(/inset(.*?)\)/g).toString();
         var coords = coords.replace("inset(", "").replace(")","").replace(/%/g, "");
         $unprefixed.attr("data-coords", coords);
-
 
         /*
         // Use only two or one shape argument if possible
@@ -711,13 +669,12 @@ function readyDrag() {
         }
         */
 
-        // Add unit if number is not zero
-        if(x !== 0) { var x = x + unit; }
-        if(y !== 0) { var y = y + unit; }
+        // Add % if number is not zero
+        if(x !== 0) { var x = x + "%"; }
+        if(y !== 0) { var y = y + "%"; }
 
         if(axis == "x") { $point.text(x); }
         if(axis == "y") { $point.text(y); }
-
 
         setHandleBars(bar);
 
@@ -752,18 +709,16 @@ function setPoint(x, y) {
   // Consider using something like this instead of draggabilly's built-in grid[]
   var snap = 1;
 
-  if(unit == "%") {
-    var x = (x/width * 100).toFixed(0);
-      if(x < snap) { var x = 0; }
-      if(x > (100 - snap)) { var x = 100; }
-    var y = (y/height * 100).toFixed(0);
-      if(y < snap) { var y = 0; }
-      if(y > (100 - snap)) { var y = 100; }
-  }
+  var x = (x/width * 100).toFixed(0);
+    if(x < snap) { var x = 0; }
+    if(x > (100 - snap)) { var x = 100; }
+  var y = (y/height * 100).toFixed(0);
+    if(y < snap) { var y = 0; }
+    if(y > (100 - snap)) { var y = 100; }
 
-  // Add unit if number is not zero
-  if(x !== 0) { var x = x + unit; }
-  if(y !== 0) { var y = y + unit; }
+  // Add % if number is not zero
+  if(x !== 0) { var x = x + "%"; }
+  if(y !== 0) { var y = y + "%"; }
 
   /*
   //Use keywords if possible
