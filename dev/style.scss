@@ -330,11 +330,11 @@ header {
     border-radius: $radius;
     box-shadow: $shadow;
     margin: .25rem .25rem .5rem;
+  }
 
-    &.flex {
-      display: flex;
-      align-items: center;
-    }
+  .flex {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -346,6 +346,10 @@ h2 {
   pointer-events: none;
   padding: 0 .5rem;
   color: darken($lightgray, 10%);
+
+  &.block {
+    display: block;
+  }
 
   &:first-child {
     color: $black;
@@ -360,8 +364,7 @@ input[type="checkbox"] {
 }
 
 
-
-label, input[type="number"] {
+label, input[type="number"], input[type="url"] {
   position: relative;
   text-align: center;
   flex: 1;
@@ -399,7 +402,8 @@ label, input[type="number"] {
   }
 
   input:checked + &,
-  &[type="number"]:focus {
+  &[type="number"]:focus,
+  &[type="url"]:focus {
     background: $black;
     z-index: 100;
     color: $lightgray;
@@ -410,12 +414,39 @@ label, input[type="number"] {
   }
 }
 
-.percentage .grid label[type="radio"]:not(:first-of-type):after {
-  font-size: 75%;
-  content: "%";
+.backgrounds {
+  overflow: hidden;
+  position: relative;
+  padding: .5rem 0 .75rem .375rem;
+
+  img {
+    cursor: pointer;
+    border-radius: .25rem;
+    float: left;
+    width: calc(25% - .25rem);
+    height: auto;
+    outline: .25rem solid white;
+    margin: .125rem;
+
+    &.selected {
+      animation: selected .4s both;
+    }
+  }
+
+  & + input {
+    font: inherit;
+    font-size: 1rem;
+    line-height: 2;
+    width: calc(100% - .375rem);
+    margin-left: .375rem;
+    text-align: left;
+    padding: .25rem 1rem;
+  }
+
 }
-.pixel .grid label[type="radio"]:not(:first-of-type):after {
-  content: "px";
+
+@keyframes selected {
+  10% { opacity: .5; }
 }
 
 

@@ -192,7 +192,38 @@ $(function(){
       setupDemo(start_coords);
   });
 
+  // Change clipboard background image
+  $(".backgrounds img").mousedown(function(){
+    var url = $(this).attr("src");
+
+    $(this).addClass("selected");
+    setTimeout(function(){
+      $(".backgrounds img").removeClass("selected");
+    }, 400);
+
+    setCustomBackground(url);
+
+  });
+
+  // Change clipboard background to custom url
+  $("#custom_url").blur(function(){
+    var url = $(this).val();
+
+    if(url !== '') {
+      setCustomBackground(url);
+    }
+
+  });
+
 });
+
+function setCustomBackground(url) {
+  var style = '.clipboard { background-image: url(' + url + '); }';
+
+  console.log(style);
+
+    $("#custom_background").html(style);
+}
 
 
 function init() {
@@ -750,6 +781,8 @@ function clipIt() {
   // console.log("clipIt();");
 
   var clip_path = $clip_path.text();
+
+  console.log(clip_path);
 
   $clipboard.attr('style', clip_path);
 }

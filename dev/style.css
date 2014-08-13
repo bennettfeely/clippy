@@ -506,7 +506,7 @@ figure:nth-of-type(22) {
   margin: .25rem .25rem .5rem;
 }
 
-.options .panel.flex {
+.options .flex {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -526,6 +526,10 @@ h2 {
   color: #c3c5be;
 }
 
+h2.block {
+  display: block;
+}
+
 h2:first-child {
   color: #100a09;
   font-weight: 300;
@@ -538,7 +542,8 @@ input[type="checkbox"] {
 }
 
 label,
-input[type="number"] {
+input[type="number"],
+input[type="url"] {
   position: relative;
   text-align: center;
   -webkit-box-flex: 1;
@@ -561,29 +566,37 @@ input[type="number"] {
 }
 
 label:hover,
-input[type="number"]:hover {
+input[type="number"]:hover,
+input[type="url"]:hover {
   background: #dcddd9;
   -webkit-transition: background 0;
   transition: background 0;
 }
 
 label:first-of-type,
-input[type="number"]:first-of-type {
+input[type="number"]:first-of-type,
+input[type="url"]:first-of-type {
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
   box-shadow: inset 0.125rem 0 #dcddd9, inset 0 0.125rem #dcddd9, inset -0.125rem 0 #dcddd9, inset 0 -0.125rem #dcddd9;
 }
 
 label:last-of-type,
-input[type="number"]:last-of-type {
+input[type="number"]:last-of-type,
+input[type="url"]:last-of-type {
   border-top-right-radius: 2rem;
   border-bottom-right-radius: 2rem;
 }
 
 input:checked + label,
 label[type="number"]:focus,
+label[type="url"]:focus,
 input:checked + input[type="number"],
-input[type="number"][type="number"]:focus {
+input[type="number"][type="number"]:focus,
+input[type="number"][type="url"]:focus,
+input:checked + input[type="url"],
+input[type="url"][type="number"]:focus,
+input[type="url"][type="url"]:focus {
   background: #100a09;
   z-index: 100;
   color: #dcddd9;
@@ -591,13 +604,49 @@ input[type="number"][type="number"]:focus {
   box-shadow: inset 0 0 0 0.125rem #100a09, 0 0 0 0.125rem #100a09;
 }
 
-.percentage .grid label[type="radio"]:not(:first-of-type):after {
-  font-size: 75%;
-  content: "%";
+.backgrounds {
+  overflow: hidden;
+  position: relative;
+  padding: .5rem 0 .75rem .375rem;
 }
 
-.pixel .grid label[type="radio"]:not(:first-of-type):after {
-  content: "px";
+.backgrounds img {
+  cursor: pointer;
+  border-radius: .25rem;
+  float: left;
+  width: -webkit-calc(25% - .25rem);
+  width: calc(25% - .25rem);
+  height: auto;
+  outline: .25rem solid white;
+  margin: .125rem;
+}
+
+.backgrounds img.selected {
+  -webkit-animation: selected .4s both;
+  animation: selected .4s both;
+}
+
+.backgrounds + input {
+  font: inherit;
+  font-size: 1rem;
+  line-height: 2;
+  width: -webkit-calc(100% - .375rem);
+  width: calc(100% - .375rem);
+  margin-left: .375rem;
+  text-align: left;
+  padding: .25rem 1rem;
+}
+
+@-webkit-keyframes selected {
+  10% {
+    opacity: .5;
+  }
+}
+
+@keyframes selected {
+  10% {
+    opacity: .5;
+  }
 }
 
 @-webkit-keyframes figin {
