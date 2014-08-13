@@ -117,8 +117,8 @@ $demo_height = $("#demo_height");
 
 $demo = $(".demo");
 
-var start = shape_array.inset[0];
-    start_type = "inset",
+var start = shape_array.circle[0];
+    start_type = "circle",
     start_coords = start.coords,
     start_name = start.name,
 
@@ -221,21 +221,6 @@ function init() {
 
   type = start_type;
 
-  // Setup insets
-  $.each(shape_array.inset, function(i, shape){
-
-    var top = shape.coords[0] + "%";
-    var right = shape.coords[1] + "%";
-    var bottom = shape.coords[2] + "%";
-    var left = shape.coords[3] + "%";
-
-    var clip_path = 'inset(' + top + ' ' + right + ' ' + bottom + ' ' + left + ')';
-
-    console.log(clip_path);
-
-    appendFigure(clip_path, shape);
-  });
-
   // Setup circles
   $.each(shape_array.circle, function(i, shape){
     type = "circle";
@@ -294,6 +279,22 @@ function init() {
     });
   });
 
+  // Setup insets
+  $.each(shape_array.inset, function(i, shape){
+    type = "inset";
+
+    var top = shape.coords[0] + "%";
+    var right = shape.coords[1] + "%";
+    var bottom = shape.coords[2] + "%";
+    var left = shape.coords[3] + "%";
+
+    var clip_path = 'inset(' + top + ' ' + right + ' ' + bottom + ' ' + left + ')';
+
+    console.log(clip_path);
+
+    appendFigure(clip_path, shape);
+  });
+
   type = start_type;
 
   setupDemo(start_coords);
@@ -329,7 +330,7 @@ function appendFigure(clip_path, shape) {
   }
 
   if(type == "inset") {
-    var fig = '<figure data-name="' + shape.name + '" data-type="polygon" class="panel" data-coords="' + shape.coords.join(" ") + '">'
+    var fig = '<figure data-name="' + shape.name + '" data-type="inset" class="panel" data-coords="' + shape.coords.join(" ") + '">'
               + '<div style="-ms-clip-path: ' + clip_path + '; -moz-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
@@ -455,7 +456,6 @@ function setupDemo(coords) {
     }
 
     if(type == "inset") {
-      console.log('setupDemo(); type == "inset"');
 
       if(i == coords.length - 1) {
 
@@ -488,7 +488,7 @@ function setHandleBars(bar) {
 
   var coords = $unprefixed.attr("data-coords").split(" ");
 
-  console.log('setHandleBars(' + coords + ');');
+  // console.log('setHandleBars(' + coords + ');');
 
   var top = coords[0];
   var right = coords[1];
@@ -645,72 +645,94 @@ function readyDrag() {
     }
   }
 
-    if(type == "inset") {
+  if(type == "inset") {
 
-      for ( var i = 0, len = handles.length; i < len; i++ ) {
-        var handle = handles[i];
-        var bar = handle.classList[1];
+    for ( var i = 0, len = handles.length; i < len; i++ ) {
+      var handle = handles[i];
+      var bar = handle.classList[1];
 
-        // console.log("spot!; " + spot);
+      // console.log("spot!; " + spot);
+
+      if(bar == "left" || bar == "right") { axis = "x"; }
+      if(bar == "top" || bar == "bottom") { axis = "y"; }
+
+      var draggie = new Draggabilly(handle, {
+        containment: true,
+        grid: grid,
+        axis: axis
+      }).on("dragStart", function(instance, e, pointer) {
+        i = instance.element.dataset.handle;
+        bar = instance.element.classList[1];
 
         if(bar == "left" || bar == "right") { axis = "x"; }
         if(bar == "top" || bar == "bottom") { axis = "y"; }
 
-        new Draggabilly(handle, {
-          containment: true,
-          grid: grid,
-          axis: axis
-        }).on("dragStart", function(instance, e, pointer) {
-          i = instance.element.dataset.handle;
-          bar = instance.element.classList[1];
+        $point = $('[data-point="' + i + '"]');
 
-          if(bar == "left" || bar == "right") { axis = "x"; }
-          if(bar == "top" || bar == "bottom") { axis = "y"; }
+        // .changing triggers the bubble burst animation
+        $point.addClass("changing");
 
-          $point = $('[data-point="' + i + '"]');
+      }).on("dragMove", function(instance, e, pointer) {
 
-          // .changing triggers the bubble burst animation
-          $point.addClass("changing");
+        var x = instance.position.x;
+        var y = instance.position.y;
 
-        }).on("dragMove", function(instance, e, pointer) {
+        var snap = 1;
 
-          var x = instance.position.x;
-          var y = instance.position.y;
+        if(unit == "%") {
+          var x = (x/width * 100).toFixed(0);
+            if(x < snap) { var x = 0; }
+            if(x > (100 - snap)) { var x = 100; }
+          var y = (y/height * 100).toFixed(0);
+            if(y < snap) { var y = 0; }
+            if(y > (100 - snap)) { var y = 100; }
 
-          var snap = 1;
+          if(bar == "right") { var x = Math.abs(100 - x); }
+          if(bar == "bottom") { var y = Math.abs(100 - y); }
+        }
 
-          if(unit == "%") {
-            var x = (x/width * 100).toFixed(0);
-              if(x < snap) { var x = 0; }
-              if(x > (100 - snap)) { var x = 100; }
-            var y = (y/height * 100).toFixed(0);
-              if(y < snap) { var y = 0; }
-              if(y > (100 - snap)) { var y = 100; }
+        var coords = $unprefixed.text().match(/inset(.*?)\)/g).toString();
+        var coords = coords.replace("inset(", "").replace(")","").replace(/%/g, "");
+        $unprefixed.attr("data-coords", coords);
 
-            if(bar == "right") { var x = Math.abs(100 - x); }
-            if(bar == "bottom") { var y = Math.abs(100 - y); }
-          }
 
-          // Add unit if number is not zero
-          if(x !== 0) { var x = x + unit; }
-          if(y !== 0) { var y = y + unit; }
+        /*
+        // Use only two or one shape argument if possible
+        var coords = coords.split(" ");
+        if(coords[0] == coords[2] && coords[1] == coords[3]) {
+          $clip_path.addClass("two-match");
+        } else {
+          $clip_path.removeClass("two-match");
+        }
+        if(coords[0] == coords[1] == coords[2] == coords[3]) {
+          $clip_path.addClass("four-match");
+        } else {
+          $clip_path.removeClass("four-match");
+        }
+        */
 
-          if(axis == "x") { $point.text(x); }
-          if(axis == "y") { $point.text(y); }
+        // Add unit if number is not zero
+        if(x !== 0) { var x = x + unit; }
+        if(y !== 0) { var y = y + unit; }
 
-          var coords = $unprefixed.text().match(/inset(.*?)\)/g).toString();
-          var coords = coords.replace("inset(", "").replace(")","").replace(/%/g, "");
+        if(axis == "x") { $point.text(x); }
+        if(axis == "y") { $point.text(y); }
 
-          $unprefixed.attr("data-coords", coords);
 
-          setHandleBars(bar);
+        setHandleBars(bar);
 
-          clipIt();
-        });
+        clipIt();
 
-      }
+      }).on("dragEnd", function(instance, e, pointer) {
+
+        // Remove all the bubble animations
+        $(".point").removeClass("changing");
+
+      });
     }
+  }
 }
+
 
 
 function getRadius(x2, x, y2, y) {

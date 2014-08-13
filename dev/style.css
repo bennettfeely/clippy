@@ -259,6 +259,7 @@ header iframe {
   padding: .75rem;
   background: #100a09;
   color: #9a8297;
+  overflow: hidden;
 }
 
 .block {
