@@ -20,10 +20,7 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 
 #### To do
 
-* Get `circle()` working when the demo area is not a 1:1 ratio.
-* Work on `ellipse()`, which may likely be complicated.
-* Look into supporting for <radius> value for `inset()`.
 * Make a favicon.
 * Make a panel card with quick information about the `clip-path` property.
 * Look up browser support for `clip-path` and create a panel card with that information.
-* See how Clippy could be used with CSS shapes module
+* See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions).
