@@ -236,9 +236,10 @@ $(function(){
 function setCustomBackground(url) {
   var style = '.clipboard { background-image: url(' + url + '); }';
 
-  console.log(style);
+  $("#custom_background").html(style);
 
-    $("#custom_background").html(style);
+  // Scroll to top of page
+  $(window).scrollTop(0);
 }
 
 
