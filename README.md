@@ -23,6 +23,8 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 
 * Get `circle()` working better when the demo area is not a 1:1 ratio.
 * Start working on  `ellipse()` with much reused from `circle()`, but more complex.
+* Look into support for <radius> value for `inset()`.
+* Support px value for `inset()`.
 * Make a favicon.
 * Make a panel card with quick information about the `clip-path` property.
 * Look up browser support and create a panel card with that information.
