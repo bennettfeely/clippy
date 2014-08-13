@@ -494,6 +494,12 @@ figure:nth-of-type(22) {
   color: peru;
 }
 
+.handle:nth-of-type(23),
+.point:nth-of-type(23),
+figure:nth-of-type(23) {
+  color: lightseagreen;
+}
+
 .options {
   display: -webkit-box;
   display: -webkit-flex;
@@ -510,8 +516,6 @@ figure:nth-of-type(22) {
   -webkit-flex: auto;
   -ms-flex: auto;
   flex: auto;
-  -webkit-box-flex: 22rem;
-  flex: 22rem 0 auto;
   display: inline-block;
   padding: 1rem 1rem 1rem .5rem;
   background: white;
@@ -540,7 +544,8 @@ h2 {
   font-size: 1.2rem;
   font-weight: 500;
   pointer-events: none;
-  padding: 0 .5rem;
+  min-width: 1em;
+  text-align: center;
   color: #c3c5be;
 }
 
@@ -549,6 +554,7 @@ h2.block {
 }
 
 h2:first-child {
+  text-align: left;
   color: #100a09;
   font-weight: 300;
   padding: 0 1rem 0 .5rem;
@@ -569,7 +575,7 @@ input[type="url"] {
   -ms-flex: auto;
   flex: auto;
   min-width: 2rem;
-  padding: .5rem .25rem;
+  padding: .5rem;
   box-shadow: inset 0 0.125rem #dcddd9, inset -0.125rem 0 #dcddd9, inset 0 -0.125rem #dcddd9;
   cursor: pointer;
   -webkit-transition: background 0.22s;
@@ -595,9 +601,9 @@ input[type="url"]:hover {
 label:first-of-type,
 input[type="number"]:first-of-type,
 input[type="url"]:first-of-type {
+  min-width: 4rem;
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
-  min-width: 3.5rem;
   box-shadow: inset 0.125rem 0 #dcddd9, inset 0 0.125rem #dcddd9, inset -0.125rem 0 #dcddd9, inset 0 -0.125rem #dcddd9;
 }
 

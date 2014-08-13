@@ -319,6 +319,7 @@ header {
   &:nth-of-type(20) { color: tomato; }
   &:nth-of-type(21) { color: gold; }
   &:nth-of-type(22) { color: peru; }
+  &:nth-of-type(23) { color: lightseagreen; }
 }
 
 .options {
@@ -328,7 +329,6 @@ header {
 
   .panel {
     flex: auto;
-    flex: 22rem 0 auto;
     display: inline-block;
     padding: 1rem 1rem 1rem .5rem;
     background: white;
@@ -350,7 +350,8 @@ h2 {
   font-size: 1.2rem;
   font-weight: 500;
   pointer-events: none;
-  padding: 0 .5rem;
+  min-width: 1em;
+  text-align: center;
   color: darken($lightgray, 10%);
 
   &.block {
@@ -358,6 +359,7 @@ h2 {
   }
 
   &:first-child {
+    text-align: left;
     color: $black;
     font-weight: 300;
     padding: 0 1rem 0 .5rem;
@@ -375,7 +377,7 @@ label, input[type="number"], input[type="url"] {
   text-align: center;
   flex: auto;
   min-width: 2rem;
-  padding: .5rem .25rem;
+  padding: .5rem;
   box-shadow:
     inset 0 .125rem $lightgray,
     inset -.125rem 0 $lightgray,
@@ -395,9 +397,9 @@ label, input[type="number"], input[type="url"] {
   }
 
   &:first-of-type {
+    min-width: 4rem;
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
-    min-width: 3.5rem;
     box-shadow:
       inset .125rem 0 $lightgray,
       inset 0 .125rem $lightgray,
