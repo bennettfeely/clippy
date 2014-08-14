@@ -29,10 +29,10 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 
 I cannot find a good table of browser support for the `clip-path` property so here is some observations:
 
-* Chrome 36 **Yes**
-* Safari 8 **Yes**
-* Opera 23 **Yes**
-* Firefox 31 **No**
-* Firefox 34 **No**
-* Internet Explorer 9 **No**
-* Internet Explorer 10/11 **Not Tested*
+* **Chrome 36**
+* **Safari 8**
+* **Opera 23**
+* ~~Firefox 31~~
+* ~~Firefox 34~~
+* ~~Internet Explorer 9~~
+* Internet Explorer 10/11 (Untested)
