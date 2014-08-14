@@ -158,14 +158,6 @@ $(function(){
       $(".ms").removeClass("show");
     }
 
-    /*
-    if($("#moz").is(':checked')) {
-      $(".moz").addClass("show");
-    } else {
-      $(".moz").removeClass("show");
-    }
-    */
-
     if($("#webkit").is(':checked')) {
       $(".webkit").addClass("show");
     } else {
@@ -322,28 +314,28 @@ function appendFigure(clip_path, shape) {
 
   if(type == "circle") {
     var fig = '<figure data-name="Circle" data-type="circle" class="panel">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -moz-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "ellipse") {
     var fig = '<figure data-name="Ellipse" data-type="ellipse" class="panel">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -moz-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "polygon") {
     var fig = '<figure data-name="' + shape.name + '" data-type="polygon" class="panel" data-coords="' + shape.coords.join(" ") + '">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -moz-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "inset") {
     var fig = '<figure data-name="' + shape.name + '" data-type="inset" class="panel" data-coords="' + shape.coords.join(" ") + '">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -moz-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
