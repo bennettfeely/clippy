@@ -260,7 +260,7 @@ header iframe {
   padding: .75rem;
   background: #100a09;
   color: #9a8297;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .block {
@@ -538,10 +538,10 @@ figure:nth-of-type(23) {
 
 h2 {
   display: inline-block;
-  -webkit-box-flex: auto;
-  -webkit-flex: auto;
-  -ms-flex: auto;
-  flex: auto;
+  -webkit-box-flex: 4rem;
+  -webkit-flex: 4rem auto;
+  -ms-flex: 4rem auto;
+  flex: 4rem auto;
   font-size: 1.2rem;
   font-weight: 500;
   pointer-events: none;
@@ -571,10 +571,10 @@ input[type="number"],
 input[type="url"] {
   position: relative;
   text-align: center;
-  -webkit-box-flex: auto;
-  -webkit-flex: auto;
-  -ms-flex: auto;
-  flex: auto;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   min-width: 2rem;
   padding: .5rem 1rem;
   box-shadow: inset 0 0.125rem #dcddd9, inset -0.125rem 0 #dcddd9, inset 0 -0.125rem #dcddd9;

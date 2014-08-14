@@ -123,7 +123,7 @@ var start = shape_array.circle[0];
     start_name = start.name,
 
     width = 280,
-    height = 280,
+    height = 200,
     grid = [0,0];
 
 
@@ -261,21 +261,6 @@ function init() {
     appendFigure(clip_path, shape);
   });
 
-  // Setup ellipses
-  $.each(shape_array.ellipse, function(i, shape){
-    type = "ellipse";
-
-    var radius_x = shape.radius[0] + "%";
-    var radius_y = shape.radius[1] + "%";
-
-    var x_pos = shape.position[0] + "%";
-    var y_pos = shape.position[1] + "%";
-
-    var clip_path = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + x_pos + ' ' + y_pos + ')';
-
-    appendFigure(clip_path, shape);
-  });
-
   // Setup polygons
   $.each(shape_array.polygon, function(i, shape){
 
@@ -387,7 +372,7 @@ function appendFigure(clip_path, shape) {
     if(type == "polygon") {
       new_shape = [];
 
-      // this seems hacky and probably needs changed
+      // Coords at stored with data-coords attribute and turned into array
       var coords = $(this).attr("data-coords").split(" ");
 
       var coords = $.each(coords, function(i, coordinate){
@@ -417,30 +402,45 @@ function setupDemo(coords) {
 
   clearDemo();
 
+  // Run through each coordinate
   $.each(coords, function(i, coord){
+
+    // Coordinates are stored in %
     var x = coord[0];
     var y = coord[1];
 
-    var x_px = Math.round((x/100) * width) + "px";
-    var y_px = Math.round((y/100) * height) + "px";
-
+    // Add unit to % coordinates
     var code_x = x + "%";
     var code_y = y + "%";
 
+    // Convert % to px coordinates
+    var x_px = Math.round((x/100) * width);
+    var y_px = Math.round((y/100) * height);
+
+    // Setup Circle demo
     if(type == "circle") {
-      if(i == 0) {
-        $handles.append('<div class="radius handle" data-handle="' + i + '" style="top: ' + y_px + '; left: ' + x_px + ';"></div>')
-      }
 
-      if(i == 1) {
-        $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + y_px + '; left: ' + x_px + ';"></div>')
-      }
-
+      // Grab preset values
       var shape = shape_array.circle[0];
-      var radius = shape.radius;
+      var radius = shape.radius; // For 1:1 ratio
+
+      // Adjust radius handle to edge of circle if ratio is not 1:1
+      if(width !== height) {
+        var radius_x_px = width * getRadiusModifier();
+      } else {
+        var radius_x_px = width;
+      }
+
+      // Setup radius Handle
+      if(i == 0) { $handles.append('<div class="radius handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
+
+      // Setup center position handle
+      if(i == 1) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>') }
+
       var position_x = shape.position[0];
       var position_y = shape.position[1];
 
+      // Add % units to preset values
       var radius = radius + "%";
       var position_x = position_x + "%";
       var position_y = position_y + "%";
@@ -459,7 +459,7 @@ function setupDemo(coords) {
     }
 
     if(type == "polygon") {
-      $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + '; left: ' + x_px + ';"></div>')
+      $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>')
 
       if(i == coords.length - 1) {
         $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>')
@@ -501,6 +501,20 @@ function setupDemo(coords) {
 }
 
 
+function getRadiusModifier() {
+  // For putting radius handler on edge of circle
+  // Formula for percentage radius is sqrt(width^2 + height^2) / sqrt(2);
+  // Returns a decimal value from 0 to 1
+
+  var radius_modifier = (width/2 + (Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / Math.sqrt(2))/2) / width;
+
+  console.log(radius_modifier);
+
+  return radius_modifier;
+}
+
+
+// Set side handles for inset shape
 function setHandleBars(bar) {
 
   var coords = $unprefixed.attr("data-coords").split(" ");
@@ -551,7 +565,10 @@ function readyDrag() {
   var handles = box.querySelectorAll(".handle");
   var $functions = $(".functions");
 
+  // If we have a circle, ellipse, or polygon setup draggibilly normally
   if(type !== "inset") {
+
+    // We have already appended handles, now we will attach draggabilly to each of them
     for ( var i = 0, len = handles.length; i < len; i++ ) {
       var handle = handles[i];
 
@@ -561,6 +578,7 @@ function readyDrag() {
       }).on("dragStart", function(instance, e, pointer) {
 
         i = instance.element.dataset.handle;
+
         $point = $('[data-point="' + i + '"]');
 
         // .changing triggers the bubble burst animation
@@ -570,6 +588,7 @@ function readyDrag() {
         if(type == "circle") {
 
           special = instance.element.classList[0];
+          modifier = getRadiusModifier2();
 
           $position = $(".position.handle");
             position_pos_x = $position.position().left;
@@ -604,19 +623,16 @@ function readyDrag() {
 
             var max = Math.max(width, height);
 
-            // var mod = 1 - (Math.sqrt((280 + 140))/100);
-            var mod = 1;
-
             // Calculate the bestest position on the edge of the circle for the radius handle
             // I don't know how the heck this works but it does,
             // Should've spent more time studying in high school...
             var angle = Math.atan2(y_delta, x_delta);
 
-            var handle_x = (Math.cos(angle) * startRadius * max * mod) + x;
+            var handle_x = (Math.cos(angle) * startRadius * max) + x;
               if(handle_x < 0) { var handle_x = 0; }
               if(handle_x > width) { var handle_x = width; }
 
-            var handle_y = (Math.sin(angle) * startRadius * max * mod) + y;
+            var handle_y = (Math.sin(angle) * startRadius * max) + y;
               if(handle_y < 0) { var handle_y = 0; }
               if(handle_y > height) { var handle_y = height; }
 
@@ -632,7 +648,8 @@ function readyDrag() {
 
             // Calculate the new radius
             var radius = getRadius(x, position_pos_x, y, position_pos_y);
-            var radius = radius + '%';
+            var radius = (radius * modifier) + '%';
+            // var radius = radius + '%';
 
             $point.text(radius);
           }
@@ -655,13 +672,15 @@ function readyDrag() {
     }
   }
 
+  // We need to use a different draggabilly setup to drag size elements in only x or only y direction
   if(type == "inset") {
 
+    // We have already appended handles, now we will attach draggabilly to each of them
     for ( var i = 0, len = handles.length; i < len; i++ ) {
       var handle = handles[i];
-      var bar = handle.classList[1];
 
-      // console.log("spot!; " + spot);
+      // bar == "top", "right", "bottom", or "left"
+      var bar = handle.classList[1];
 
       if(bar == "left" || bar == "right") { axis = "x"; }
       if(bar == "top" || bar == "bottom") { axis = "y"; }
@@ -671,9 +690,11 @@ function readyDrag() {
         grid: grid,
         axis: axis
       }).on("dragStart", function(instance, e, pointer) {
+
         i = instance.element.dataset.handle;
         bar = instance.element.classList[1];
 
+        // We have to do this again for some reason, look to remove in the future
         if(bar == "left" || bar == "right") { axis = "x"; }
         if(bar == "top" || bar == "bottom") { axis = "y"; }
 
@@ -684,9 +705,11 @@ function readyDrag() {
 
       }).on("dragMove", function(instance, e, pointer) {
 
+        // Handle position
         var x = instance.position.x;
         var y = instance.position.y;
 
+        // snap to edges
         var snap = 1;
 
         var x = (x/width * 100).toFixed(0);
@@ -696,9 +719,11 @@ function readyDrag() {
           if(y < snap) { var y = 0; }
           if(y > (100 - snap)) { var y = 100; }
 
+        // inset() uses absolute numbers from edges
         if(bar == "right") { var x = Math.abs(100 - x); }
         if(bar == "bottom") { var y = Math.abs(100 - y); }
 
+        // Hacky way to get and store the current coordinates displayed in CSS
         var coords = $unprefixed.text().match(/inset(.*?)\)/g).toString();
         var coords = coords.replace("inset(", "").replace(")","").replace(/%/g, "");
         $unprefixed.attr("data-coords", coords);
@@ -739,6 +764,16 @@ function readyDrag() {
   }
 }
 
+
+function getRadiusModifier2() {
+  // For putting radius handler on edge of circle
+  // Formula for percentage radius is sqrt(width^2 + height^2) / sqrt(2);
+  // Returns a decimal value from 0 to 1
+
+  var radius_modifier = (width/2 + (Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / Math.sqrt(2))) / width;
+
+  return radius_modifier;
+}
 
 
 function getRadius(x2, x, y2, y) {
@@ -796,11 +831,7 @@ function clearDemo() {
 
 // Get the code in the code blocks and set the style inline on the clipboard
 function clipIt() {
-  // console.log("clipIt();");
-
   var clip_path = $clip_path.text();
-
-  console.log(clip_path);
 
   $clipboard.attr('style', clip_path);
 }
