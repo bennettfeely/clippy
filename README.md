@@ -25,7 +25,9 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 * Look up browser support for `clip-path` and create a panel card with that information.
 * See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions).
 
-#### Browser Support for `clip-path`
+***
+
+#### Browser Support
 
 I cannot find a good table of browser support for the `clip-path` property so here are some observations. Bolded support at least the basic shape functions.
 
