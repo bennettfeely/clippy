@@ -20,7 +20,6 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 
 #### To do
 
-* Make a favicon.
 * Make a panel card with quick information about the `clip-path` property.
 * Look up browser support for `clip-path` and create a panel card with that information.
 * See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions).
