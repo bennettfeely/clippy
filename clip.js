@@ -123,7 +123,7 @@ var start = shape_array.circle[0];
     start_name = start.name,
 
     width = 280,
-    height = 200,
+    height = 280,
     grid = [0,0];
 
 
