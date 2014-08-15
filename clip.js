@@ -401,7 +401,6 @@ function setupDemo(coords) {
 
   // Run through each coordinate
   $.each(coords, function(i, coord){
-
     var x = coord[0];
     var y = coord[1];
 
@@ -412,7 +411,6 @@ function setupDemo(coords) {
     // Convert % to px coordinates
     var x_px = Math.round((x/100) * width);
     var y_px = Math.round((y/100) * height);
-
 
     // Setup Circle demo
     if(type == "circle") {
@@ -454,7 +452,6 @@ function setupDemo(coords) {
         readyDrag();
       }
     }
-
 
     // Setup ellipse demo
     if(type == "ellipse") {
@@ -498,7 +495,6 @@ function setupDemo(coords) {
         readyDrag();
       }
     }
-
 
     if(type == "polygon") {
       $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>')
@@ -747,18 +743,19 @@ function readyDrag() {
         $point = $('[data-point="' + i + '"]');
         $point.addClass("changing");
 
+        $position = $(".position");
         $radius_x = $(".radius_x");
         $radius_y = $(".radius_y");
 
         start_x_px = instance.position.x;
         start_y_px = instance.position.y;
 
+        start_pos_x = $position.position().left;
+        start_pos_y = $position.position().top;
+
         if(bar == "position") {
           start_radius_x_px = [$radius_x.position().left, $radius_x.position().top];
           start_radius_y_px = [$radius_y.position().left, $radius_y.position().top];
-
-          console.log("start_radius_x_px" + start_radius_x_px);
-          console.log("start_radius_y_px" + start_radius_y_px);
 
         }
 
@@ -772,27 +769,34 @@ function readyDrag() {
         // snap to edges
         var snap = 1;
 
-
         if(bar == "radius_x") {
-          var x_pct = Math.floor(Math.abs(width/2 - x) / width*100) + "%";
+          // Set % from center center position as absolute number
+          var x_pct = Math.floor(Math.abs(start_pos_x - x) / width*100) + "%";
 
           $point.text(x_pct);
         }
         if(bar == "radius_y") {
-          var y_pct = Math.floor(Math.abs(height/2 - y) / height*100) + "%";
+          // Set % from center center position as absolute number
+          var y_pct = Math.floor(Math.abs(start_pos_y - y) / height*100) + "%";
 
-          $point.text(y_pct);
+          $point.text(y_pct );
         }
+
         if(bar == "position") {
           var move_x = start_x_px - x;
           var move_y = start_y_px - y;
 
+          // Set new positions of radius handles
           var move_radius_x_x_px = (start_radius_x_px[0] - move_x);
           var move_radius_x_y_px = (start_radius_x_px[1] - move_y);
-
           var move_radius_y_x_px = (start_radius_y_px[0] - move_x);
           var move_radius_y_y_px = (start_radius_y_px[1] - move_y);
 
+          // Prevent handle overflow
+          if(move_radius_x_x_px > width) { var move_radius_x_x_px = width; }
+          if(move_radius_y_y_px < 0) { var move_radius_y_y_px = 0; }
+
+          // Move the handles
           $radius_x.css({
             "left" : move_radius_x_x_px + "px",
             "top" : move_radius_x_y_px + "px"
