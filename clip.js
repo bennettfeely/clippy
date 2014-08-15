@@ -608,7 +608,7 @@ function readyDrag() {
   var $functions = $(".functions");
 
   // If we have a circle, ellipse, or polygon setup draggibilly normally
-  if(type !== "inset") {
+  if(type == "circle" || type == "polygon") {
 
     // We have already appended handles, now we will attach draggabilly to each of them
     for ( var i = 0, len = handles.length; i < len; i++ ) {
@@ -621,9 +621,8 @@ function readyDrag() {
 
         i = instance.element.dataset.handle;
 
-        $point = $('[data-point="' + i + '"]');
-
         // .changing triggers the bubble burst animation
+        $point = $('[data-point="' + i + '"]');
         $point.addClass("changing");
 
         // If we are changing a circle we are working differently than with polygon
@@ -719,6 +718,109 @@ function readyDrag() {
     }
   }
 
+  // Drag ellipse radius handles in only x or y direction
+  if(type == "ellipse") {
+
+    // We have already appended handles, now we will attach draggabilly to each of them
+    for ( var i = 0, len = handles.length; i < len; i++ ) {
+      var handle = handles[i];
+
+      // Restrict dragging if necessary
+      // bar == "radius_x", "radius_y", "position"
+      var bar = handle.classList[0];
+      if(bar == "radius_x") { var axis = "x"; }
+      if(bar == "radius_y") { var axis = "y"; }
+      if(bar == "position") { var axis = ""; }
+
+      var draggie = new Draggabilly(handle, {
+
+        containment: true,
+        grid: grid,
+        axis: axis
+
+      }).on("dragStart", function(instance, e, pointer) {
+
+        i = instance.element.dataset.handle;
+        bar = instance.element.classList[0];
+
+        // .changing triggers the bubble burst animation
+        $point = $('[data-point="' + i + '"]');
+        $point.addClass("changing");
+
+        $radius_x = $(".radius_x");
+        $radius_y = $(".radius_y");
+
+        start_x_px = instance.position.x;
+        start_y_px = instance.position.y;
+
+        if(bar == "position") {
+          start_radius_x_px = [$radius_x.position().left, $radius_x.position().top];
+          start_radius_y_px = [$radius_y.position().left, $radius_y.position().top];
+
+          console.log("start_radius_x_px" + start_radius_x_px);
+          console.log("start_radius_y_px" + start_radius_y_px);
+
+        }
+
+
+      }).on("dragMove", function(instance, e, pointer) {
+
+        // Handle position
+        var x = instance.position.x;
+        var y = instance.position.y;
+
+        // snap to edges
+        var snap = 1;
+
+
+        if(bar == "radius_x") {
+          var x_pct = Math.floor(Math.abs(width/2 - x) / width*100) + "%";
+
+          $point.text(x_pct);
+        }
+        if(bar == "radius_y") {
+          var y_pct = Math.floor(Math.abs(height/2 - y) / height*100) + "%";
+
+          $point.text(y_pct);
+        }
+        if(bar == "position") {
+          var move_x = start_x_px - x;
+          var move_y = start_y_px - y;
+
+          var move_radius_x_x_px = (start_radius_x_px[0] - move_x);
+          var move_radius_x_y_px = (start_radius_x_px[1] - move_y);
+
+          var move_radius_y_x_px = (start_radius_y_px[0] - move_x);
+          var move_radius_y_y_px = (start_radius_y_px[1] - move_y);
+
+          $radius_x.css({
+            "left" : move_radius_x_x_px + "px",
+            "top" : move_radius_x_y_px + "px"
+          });
+
+          $radius_y.css({
+            "left" : move_radius_y_x_px + "px",
+            "top" : move_radius_y_y_px + "px"
+          });
+
+          // Set position of position handle
+          var x_pct = Math.floor(x / width*100) + "%";
+          var y_pct = Math.floor(y / height*100) + "%";
+
+          $point.text(x_pct + ' ' + y_pct);
+        }
+
+        clipIt();
+
+      }).on("dragEnd", function(instance, e, pointer) {
+
+        // Remove all the bubble animations
+        $(".point").removeClass("changing");
+
+      });
+    }
+  }
+
   // We need to use a different draggabilly setup to drag size elements in only x or only y direction
   if(type == "inset") {
 
@@ -745,9 +847,8 @@ function readyDrag() {
         if(bar == "left" || bar == "right") { axis = "x"; }
         if(bar == "top" || bar == "bottom") { axis = "y"; }
 
-        $point = $('[data-point="' + i + '"]');
-
         // .changing triggers the bubble burst animation
+        $point = $('[data-point="' + i + '"]');
         $point.addClass("changing");
 
       }).on("dragMove", function(instance, e, pointer) {
