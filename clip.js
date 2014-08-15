@@ -7,7 +7,7 @@ shape_array = {
   }],
   "ellipse" : [{
       name : "Ellipse",
-      radius : [25,50],
+      radius : [25,40],
       position : [50,50],
       coords : [[50,50],[0,50],[0,50]]
   }],
@@ -117,8 +117,8 @@ $demo_height = $("#demo_height");
 
 $demo = $(".demo");
 
-var start = shape_array.circle[0];
-    start_type = "circle",
+var start = shape_array.ellipse[0];
+    start_type = "ellipse",
     start_coords = start.coords,
     start_name = start.name,
 
@@ -137,13 +137,10 @@ $(function(){
 
   // Switch grid size
   $('input[type="radio"]').change(function(){
-
       var grid_x = $('input[name="grid"]:checked').val()*(width/100);
       var grid_y = $('input[name="grid"]:checked').val()*(height/100);
 
       grid = [grid_x, grid_y];
-
-    console.log(start_coords);
 
     setupDemo(start_coords);
   });
@@ -210,17 +207,13 @@ $(function(){
     }, 400);
 
     setCustomBackground(url);
-
   });
 
   // Change clipboard background to custom url
   $("#custom_url").blur(function(){
     var url = $(this).val();
 
-    if(url !== '') {
-      setCustomBackground(url);
-    }
-
+    if(url !== '') { setCustomBackground(url); }
   });
 
 });
@@ -253,9 +246,22 @@ function init() {
     appendFigure(clip_path, shape);
   });
 
+  // Setup ellipses
+  $.each(shape_array.ellipse, function(i, shape){
+    type = "ellipse";
+
+    var radius_x = shape.radius[0] + "%";
+    var radius_y = shape.radius[1] + "%";
+    var x_pos = shape.position[0] + "%";
+    var y_pos = shape.position[1] + "%";
+
+    var clip_path = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + x_pos + ' ' + y_pos + ')';
+
+    appendFigure(clip_path, shape);
+  });
+
   // Setup polygons
   $.each(shape_array.polygon, function(i, shape){
-
     paths = '';
 
     $.each(shape.coords, function(i, coord){
@@ -384,7 +390,6 @@ function appendFigure(clip_path, shape) {
 
       setupDemo(shape.coords);
     }
-
   });
 }
 
@@ -397,7 +402,6 @@ function setupDemo(coords) {
   // Run through each coordinate
   $.each(coords, function(i, coord){
 
-    // Coordinates are stored in %
     var x = coord[0];
     var y = coord[1];
 
@@ -408,6 +412,7 @@ function setupDemo(coords) {
     // Convert % to px coordinates
     var x_px = Math.round((x/100) * width);
     var y_px = Math.round((y/100) * height);
+
 
     // Setup Circle demo
     if(type == "circle") {
@@ -423,7 +428,7 @@ function setupDemo(coords) {
         var radius_x_px = width;
       }
 
-      // Setup radius Handle
+      // Setup radius handle
       if(i == 0) { $handles.append('<div class="radius handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
 
       // Setup center position handle
@@ -449,6 +454,51 @@ function setupDemo(coords) {
         readyDrag();
       }
     }
+
+
+    // Setup ellipse demo
+    if(type == "ellipse") {
+
+      // Grab preset values
+      var shape = shape_array.ellipse[0];
+      var position = shape.position;
+        var position_x_px = (position[0]/100) * width;
+        var position_y_px = (position[1]/100) * height;
+
+      var radius = shape.radius;
+        var radius_x_px = (1 - radius[0]/100) * width;
+        var radius_y_px = (radius[1]/2/100) * height/2;
+
+        console.log("radius_x_px == " + radius_x_px);
+        console.log("radius_y_px == " + radius_y_px);
+
+
+      // Setup ellipse radius handles
+      if(i == 0) { $handles.append('<div class="radius_x handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
+      if(i == 1) { $handles.append('<div class="radius_y handle" data-handle="' + i + '" style="top: ' + radius_y_px + 'px; left: ' + position_x_px + 'px;"></div>') }
+
+      // Setup center position handle
+      if(i == 2) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + position_x_px + 'px; left: ' + position_y_px + 'px;"></div>') }
+
+      // Add % units to preset values
+      var radius_x = radius[0] + "%";
+      var radius_y = radius[1] + "%";
+      var position_x = shape.position[0] + "%";
+      var position_y = shape.position[1] + "%";
+
+      if(i == coords.length - 1) {
+        var radius_x = '<code class="point radius" data-point="0">' + radius_x + '</code>';
+        var radius_y = '<code class="point radius" data-point="1">' + radius_y + '</code>';
+        var position = '<code class="point position" data-point="2">' + position_x + ' ' + position_y + '</code>';
+
+        var clip_path_function = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + position + ')';
+        $functions.append(clip_path_function);
+
+        clipIt();
+        readyDrag();
+      }
+    }
+
 
     if(type == "polygon") {
       $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>')
@@ -580,7 +630,7 @@ function readyDrag() {
         if(type == "circle") {
 
           special = instance.element.classList[0];
-          modifier = getRadiusModifier2();
+          modifier = getRadiusModifier();
 
           $position = $(".position.handle");
             position_pos_x = $position.position().left;
@@ -640,8 +690,13 @@ function readyDrag() {
 
             // Calculate the new radius
             var radius = getRadius(x, position_pos_x, y, position_pos_y);
-            var radius = (radius * modifier) + '%';
-            // var radius = radius + '%';
+
+            //
+            //
+            // BUGGY!
+            //
+            // This is messed up if ratio is not 1:1
+            var radius = radius + '%';
 
             $point.text(radius);
           }
@@ -754,17 +809,6 @@ function readyDrag() {
       });
     }
   }
-}
-
-
-function getRadiusModifier2() {
-  // For putting radius handler on edge of circle
-  // Formula for percentage radius is sqrt(width^2 + height^2) / sqrt(2);
-  // Returns a decimal value from 0 to 1
-
-  var radius_modifier = (width/2 + (Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / Math.sqrt(2))) / width;
-
-  return radius_modifier;
 }
 
 
