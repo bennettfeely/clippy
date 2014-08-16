@@ -123,7 +123,7 @@ var start = shape_array.ellipse[0];
     start_name = start.name,
 
     width = 280,
-    height = 200,
+    height = 280,
     grid = [0,0];
 
 
@@ -186,8 +186,7 @@ $(function(){
 
       $demo_height.val(height);
 
-      console.log("width: " + width);
-      console.log("height: " + height);
+
 
       sizes();
 
@@ -299,8 +298,6 @@ function init() {
     var left = shape.coords[3] + "%";
 
     var clip_path = 'inset(' + top + ' ' + right + ' ' + bottom + ' ' + left + ')';
-
-    console.log(clip_path);
 
     appendFigure(clip_path, shape);
   });
@@ -462,8 +459,6 @@ function setupDemo(coords) {
         var position_x_px = (position[0]/100) * width;
         var position_y_px = (position[1]/100) * height;
 
-        console.log(position_x_px);
-
       var radius = shape.radius;
         var radius_x_px = (1 - radius[0]/100) * width;
         var radius_y_px = (radius[1]/2/100) * height/2;
@@ -544,18 +539,13 @@ function getRadiusModifier() {
 
   var radius_modifier = (width/2 + (Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / Math.sqrt(2))/2) / width;
 
-  console.log(radius_modifier);
-
   return radius_modifier;
 }
 
 
 // Set side handles for inset shape
 function setHandleBars(bar) {
-
   var coords = $unprefixed.attr("data-coords").split(" ");
-
-  // console.log('setHandleBars(' + coords + ');');
 
   var top = coords[0];
   var right = coords[1];
@@ -796,6 +786,7 @@ function readyDrag() {
 
           if(move_radius_y_y_px < 0) { var move_radius_y_y_px = 0; }
           if(move_radius_y_y_px > height) { var move_radius_y_y_px = height; }
+
 
           // Move the handles
           $radius_x.css({
