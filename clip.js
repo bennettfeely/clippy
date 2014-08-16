@@ -123,7 +123,7 @@ var start = shape_array.ellipse[0];
     start_name = start.name,
 
     width = 280,
-    height = 280,
+    height = 200,
     grid = [0,0];
 
 
@@ -462,20 +462,18 @@ function setupDemo(coords) {
         var position_x_px = (position[0]/100) * width;
         var position_y_px = (position[1]/100) * height;
 
+        console.log(position_x_px);
+
       var radius = shape.radius;
         var radius_x_px = (1 - radius[0]/100) * width;
         var radius_y_px = (radius[1]/2/100) * height/2;
-
-        console.log("radius_x_px == " + radius_x_px);
-        console.log("radius_y_px == " + radius_y_px);
-
 
       // Setup ellipse radius handles
       if(i == 0) { $handles.append('<div class="radius_x handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
       if(i == 1) { $handles.append('<div class="radius_y handle" data-handle="' + i + '" style="top: ' + radius_y_px + 'px; left: ' + position_x_px + 'px;"></div>') }
 
       // Setup center position handle
-      if(i == 2) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + position_x_px + 'px; left: ' + position_y_px + 'px;"></div>') }
+      if(i == 2) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + position_y_px + 'px; left: ' + position_x_px + 'px;"></div>') }
 
       // Add % units to preset values
       var radius_x = radius[0] + "%";
@@ -793,15 +791,17 @@ function readyDrag() {
           var move_radius_y_y_px = (start_radius_y_px[1] - move_y);
 
           // Prevent handle overflow
+          if(move_radius_x_x_px < 0) { var move_radius_x_x_px = 0; }
           if(move_radius_x_x_px > width) { var move_radius_x_x_px = width; }
+
           if(move_radius_y_y_px < 0) { var move_radius_y_y_px = 0; }
+          if(move_radius_y_y_px > height) { var move_radius_y_y_px = height; }
 
           // Move the handles
           $radius_x.css({
             "left" : move_radius_x_x_px + "px",
             "top" : move_radius_x_y_px + "px"
           });
-
           $radius_y.css({
             "left" : move_radius_y_x_px + "px",
             "top" : move_radius_y_y_px + "px"
