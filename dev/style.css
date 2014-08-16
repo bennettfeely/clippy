@@ -538,6 +538,10 @@ figure:nth-of-type(23) {
 
 h2 {
   display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -webkit-box-flex: 4rem;
   -webkit-flex: 4rem auto;
   -ms-flex: 4rem auto;
@@ -631,6 +635,25 @@ input[type="url"][type="url"]:focus {
   box-shadow: inset 0 0 0 0.125rem #100a09, 0 0 0 0.125rem #100a09, 0 0 0 0.25rem white;
 }
 
+input[type="number"] {
+  font-family: inherit;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  box-shadow: inset 0 0 0 0.125rem #dcddd9;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type="number"]:invalid {
+  background: rgba(178, 34, 34, 0.2);
+  box-shadow: inset 0 0 0 0.125rem rgba(178, 34, 34, 0.5);
+}
+
 .backgrounds {
   overflow: hidden;
   position: relative;
@@ -676,23 +699,75 @@ input[type="url"][type="url"]:focus {
   }
 }
 
-input[type="number"] {
-  font-family: inherit;
-  font-size: 1.1rem;
-  border-radius: 2rem;
-  box-shadow: inset 0 0 0 0.125rem #dcddd9;
+.browser-support {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: .5rem;
+  padding: .25rem;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
+.icon {
+  display: inline-block;
+  text-align: center;
+  padding: .25rem;
+  color: #777777;
+  -webkit-transition: color 0.22s;
+  transition: color 0.22s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-input[type="number"]:invalid {
-  background: rgba(178, 34, 34, 0.2);
-  box-shadow: inset 0 0 0 0.125rem rgba(178, 34, 34, 0.5);
+.panel:hover .icon {
+  color: tomato;
+}
+
+.panel:hover .icon.supported {
+  color: #36a065;
+}
+
+.icon:before {
+  display: block;
+  font-family: browsers;
+  font-size: 2.25em;
+}
+
+.icon.chrome:before {
+  content: "\e603";
+}
+
+.icon.safari:before {
+  content: "\e607";
+}
+
+.icon.opera:before {
+  content: "\e606";
+}
+
+.icon.firefox:before {
+  content: "\e604";
+}
+
+.icon.ie:before {
+  content: "\e605";
+}
+
+.icon:after {
+  display: block;
+  font-size: 1.1em;
+  color: #100a09;
+  content: attr(data-version);
+  padding-top: .25rem;
 }
 
 @font-face {
@@ -707,4 +782,11 @@ input[type="number"]:invalid {
   font-style: normal;
   font-weight: 400;
   src: local("Alegreya Sans"), local("AlegreyaSans-Regular"), url(http://fonts.gstatic.com/s/alegreyasans/v2/KYNzioYhDai7mTMnx_gDgnt9r5m2YmP5sw3cUAQwL0E.woff) format("woff");
+}
+
+@font-face {
+  font-family: "browsers";
+  font-weight: normal;
+  font-style: normal;
+  src: url(fonts/browsers.woff) format("woff");
 }

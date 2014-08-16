@@ -341,9 +341,9 @@ header {
   }
 }
 
-
 h2 {
   display: inline-block;
+  user-select: none;
   flex: 4rem auto;
   font-size: 1.2rem;
   font-weight: 500;
@@ -352,9 +352,7 @@ h2 {
   text-align: center;
   color: darken($lightgray, 10%);
 
-  &.block {
-    display: block;
-  }
+  &.block { display: block; }
 
   &:first-child {
     text-align: left;
@@ -423,6 +421,27 @@ label, input[type="number"], input[type="url"] {
   }
 }
 
+input[type="number"] {
+  font-family: inherit;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  box-shadow:
+      inset 0 0 0 .125rem $lightgray;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
+  &:invalid {
+    background: rgba(firebrick, .2);
+    box-shadow:
+      inset 0 0 0 .125rem rgba(firebrick, .5);
+  }
+}
+
 .backgrounds {
   overflow: hidden;
   position: relative;
@@ -454,27 +473,50 @@ label, input[type="number"], input[type="url"] {
 }
   @keyframes selected { 10% { opacity: .5; } }
 
-
-input[type="number"] {
-  font-family: inherit;
-  font-size: 1.1rem;
-  border-radius: 2rem;
-  box-shadow:
-      inset 0 0 0 .125rem $lightgray;
-
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
+  .browser-support {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: .5rem;
+    padding: .25rem;
   }
 
-  &:invalid {
-    background: rgba(firebrick, .2);
-    box-shadow:
-      inset 0 0 0 .125rem rgba(firebrick, .5);
+  .icon {
+    display: inline-block;
+    text-align: center;
+    padding: .25rem;
+    color: desaturate($green, 100%);
+    transition: color $transition;
+    user-select: none;
+
+    .panel:hover & {
+      color: $red;
+
+      &.supported { color: darken($green, 5%); }
+    }
+
+
+    &:before {
+      display: block;
+      font-family: browsers;
+      font-size: 2.25em;
+    }
+
+    &.chrome:before { content: "\e603"; }
+    &.safari:before { content: "\e607"; }
+    &.opera:before { content: "\e606"; }
+    &.firefox:before { content: "\e604"; }
+    &.ie:before { content: "\e605"; }
+
+    &:after {
+      display: block;
+      font-size: 1.1em;
+      color: $black;
+      content: attr(data-version);
+      padding-top: .25rem;
+    }
   }
-}
+
 
 
 @font-face {
@@ -488,4 +530,10 @@ input[type="number"] {
   font-style: normal;
   font-weight: 400;
   src: local('Alegreya Sans'), local('AlegreyaSans-Regular'), url(http://fonts.gstatic.com/s/alegreyasans/v2/KYNzioYhDai7mTMnx_gDgnt9r5m2YmP5sw3cUAQwL0E.woff) format('woff');
+}
+@font-face {
+  font-family: "browsers";
+  font-weight: normal;
+  font-style: normal;
+  src: url(fonts/browsers.woff) format('woff');
 }
