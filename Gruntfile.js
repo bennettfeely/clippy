@@ -44,6 +44,13 @@ module.exports = function (grunt) {
             }
           }
         },
+        uncss: {
+          dist: {
+            files: {
+              'dist/style.css': ['index.html']
+            }
+          }
+        },
         cssmin: {
             add_banner: {
                 options: {
@@ -65,7 +72,7 @@ module.exports = function (grunt) {
           },
           sass: {
               files: ['dev/style.scss'],
-              tasks: ['sass','autoprefixer','cssmin'],
+              tasks: ['sass','autoprefixer','uncss','cssmin'],
               options: {
                 livereload: false
               },
@@ -78,6 +85,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-remfallback');
+    grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // grunt.loadNpmTasks('grunt-contrib-uglify');
