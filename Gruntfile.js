@@ -4,13 +4,6 @@ module.exports = function (grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        sass: {
-            dist: {
-                files: {
-                    'dev/style.css' : 'dev/style.scss'
-                }
-            }
-        },
         htmlmin: {
           dist: {
             options: {
@@ -22,6 +15,25 @@ module.exports = function (grunt) {
               'index.html' : 'dev/index.html'
             }
           }
+        },
+        uglify: {
+          my_target: {
+            options : {
+              compress: {
+                drop_console: true
+              }
+            },
+            files: {
+              'clip.min.js': ['dev/clip.js']
+            }
+          }
+        },
+        sass: {
+            dist: {
+                files: {
+                    'dev/style.css' : 'dev/style.scss'
+                }
+            }
         },
         autoprefixer: {
             options: {
@@ -44,13 +56,6 @@ module.exports = function (grunt) {
             }
           }
         },
-        uncss: {
-          dist: {
-            files: {
-              'dist/style.css': ['index.html']
-            }
-          }
-        },
         cssmin: {
             add_banner: {
                 options: {
@@ -70,9 +75,13 @@ module.exports = function (grunt) {
             files: ['dev/index.html'],
             tasks: ['htmlmin']
           },
+          scripts : {
+            files: ['dev/clip.js'],
+            tasks: ['uglify']
+          },
           sass: {
               files: ['dev/style.scss'],
-              tasks: ['sass','autoprefixer','uncss','cssmin'],
+              tasks: ['sass','autoprefixer','cssmin'],
               options: {
                 livereload: false
               },
@@ -81,14 +90,12 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-remfallback');
-    grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-
-    // grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.registerTask('default', ["watch"]);
