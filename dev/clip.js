@@ -117,8 +117,8 @@ $demo_height = $("#demo_height");
 
 $demo = $(".demo");
 
-var start = shape_array.ellipse[0];
-    start_type = "ellipse",
+var start = shape_array.polygon[0];
+    start_type = "polygon",
     start_coords = start.coords,
     start_name = start.name,
 
@@ -344,6 +344,9 @@ function appendFigure(clip_path, shape) {
   }
 
   $shapes.append(fig);
+
+  // Add .on class to the figure we are starting with
+  $('[data-name="' + start.name + '"]').addClass("on");
 
   // listen for clicks on the figure buttons
   $("figure").unbind().click(function(){
