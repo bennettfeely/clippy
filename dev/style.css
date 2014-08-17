@@ -765,7 +765,6 @@ input[type="number"]:invalid {
 .icon:after {
   display: block;
   font-size: 1.1em;
-  color: #100a09;
   content: attr(data-version);
   padding-top: .25rem;
 }
