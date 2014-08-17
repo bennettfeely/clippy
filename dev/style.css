@@ -199,6 +199,8 @@ header iframe {
   padding: .5rem 0 0 .5rem;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
+  -webkit-animation: shapes-slide-left 1s .5s ease-out both;
+  animation: shapes-slide-left 1s .5s ease-out both;
 }
 
 .shapes figure {
@@ -253,6 +255,21 @@ header iframe {
   white-space: nowrap;
   margin-top: .5rem;
   padding: 0 .25rem;
+}
+
+@-webkit-keyframes shapes-slide-left {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes shapes-slide-left {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 .clip-path {
