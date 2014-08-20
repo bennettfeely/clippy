@@ -23,11 +23,13 @@ $shadow : 0 1px 2px rgba($black, .15);
 $shadow-hover : 0 2px 4px rgba($black, .2);
 
 $transition : .22s;
-$bounce : cubic-bezier(.17,.67,.19,1.15);
+$bounce : cubic-bezier(.15,.7,.5,1.1);
+
+$figure-size : 4.625rem;
+$tablet : 50em;
 
 
 html, body { position: relative; height: 100%; }
-
 body {
   display: flex;
   flex-direction: column;
@@ -56,23 +58,41 @@ header {
   iframe { max-width: 95px; } // Twitter button
 }
 
-.demo {
+.screen {
+  flex: 1;
+
+  @media (min-width: $tablet) {
+    display: flex;
+  }
+}
+
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+
+.demo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background: $white;
+  box-shadow: $shadow;
   user-select: none;
   position: relative;
   z-index: 100;
-  display: flex;
-  justify-content: center;
+}
+
+.demo {
   padding: 0 0 1rem;
-  align-items: center;
-  background: $white;
-  box-shadow: $shadow;
   overflow: hidden;
 }
 
 .box {
   position: relative;
-  // width: 300px;
-  // height: 300px;
   box-shadow:
     inset 0 0 0 10px $white,
     inset 0 0 0 11px $lightgray;
@@ -146,39 +166,60 @@ header {
 .shapes {
   position: relative;
   max-width: 100%;
-  white-space: nowrap;
   background: $lightgray;
-  overflow: hidden;
+  white-space: nowrap;
 
-  &:after { // fade right edge to indicate more items
-    display: block;
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 1.5rem;
-    background: linear-gradient(90deg, rgba($lightgray, 0), $lightgray);
-    pointer-events: none;
+  &.horizontal { display: block; }
+  &.vertical { display: none; }
+
+  @media (min-width: $tablet) {
+    &.horizontal { display: none; }
+    &.vertical {
+      display: block;
+      white-space: normal;
+    }
   }
+
+  @media (max-width: $tablet) {
+    &:after { // fade right edge to indicate more items
+      display: block;
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      pointer-events: none;
+      top: 0;
+      background: linear-gradient(90deg, rgba($lightgray, 0), $lightgray);
+      width: 1.5rem;
+    }
+  }
+
+
+
+
+
+
 
   ul {
     width: 100%;
     overflow-x: auto;
-    padding: .5rem 0 0 .5rem;
+    padding: .25rem;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
-    animation: shapes-slide-left 1s .5s ease-out both;
+    // animation: shapes-slide-left .7s .3s $bounce both;
+
+    @media (min-width: $tablet) {
+      padding: 0;
+    }
   }
 
   figure {
     display: inline-block;
     text-align: center;
-    padding: .5rem 0;
-    margin-right: .5rem;
-    margin-bottom: .5rem;
+    padding: .625rem .25rem;
+    margin: .25rem;
     background: white;
-    width: 4.125rem;
+    width: $figure-size - .5rem;
     box-shadow: $shadow;
     border-radius: $radius;
     transition:
@@ -213,7 +254,7 @@ header {
 
   figcaption { // shape label
     display: block;
-    font-size: smaller;
+    font-size: .75rem;
     color: $black;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -233,6 +274,7 @@ header {
   background: $black;
   color: #9a8297;
   overflow-x: hidden;
+  box-shadow: $shadow;
 }
 
 .block {
@@ -326,18 +368,26 @@ header {
 }
 
 .options {
-  display: flex;
-  flex-wrap: wrap;
   padding: .25rem .25rem 1.25rem;
+
+  @media (min-width: $tablet) {
+    width: $figure-size * 5 + .5rem;
+    max-height: 100%;
+    overflow: scroll;
+  }
 
   .panel {
     flex: auto;
-    display: inline-block;
+    display: block;
     padding: 1rem 1rem 1rem .5rem;
     background: white;
     border-radius: $radius;
     box-shadow: $shadow;
-    margin: .25rem .25rem;
+    margin: .5rem .25rem;
+
+    &:first-of-type {
+      margin-top: .25rem;
+    }
   }
 
   .flex {
@@ -378,7 +428,7 @@ label, input[type="number"], input[type="url"] {
   text-align: center;
   flex: 1;
   min-width: 2rem;
-  padding: .5rem 1rem;
+  padding: .5rem .25rem;
   box-shadow:
     inset 0 .125rem $lightgray,
     inset -.125rem 0 $lightgray,
@@ -395,6 +445,14 @@ label, input[type="number"], input[type="url"] {
   &:hover {
     background: $lightgray;
     transition: background 0;
+  }
+
+  &[for="webkit"], &[for="ms"] {
+    &:before {
+      content: "-";
+      font-family: monospace;
+      vertical-align: top;
+    }
   }
 
   &:first-of-type {
@@ -421,8 +479,7 @@ label, input[type="number"], input[type="url"] {
     outline: 0;
     box-shadow:
       inset 0 0 0 .125rem $black,
-      0 0 0 .125rem $black,
-      0 0 0 .25rem white;
+      0 0 0 .125rem $black;
   }
 }
 
@@ -478,6 +535,7 @@ input[type="number"] {
 }
   @keyframes selected { 10% { opacity: .5; } }
 
+
   .browser-support {
     display: flex;
     justify-content: space-between;
@@ -490,54 +548,70 @@ input[type="number"] {
     display: inline-block;
     text-align: center;
     padding: .25rem;
-    color: desaturate($green, 100%);
-    transition: color $transition;
+    color: $black;
+    transition:
+      color $transition,
+      transform $transition,
+      text-shadow $transition;
     user-select: none;
+    text-shadow: 0 0 0 $black;
 
     .panel:hover & {
-      color: $red;
 
-      &.supported { color: darken($green, 5%); }
+      &.unsupported {
+        transform: scale(.9);
+        color: transparent;
+        text-shadow: 0 0 .5em $black;
+      }
     }
-
 
     &:before {
       display: block;
-      font-family: browsers;
-      font-size: 2.25em;
+      font-family: Browsers;
+      font-size: 2.5em;
     }
-
-    &.chrome:before { content: "\e603"; }
-    &.safari:before { content: "\e607"; }
-    &.opera:before { content: "\e606"; }
-    &.firefox:before { content: "\e604"; }
-    &.ie:before { content: "\e605"; }
+      &.chrome:before { content: "\e603"; }
+      &.safari:before { content: "\e607"; }
+      &.opera:before { content: "\e606"; }
+      &.firefox:before { content: "\e604"; }
+      &.ie:before { content: "\e605"; }
 
     &:after {
       display: block;
-      font-size: 1.1em;
+      font-size: 1.25em;
       content: attr(data-version);
       padding-top: .25rem;
+    }
+
+    &.unsupported {
+      opacity: .3;
+
+      &:after { content: "\00D7"; }
     }
   }
 
 
 
 @font-face {
-  font-family: 'Alegreya Sans';
+  font-family: "Alegreya Sans";
   font-style: normal;
   font-weight: 300;
   src: local('Alegreya Sans Light'), local('AlegreyaSans-Light'), url(http://fonts.gstatic.com/s/alegreyasans/v2/11EDm-lum6tskJMBbdy9aanUXp5W4FLE8OnWB9t-aHo.woff) format('woff');
 }
 @font-face {
-  font-family: 'Alegreya Sans';
+  font-family: "Alegreya Sans";
   font-style: normal;
   font-weight: 400;
   src: local('Alegreya Sans'), local('AlegreyaSans-Regular'), url(http://fonts.gstatic.com/s/alegreyasans/v2/KYNzioYhDai7mTMnx_gDgnt9r5m2YmP5sw3cUAQwL0E.woff) format('woff');
 }
 @font-face {
-  font-family: "browsers";
+  font-family: "Browsers";
+  src: url(fonts/browsers.eot);
+  src: url(fonts/browsers.eot) format('embedded-opentype'),
+    url(fonts/browsers.woff) format('woff'),
+    url(fonts/browsers.ttf) format('truetype'),
+    url(fonts/browsers.svg) format('svg');
   font-weight: normal;
   font-style: normal;
-  src: url(fonts/browsers.woff) format('woff');
 }
+

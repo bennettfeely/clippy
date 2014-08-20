@@ -11,110 +11,103 @@
   <meta name="viewport" content="width=device-width">
 </head>
 
-<main>
-  <header>
-    <a href="http://bennettfeely.com/clip-path">CSS clip-path maker</a>
 
-    <!--
-      <a href="https://twitter.com/share" class="twitter-share-button" data-via="bennettfeely">Tweet</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    -->
+  <div class="screen">
+    <div class="main side">
 
-  </header>
+      <header>
+        <a href="http://bennettfeely.com/clip-path">CSS clip-path maker</a>
+        <!-- <a href="https://twitter.com/share" class="twitter-share-button" data-via="bennettfeely">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> -->
+      </header>
 
-  <section class="demo">
-    <div id="box" class="box">
-      <div class="clipboard"></div>
-      <div class="handles"></div>
-    </div>
-  </section>
 
-  <section class="shapes">
-    <ul><!--<h2>Shapes</h2>--></ul>
-  </section>
-
-  <section class="clip-path">
-    <code class="ms block">-ms-clip-path: <span class="functions"></span>;</code>
-    <code class="webkit block show">-webkit-clip-path: <span class="functions"></span>;</code>
-    <code class="unprefixed block show">clip-path: <span class="functions"></span>;</code>
-  </section>
-
-  <section class="options">
-
-    <!--
-      <div class="panel flex">
-        <h2>Units</h2>
-        <input name="unit" checked value="%" type="radio" id="pct">
-        <label for="pct">Percentage</label>
-        <input name="unit" value="px" type="radio" id="px">
-        <label for="px">Pixels</label>
-      </div>
-    -->
-
-    <div class="grid panel flex">
-      <h2>Prefix</h2>
-
-      <input name="prefix" value="5" type="checkbox" id="webkit" checked>
-      <label for="webkit">webkit</label>
-
-      <input name="prefix" value="25" type="checkbox" id="ms">
-      <label for="ms">ms</label>
-    </div>
-
-    <div class="grid panel flex">
-      <h2>Snap</h2>
-      <input name="grid" checked value="1" type="radio" id="grid-none">
-      <label for="grid-none">None</label>
-
-      <input name="grid" value="5" type="radio" id="grid-5">
-      <label for="grid-5">5<small>%</small></label>
-
-      <input name="grid" value="10" type="radio" id="grid-10">
-      <label for="grid-10">10<small>%</small></label>
-
-      <input name="grid" value="25" type="radio" id="grid-25">
-      <label for="grid-25">25<small>%</small></label>
-    </div>
-
-    <div class="grid panel flex">
-      <h2>Demo Size</h2>
-      <input id="demo_width" value="280" type="number">
-        <h2>&times;</h2>
-      <input id="demo_height" value="280" type="number">
-    </div>
-
-    <div class="grid panel">
-      <h2>Demo Background</h2>
-
-      <div class="backgrounds">
-
-        <img src="pics/pittsburgh.jpg">
-        <img src="pics/sparkler.jpg">
-        <img src="pics/fierenze.jpg">
-        <img src="pics/miami.jpg">
-
-      </div>
-        <input placeholder="Custom URL..." id="custom_url" type="url" name="background">
-
-        <style id="custom_background"></style>
-    </div>
-
-    <div class="grid panel">
-      <h2>Browser Support</h2>
-
-      <div class="browser-support">
-        <span class="icon chrome supported" data-version="36+"></span>
-        <span class="icon safari supported" data-version="8+"></span>
-        <span class="icon opera supported" data-version="23+"></span>
-        <span class="icon ie" data-version="-"></span>
-        <span class="icon firefox" data-version="-"></span>
+      <div class="demo-container">
+        <section class="demo">
+          <div id="box" class="box">
+            <div class="clipboard"></div>
+            <div class="handles"></div>
+          </div>
+        </section>
       </div>
 
+      <section class="shapes horizontal">
+        <ul></ul>
+      </section>
 
+      <section class="clip-path">
+        <code class="ms block">-ms-clip-path: <span class="functions"></span>;</code>
+        <code class="webkit block show">-webkit-clip-path: <span class="functions"></span>;</code>
+        <code class="unprefixed block show">clip-path: <span class="functions"></span>;</code>
+      </section>
     </div>
 
+
+    <section class="side options">
+      <section class="shapes vertical">
+        <ul></ul>
+      </section>
+
+      <div class="grid panel flex">
+        <h2>Prefix</h2>
+
+        <input name="prefix" value="5" type="checkbox" id="webkit" checked>
+        <label for="webkit">webkit</label>
+
+        <input name="prefix" value="25" type="checkbox" id="ms">
+        <label for="ms">ms</label>
+      </div>
+
+      <div class="grid panel flex">
+        <h2>Snap</h2>
+        <input name="grid" checked value="1" type="radio" id="grid-none">
+        <label for="grid-none">None</label>
+
+        <input name="grid" value="5" type="radio" id="grid-5">
+        <label for="grid-5">5<small>%</small></label>
+
+        <input name="grid" value="10" type="radio" id="grid-10">
+        <label for="grid-10">10<small>%</small></label>
+
+        <input name="grid" value="25" type="radio" id="grid-25">
+        <label for="grid-25">25<small>%</small></label>
+      </div>
+
+      <div class="grid panel flex">
+        <h2>Demo Size</h2>
+        <input id="demo_width" value="280" type="number">
+          <h2>&times;</h2>
+        <input id="demo_height" value="280" type="number">
+      </div>
+
+      <div class="grid panel">
+        <h2>Demo Background</h2>
+
+        <div class="backgrounds">
+
+          <img src="pics/pittsburgh.jpg">
+          <img src="pics/sparkler.jpg">
+          <img src="pics/fierenze.jpg">
+          <img src="pics/miami.jpg">
+
+        </div>
+          <input placeholder="Custom URL..." id="custom_url" type="url" name="background">
+
+          <style id="custom_background"></style>
+      </div>
+
+      <div class="grid panel">
+        <h2>Browser Support</h2>
+
+        <div class="browser-support">
+          <span class="icon chrome" data-version="36+"></span>
+          <span class="icon safari" data-version="8+"></span>
+          <span class="icon opera" data-version="23+"></span>
+          <span class="icon ie unsupported"></span>
+          <span class="icon firefox unsupported"></span>
+        </div>
+      </div>
   </section>
-</main>
+</div>
 
 <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
 <script src="jquery.min.js"></script>

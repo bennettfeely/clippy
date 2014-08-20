@@ -137,10 +137,12 @@ $(function(){
 
   // Switch grid size
   $('input[type="radio"]').change(function(){
-      var grid_x = $('input[name="grid"]:checked').val()*(width/100);
-      var grid_y = $('input[name="grid"]:checked').val()*(height/100);
+    var grid_x = $('input[name="grid"]:checked').val()*(width/100);
+    var grid_y = $('input[name="grid"]:checked').val()*(height/100);
 
-      grid = [grid_x, grid_y];
+    grid = [grid_x, grid_y];
+
+    scrollTop();
 
     setupDemo(start_coords);
   });
@@ -160,6 +162,8 @@ $(function(){
     } else {
       $(".webkit").removeClass("show");
     }
+
+      scrollTop();
   });
 
   // Resize width/height of the demo
@@ -190,8 +194,7 @@ $(function(){
 
       sizes();
 
-      // Scroll to the top after changing
-      $(window).scrollTop(0);
+      scrollTop();
 
       setupDemo(start_coords);
   });
@@ -223,6 +226,10 @@ function setCustomBackground(url) {
   $("#custom_background").html(style);
 
   // Scroll to top of page
+  scrollTop();
+}
+
+function scrollTop() {
   $(window).scrollTop(0);
 }
 
@@ -316,28 +323,28 @@ function appendFigure(clip_path, shape) {
   console.log("appendFigure();");
 
   if(type == "circle") {
-    var fig = '<figure data-name="Circle" data-type="circle" class="panel">'
+    var fig = '<figure data-name="Circle" data-type="circle">'
               + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "ellipse") {
-    var fig = '<figure data-name="Ellipse" data-type="ellipse" class="panel">'
+    var fig = '<figure data-name="Ellipse" data-type="ellipse">'
               + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "polygon") {
-    var fig = '<figure data-name="' + shape.name + '" data-type="polygon" class="panel" data-coords="' + shape.coords.join(" ") + '">'
+    var fig = '<figure data-name="' + shape.name + '" data-type="polygon" data-coords="' + shape.coords.join(" ") + '">'
               + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "inset") {
-    var fig = '<figure data-name="' + shape.name + '" data-type="inset" class="panel" data-coords="' + shape.coords.join(" ") + '">'
+    var fig = '<figure data-name="' + shape.name + '" data-type="inset" data-coords="' + shape.coords.join(" ") + '">'
               + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
