@@ -196,6 +196,7 @@ header {
   max-width: 100%;
   background: $lightgray;
   white-space: nowrap;
+  overflow-x: hidden;
 
   &:focus { outline: 0; }
 
@@ -222,11 +223,6 @@ header {
     }
   }
 }
-
-
-
-
-
 
 
   ul {
@@ -322,8 +318,10 @@ header {
 }
 
 .clip-path {
+  position: relative;
   font-size: 1.1em;
   padding: .75rem;
+  padding-right: 4rem;
   background: $black;
   color: #9a8297;
   overflow-x: hidden;
@@ -332,6 +330,38 @@ header {
   @media (min-width: $tablet) {
     margin: .5rem 0 .25rem;
     border-radius: $radius;
+  }
+
+  .edit-in-codepen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 4rem;
+    background: $black;
+    background-image: url(http://blog.codepen.io/wp-content/uploads/2012/06/Button-White-Large.png);
+    background-size: 60%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition:
+      opacity $transition,
+      background-size $transition;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+      transition-duration: $transition/2;
+    }
+
+    &:active {
+      opacity: .5;
+      transition-duration: 0;
+    }
+
+    &:focus {
+      outline: 0;
+    }
   }
 }
 

@@ -89,6 +89,10 @@ shape_array = {
       coords : [[50,0],[63,38],[100,38],[69,59],[82,100],[50,75],[18,100],[31,59],[0,38],[37,38]]
     },
     {
+      name : "Star",
+      coords : [[50,0],]
+    },
+    {
       name : "Cross",
       coords : [[10,25],[35,25],[35,0],[65,0],[65,25],[90,25],[90,50],[65,50],[65,100],[35,100],[35,50],[10,50]]
     }
@@ -116,6 +120,8 @@ $demo_width = $("#demo_width");
 $demo_height = $("#demo_height");
 
 $demo = $(".demo");
+
+$codepen = $(".edit-in-codepen");
 
 var start = shape_array.polygon[0];
     start_type = "polygon",
@@ -217,6 +223,9 @@ $(function(){
 
     if(url !== '') { setCustomBackground(url); }
   });
+
+  // Edit in Codepen
+  $codepen.click(codePen);
 
 });
 
@@ -994,3 +1003,52 @@ function sizes() {
     "height" : adjusted_height
   });
 }
+
+// Edit in Codepen
+function codePen() {
+
+  var clip = $(".clip-path .show").text();
+  var clip = clip.split(";").join(";\n");
+
+  var width = $demo_width = $("#demo_width").val();
+  var height = $demo_height = $("#demo_height").val();
+
+  var CSS = 'div {\n'
+          + '\twidth: ' + width + 'px;\n'
+          + '\theight: ' + height + 'px;\n'
+          + '\tbackground: red;\n'
+          + '\t' + clip
+          + '}\n'
+          + '\n'
+          + '/* Center the demo */\n'
+          + 'html, body { height: 100%; }\n'
+          + 'body {\n'
+          + '\tdisplay: flex;\n'
+          + '\tjustify-content: center;\n'
+          + '\talign-items: center;\n'
+          + '}';
+
+  var data = {
+    html              : "<div></div>",
+    css               : CSS,
+    css_pre_processor : "none",
+    css_prefix        : "autoprefixer",
+    css_starter       : "reset",
+  };
+
+  var JSONstring = JSON.stringify(data).replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+
+  var $form = $('<form action="http://codepen.io/pen/define" method="POST" target="_blank">'
+           + '<input type="hidden" name="data" value=\'' + JSONstring + '\'>'
+           + '</form>');
+
+  $form.submit();
+}
+
+
+
+
+
+
+
+

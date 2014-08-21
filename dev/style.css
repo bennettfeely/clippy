@@ -242,6 +242,7 @@ header iframe {
   max-width: 100%;
   background: #d3d2cd;
   white-space: nowrap;
+  overflow-x: hidden;
 }
 
 .shapes:focus {
@@ -427,8 +428,10 @@ figure figcaption {
 }
 
 .clip-path {
+  position: relative;
   font-size: 1.1em;
   padding: .75rem;
+  padding-right: 4rem;
   background: #100a09;
   color: #9a8297;
   overflow-x: hidden;
@@ -440,6 +443,42 @@ figure figcaption {
     margin: .5rem 0 .25rem;
     border-radius: 2px;
   }
+}
+
+.clip-path .edit-in-codepen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 4rem;
+  background: #100a09;
+  background-image: url(http://blog.codepen.io/wp-content/uploads/2012/06/Button-White-Large.png);
+  background-size: 60%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-transition: opacity 0.22s, background-size 0.22s;
+  transition: opacity 0.22s, background-size 0.22s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.clip-path .edit-in-codepen:hover {
+  opacity: .8;
+  -webkit-transition-duration: 0.11s;
+  transition-duration: 0.11s;
+}
+
+.clip-path .edit-in-codepen:active {
+  opacity: .5;
+  -webkit-transition-duration: 0;
+  transition-duration: 0;
+}
+
+.clip-path .edit-in-codepen:focus {
+  outline: 0;
 }
 
 .block {
