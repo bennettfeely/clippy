@@ -13,7 +13,7 @@
 
 
   <div class="screen">
-    <div class="main side">
+    <div class="main">
 
       <header>
         <a href="http://bennettfeely.com/clip-path">CSS clip-path maker</a>
@@ -42,71 +42,73 @@
     </div>
 
 
-    <section class="side options">
-      <section class="shapes vertical">
+    <div class="side">
+      <section class="shapes vertical" tabindex="-1">
         <ul></ul>
       </section>
 
-      <div class="grid panel flex">
-        <h2>Prefix</h2>
+      <section class="options">
+        <div class="grid panel flex">
+          <h2>Prefix</h2>
 
-        <input name="prefix" value="5" type="checkbox" id="webkit" checked>
-        <label for="webkit">webkit</label>
+          <input name="prefix" value="5" type="checkbox" id="webkit" checked>
+          <label for="webkit">webkit</label>
 
-        <input name="prefix" value="25" type="checkbox" id="ms">
-        <label for="ms">ms</label>
-      </div>
-
-      <div class="grid panel flex">
-        <h2>Snap</h2>
-        <input name="grid" checked value="1" type="radio" id="grid-none">
-        <label for="grid-none">None</label>
-
-        <input name="grid" value="5" type="radio" id="grid-5">
-        <label for="grid-5">5<small>%</small></label>
-
-        <input name="grid" value="10" type="radio" id="grid-10">
-        <label for="grid-10">10<small>%</small></label>
-
-        <input name="grid" value="25" type="radio" id="grid-25">
-        <label for="grid-25">25<small>%</small></label>
-      </div>
-
-      <div class="grid panel flex">
-        <h2>Demo Size</h2>
-        <input id="demo_width" value="280" type="number">
-          <h2>&times;</h2>
-        <input id="demo_height" value="280" type="number">
-      </div>
-
-      <div class="grid panel">
-        <h2>Demo Background</h2>
-
-        <div class="backgrounds">
-
-          <img src="pics/pittsburgh.jpg">
-          <img src="pics/sparkler.jpg">
-          <img src="pics/fierenze.jpg">
-          <img src="pics/miami.jpg">
-
+          <input name="prefix" value="25" type="checkbox" id="ms">
+          <label for="ms">ms</label>
         </div>
-          <input placeholder="Custom URL..." id="custom_url" type="url" name="background">
 
-          <style id="custom_background"></style>
-      </div>
+        <div class="grid panel flex">
+          <h2>Snap</h2>
+          <input name="grid" checked value="1" type="radio" id="grid-none">
+          <label for="grid-none">None</label>
 
-      <div class="grid panel">
-        <h2>Browser Support</h2>
+          <input name="grid" value="5" type="radio" id="grid-5">
+          <label for="grid-5">5<small>%</small></label>
 
-        <div class="browser-support">
-          <span class="icon chrome" data-version="36+"></span>
-          <span class="icon safari" data-version="8+"></span>
-          <span class="icon opera" data-version="23+"></span>
-          <span class="icon ie unsupported"></span>
-          <span class="icon firefox unsupported"></span>
+          <input name="grid" value="10" type="radio" id="grid-10">
+          <label for="grid-10">10<small>%</small></label>
+
+          <input name="grid" value="25" type="radio" id="grid-25">
+          <label for="grid-25">25<small>%</small></label>
         </div>
-      </div>
-  </section>
+
+        <div class="grid panel flex">
+          <h2>Demo Size</h2>
+          <input id="demo_width" value="280" type="number">
+            <h2>&times;</h2>
+          <input id="demo_height" value="280" type="number">
+        </div>
+
+        <div class="grid panel">
+          <h2>Demo Background</h2>
+
+          <div class="backgrounds">
+
+            <img src="pics/pittsburgh.jpg">
+            <img src="pics/sparkler.jpg">
+            <img src="pics/fierenze.jpg">
+            <img src="pics/miami.jpg">
+
+          </div>
+            <input placeholder="Custom URL..." id="custom_url" type="url" name="background">
+
+            <style id="custom_background"></style>
+        </div>
+
+        <div class="grid panel">
+          <h2>Browser Support</h2>
+
+          <div class="browser-support">
+            <span class="icon chrome" data-version="36+"></span>
+            <span class="icon safari" data-version="8+"></span>
+            <span class="icon opera" data-version="23+"></span>
+            <span class="icon ie unsupported"></span>
+            <span class="icon firefox unsupported"></span>
+          </div>
+        </div>
+      </section>
+  </div>
 </div>
 
 <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
