@@ -89,8 +89,8 @@ shape_array = {
       coords : [[50,0],[63,38],[100,38],[69,59],[82,100],[50,75],[18,100],[31,59],[0,38],[37,38]]
     },
     {
-      name : "Star",
-      coords : [[50,0],]
+      name : "Burst",
+      coords : [[50,100],[100,0],[0,50],[100,100],[50,0],[0,100],[100,50],[0,0]]
     },
     {
       name : "Cross",
@@ -157,11 +157,13 @@ $(function(){
   // Add/remove prefixes
   // Classes determine if code block is displayed
   $('input[type="checkbox"]').change(function(){
+    /*
     if($("#ms").is(':checked')) {
       $(".ms").addClass("show");
     } else {
       $(".ms").removeClass("show");
     }
+    */
 
     if($("#webkit").is(':checked')) {
       $(".webkit").addClass("show");
@@ -178,7 +180,13 @@ $(function(){
     width = $demo_width.val();
       // max width is the width of the window
       // This needs to be fixed for larger than mobile devices when making website responsive
-      var max_width = $(window).width() - 20;
+
+      if($(window).width() < 800) {
+        var max_width = $(window).width() - 20;
+      } else {
+        var max_width = $(".demo-container").width() - 20;
+      }
+
       var min_width = 50;
 
       if(width > max_width) { width = max_width; }
@@ -187,8 +195,13 @@ $(function(){
       $demo_width.val(width);
 
     height = $demo_height.val();
-      // max height fills the page with just the header and demo
-      var max_height = $(window).height() - $("header").outerHeight() - 36;
+
+      if($(window).width() < 800) {
+        var max_height = $(window).height() - $("header").outerHeight() - 36;
+      } else {
+        var max_height = $(".demo-container").height() - 20;
+      }
+
       var min_height = 50;
 
       if(height > max_height) { height = max_height; }
@@ -1016,7 +1029,7 @@ function codePen() {
   var CSS = 'div {\n'
           + '\twidth: ' + width + 'px;\n'
           + '\theight: ' + height + 'px;\n'
-          + '\tbackground: red;\n'
+          + '\tbackground: #1e90ff;\n'
           + '\t' + clip
           + '}\n'
           + '\n'
