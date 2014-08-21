@@ -16,7 +16,7 @@ $green : #3cb371;
 
 $black : #100a09;
 $white : #fbfcf7;
-$lightgray : #d3d2cd;
+$lightgray : #d3d0c9;
 
 $radius : 2px;
 $shadow : 0 1px 2px rgba($black, .15);
@@ -26,7 +26,7 @@ $transition : .22s;
 $bounce : cubic-bezier(.15,1,.3,1.1);
 
 $figure-height : 4.625rem;
-$tablet : 50em;
+$tablet : 800px;
 
 
 @mixin overflow-shadow {
@@ -85,7 +85,6 @@ header {
     display: flex;
   }
 }
-
 
 .main {
   display: flex;
@@ -273,7 +272,14 @@ header {
         transition:
           background $transition,
           transform $transition*1.5 $bounce;
+
+        &:nth-child(n+9) { transition-delay: $transition*.15; }
+        &:nth-child(n+13) { transition-delay: $transition*.3; }
+        &:nth-child(n+17) { transition-delay: $transition*.45; }
+        &:nth-child(n+21) { transition-delay: $transition*.6; }
       }
+
+
     }
 
     &:hover {
@@ -284,9 +290,6 @@ header {
 
     &.on, &:active {
       background: $black;
-      transition:
-        background 0,
-        transform 0;
 
       figcaption {
         color: $lightgray;
@@ -330,6 +333,11 @@ header {
   @media (min-width: $tablet) {
     margin: .5rem 0 .25rem;
     border-radius: $radius;
+
+    &:focus {
+      box-shadow: 0 0 .5rem $green;
+      outline: 0;
+    }
   }
 
   .edit-in-codepen {
@@ -451,8 +459,9 @@ header {
   &:nth-of-type(19) { color: seagreen; }
   &:nth-of-type(20) { color: tomato; }
   &:nth-of-type(21) { color: gold; }
-  &:nth-of-type(22) { color: peru; }
-  &:nth-of-type(23) { color: lightseagreen; }
+  &:nth-of-type(22) { color: blueviolet; }
+  &:nth-of-type(23) { color: peru; }
+  &:nth-of-type(24) { color: lightseagreen; }
 }
 
 .side {
@@ -506,9 +515,9 @@ header {
       left: 0;
       right: 0;
       bottom: 100%;
-      height: 3rem;
+      height: 4rem;
       background:
-        linear-gradient(rgba($lightgray,0), $lightgray 75%);
+        linear-gradient(rgba($lightgray,0), $lightgray 90%);
       transition: inherit;
       transition-timing-function: ease;
       transform-origin: center bottom;
