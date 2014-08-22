@@ -26,6 +26,7 @@ $transition : .22s;
 $bounce : cubic-bezier(.15,1,.3,1.1);
 
 $figure-height : 4.625rem;
+$sidebar-width : ($figure-height * 5) + .5rem;
 $tablet : 800px;
 
 
@@ -34,22 +35,41 @@ $tablet : 800px;
   position: absolute;
   content: "";
   pointer-events: none;
-
-
 }
 
-html, body { position: relative; height: 100%; }
+
+html, body {
+  position: relative;
+  height: 100%;
+}
 body {
-  display: flex;
-  flex-direction: column;
   font: 100%/1.5 "Alegreya Sans", sans-serif;
   background: $lightgray;
   color: $black;
 
   @media (min-width: $tablet) {
     padding: 0 .5rem 0;
+    padding-left: calc(100% - #{$sidebar-width});
   }
 }
+
+
+.main {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $tablet) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    right: $sidebar-width;
+    padding: .25rem .25rem .25rem .75rem;
+    -ms-touch-action: none;
+    touch-action: none;
+  }
+}
+
 
 header {
   display: flex;
@@ -69,31 +89,13 @@ header {
     display: inline-block;
     text-decoration: none;
     color: inherit;
-    padding: .5rem;
+    padding: .25rem;
     user-select: none;
 
     &:hover { text-decoration: underline; }
   }
 
   iframe { max-width: 95px; } // Twitter button
-}
-
-.screen {
-  flex: 1;
-
-  @media (min-width: $tablet) {
-    display: flex;
-  }
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
-  @media (min-width: $tablet) {
-    padding: .25rem;
-  }
 }
 
 
@@ -278,8 +280,6 @@ header {
         &:nth-child(n+17) { transition-delay: $transition*.45; }
         &:nth-child(n+21) { transition-delay: $transition*.6; }
       }
-
-
     }
 
     &:hover {
@@ -329,13 +329,14 @@ header {
   color: #9a8297;
   overflow-x: hidden;
   box-shadow: $shadow;
+  font-family: monospace;
 
   @media (min-width: $tablet) {
     margin: .5rem 0 .25rem;
     border-radius: $radius;
 
     &:focus {
-      box-shadow: 0 0 .5rem $green;
+      box-shadow: 0 0 .5rem gold;
       outline: 0;
     }
   }
@@ -390,10 +391,6 @@ header {
 }
 
 
-.points {
-  font-family: monospace;
-}
-
 .point {
   display: inline-block;
   position: relative;
@@ -437,6 +434,7 @@ header {
   }
 }
 
+
 .handle, .point, figure {
   &:nth-of-type(1) { color: tomato; }
   &:nth-of-type(2) { color: mediumseagreen; }
@@ -468,9 +466,7 @@ header {
   padding: .25rem .25rem 1.25rem;
 
   @media (min-width: $tablet) {
-    width: $figure-height * 5 + .5rem;
     max-height: 100%;
-    overflow: scroll;
     padding: .5rem 0 0 .125rem;
   }
 
@@ -500,9 +496,9 @@ header {
 
 
 @media (min-width: $tablet) {
-  .options {
-    $hide : ($figure-height * 3) - .25rem;
+  $hide : ($figure-height * 3) - .25rem;
 
+  .options {
     position: relative;
     background: $lightgray;
     transform: translate3d(0, -$hide, 0);
@@ -533,7 +529,6 @@ header {
     }
   }
 }
-
 
 h2 {
   display: inline-block;
@@ -676,12 +671,41 @@ input[type="number"] {
 
 
   .browser-support {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: .5rem;
-    padding: .25rem;
+    color: inherit;
+    text-decoration: none;
+
+    h2 {
+      display: flex;
+      padding-right: 0;
+    }
+
+    small {
+      text-align: right;
+      flex: 1;
+
+      &:before { content: "("; }
+      &:after { content: ")"; }
+    }
+
+    &:hover small {
+      color: $blue;
+
+      &:before { content: "www."; }
+      &:after { content: ""; }
+    }
+    &:active {
+      background: rgba(white, .5);
+    }
+
+    .table {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+      padding: .25rem;
+    }
   }
+
 
   .icon {
     display: inline-block;

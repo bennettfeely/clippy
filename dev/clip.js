@@ -109,6 +109,7 @@ shape_array = {
 $html = $("html");
 $body = $("body");
 $box = $("#box");
+$side = $(".side");
 $clipboard = $(".clipboard");
 $handles = $(".handles");
 $shapes = $(".shapes ul");
@@ -141,6 +142,17 @@ $(function(){
   // Reevaluates max width/height on window resize
   $(window).resize(sizes);
 
+  // Hide sidebar scroll shadow
+  $(document).scroll(function(){
+    var pos = $(this).scrollTop();
+    var bottom = $(this).height() - $side.outerHeight();
+    if(pos == bottom) {
+      $html.addClass("at-bottom");
+    } else {
+      $html.removeClass("at-bottom");
+    }
+  });
+
   // Switch grid size
   $('input[type="radio"]').change(function(){
     var grid_x = $('input[name="grid"]:checked').val()*(width/100);
@@ -152,7 +164,6 @@ $(function(){
 
     setupDemo(start_coords);
   });
-
 
   // Add/remove prefixes
   // Classes determine if code block is displayed
@@ -209,10 +220,7 @@ $(function(){
 
       $demo_height.val(height);
 
-
-
       sizes();
-
       scrollTop();
 
       setupDemo(start_coords);
@@ -239,7 +247,6 @@ $(function(){
 
   // Edit in Codepen
   $codepen.click(codePen);
-
 });
 
 function setCustomBackground(url) {
@@ -344,30 +351,41 @@ function appendFigure(clip_path, shape) {
 
   console.log("appendFigure();");
 
+  var ms = '';
+  var webkit = '';
+  var unprefixed = 'clip-path: ' + clip_path;
+
+  if($(".ms.block").hasClass("show")) {
+    var ms = '-ms-clip-path: ' + clip_path + ';';
+  }
+  if($(".webkit.block").hasClass("show")) {
+    var webkit = '-webkit-clip-path: ' + clip_path + ';';
+  }
+
   if(type == "circle") {
     var fig = '<figure data-name="Circle" data-type="circle">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "ellipse") {
     var fig = '<figure data-name="Ellipse" data-type="ellipse">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "polygon") {
     var fig = '<figure data-name="' + shape.name + '" data-type="polygon" data-coords="' + shape.coords.join(" ") + '">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "inset") {
     var fig = '<figure data-name="' + shape.name + '" data-type="inset" data-coords="' + shape.coords.join(" ") + '">'
-              + '<div style="-ms-clip-path: ' + clip_path + '; -webkit-clip-path: ' + clip_path + '; clip-path: ' + clip_path + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
@@ -995,7 +1013,7 @@ function clearDemo() {
 
 // Get the code in the code blocks and set the style inline on the clipboard
 function clipIt() {
-  var clip_path = $clip_path.text();
+  var clip_path = $(".show.block").text();
 
   $clipboard.attr('style', clip_path);
 }
