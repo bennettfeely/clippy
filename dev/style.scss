@@ -20,7 +20,7 @@ $lightgray : #d3d0c9;
 
 $radius : 2px;
 $shadow : 0 1px 2px rgba($black, .15);
-$shadow-hover : 0 2px 4px rgba($black, .2);
+$shadow-hover : 0 2px 3px rgba($black, .3);
 
 $transition : .22s;
 $bounce : cubic-bezier(.15,1,.3,1.1);
@@ -342,15 +342,17 @@ header {
   color: #9a8297;
   padding: .75rem;
   box-shadow: $shadow;
+
+  @media (min-width: $tablet) {
+    border-radius: $radius;
+  }
 }
 
 .css-code {
   flex: 1;
-  border-radius: 0 $radius $radius 0;
 
   @media (min-width: $tablet) {
-    margin-right: .25rem;
-    border-radius: $radius;
+    margin-right: .5vw;
   }
 }
 
@@ -366,11 +368,6 @@ header {
     background-size $transition;
   user-select: none;
   cursor: pointer;
-  border-radius: $radius 0 0 $radius;
-
-  @media (min-width: $tablet) {
-    border-radius: $radius;
-  }
 
   &:hover {
     opacity: .8;
