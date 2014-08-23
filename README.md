@@ -6,7 +6,7 @@ Shape up your website with CSS clip-paths.
 Clippy is a tool for generating values for shape functions with the CSS clip-path property. The property accepts several basic shapes that will be able to create with Clippy and their current implementation status:
 
 * `circle()` Buggy, does not work without a 1:1 size ratio.
-* `ellipse()` Done. Could be improved a little.
+* `ellipse()` Done.
 * `polygon()` Done.
 * `inset()` Done, looking into how to support `radius` value.
 
@@ -21,6 +21,7 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 #### To do
 
 * Make a panel card with quick information about the `clip-path` property.
+* Add HTML5 localstorage to save things.
 * See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions).
 
 ***
