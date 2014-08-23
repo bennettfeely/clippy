@@ -430,14 +430,13 @@ figure figcaption {
 }
 
 .clip-path {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   position: relative;
   font-size: 1.1em;
-  padding: .75rem;
-  padding-right: 4rem;
-  background: #100a09;
-  color: #9a8297;
   overflow-x: hidden;
-  box-shadow: 0 1px 2px rgba(16, 10, 9, 0.15);
   font-family: monospace;
 }
 
@@ -453,39 +452,66 @@ figure figcaption {
   }
 }
 
-.clip-path .edit-in-codepen {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 4rem;
+.code {
   background: #100a09;
+  color: #9a8297;
+  padding: .75rem;
+  box-shadow: 0 1px 2px rgba(16, 10, 9, 0.15);
+}
+
+.css-code {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-radius: 0 2px 2px 0;
+}
+
+@media (min-width: 800px) {
+  .css-code {
+    margin-right: .25rem;
+    border-radius: 2px;
+  }
+}
+
+.edit-in-codepen {
+  width: 4rem;
   background-image: url(http://blog.codepen.io/wp-content/uploads/2012/06/Button-White-Large.png);
   background-size: 60%;
   background-position: center center;
   background-repeat: no-repeat;
-  -webkit-transition: opacity 0.22s, background-size 0.22s;
-  transition: opacity 0.22s, background-size 0.22s;
+  -webkit-transition: opacity 0.22s, -webkit-transform 0.22s, background-size 0.22s;
+  transition: opacity 0.22s, transform 0.22s, background-size 0.22s;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
+  border-radius: 2px 0 0 2px;
 }
 
-.clip-path .edit-in-codepen:hover {
+@media (min-width: 800px) {
+  .edit-in-codepen {
+    border-radius: 2px;
+  }
+}
+
+.edit-in-codepen:hover {
   opacity: .8;
   -webkit-transition-duration: 0.11s;
   transition-duration: 0.11s;
 }
 
-.clip-path .edit-in-codepen:active {
+.edit-in-codepen:active {
+  -webkit-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
   opacity: .5;
   -webkit-transition-duration: 0;
   transition-duration: 0;
 }
 
-.clip-path .edit-in-codepen:focus {
+.edit-in-codepen:focus {
   outline: 0;
 }
 

@@ -315,20 +315,15 @@ header {
   }
 }
 
-
 @keyframes shapes-slide-left {
   from { transform: translate3d(100%,0,0); }
 }
 
 .clip-path {
+  display: flex;
   position: relative;
   font-size: 1.1em;
-  padding: .75rem;
-  padding-right: 4rem;
-  background: $black;
-  color: #9a8297;
   overflow-x: hidden;
-  box-shadow: $shadow;
   font-family: monospace;
 
   @media (min-width: $tablet) {
@@ -340,37 +335,56 @@ header {
       outline: 0;
     }
   }
+}
 
-  .edit-in-codepen {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 4rem;
-    background: $black;
-    background-image: url(http://blog.codepen.io/wp-content/uploads/2012/06/Button-White-Large.png);
-    background-size: 60%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    transition:
-      opacity $transition,
-      background-size $transition;
-    user-select: none;
-    cursor: pointer;
+.code {
+  background: $black;
+  color: #9a8297;
+  padding: .75rem;
+  box-shadow: $shadow;
+}
 
-    &:hover {
-      opacity: .8;
-      transition-duration: $transition/2;
-    }
+.css-code {
+  flex: 1;
+  border-radius: 0 $radius $radius 0;
 
-    &:active {
-      opacity: .5;
-      transition-duration: 0;
-    }
+  @media (min-width: $tablet) {
+    margin-right: .25rem;
+    border-radius: $radius;
+  }
+}
 
-    &:focus {
-      outline: 0;
-    }
+.edit-in-codepen {
+  width: 4rem;
+  background-image: url(http://blog.codepen.io/wp-content/uploads/2012/06/Button-White-Large.png);
+  background-size: 60%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition:
+    opacity $transition,
+    transform $transition,
+    background-size $transition;
+  user-select: none;
+  cursor: pointer;
+  border-radius: $radius 0 0 $radius;
+
+  @media (min-width: $tablet) {
+    border-radius: $radius;
+  }
+
+  &:hover {
+    opacity: .8;
+    transition-duration: $transition/2;
+  }
+
+  &:active {
+    transform: scale(.95);
+    opacity: .5;
+    transition-duration: 0;
+  }
+
+  &:focus {
+    outline: 0;
   }
 }
 
