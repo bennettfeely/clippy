@@ -28,12 +28,4 @@ Clippy is a tool for generating values for shape functions with the CSS clip-pat
 
 #### Browser Support
 
-I cannot find a good table of browser support for the `clip-path` property so here are some observations. Bolded support at least the basic shape functions.
-
-* **Chrome 36**
-* **Safari 8**
-* **Opera 23**
-* ~~Firefox 31~~
-* ~~Firefox 34~~
-* ~~Internet Explorer 9~~
-* Internet Explorer 10/11 (Untested)
+[caniuse.com](http://caniuse.com/#search=clip-path)
