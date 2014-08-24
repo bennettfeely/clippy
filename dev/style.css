@@ -73,7 +73,8 @@ header {
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  background: #fbfcf7;
+  background: rgba(251, 252, 247, 0.75);
+  box-shadow: inset 0 -1px rgba(211, 208, 201, 0.25);
   padding: .75rem 1rem 0;
 }
 
@@ -375,8 +376,8 @@ figure {
 
   .shapes:hover figure:nth-child(n+21),
   .shapes:focus figure:nth-child(n+21) {
-    -webkit-transition-delay: 0.132s;
-    transition-delay: 0.132s;
+    -webkit-transition-delay: 0.121s;
+    transition-delay: 0.121s;
   }
 }
 
@@ -776,7 +777,7 @@ figure:nth-of-type(24) {
   margin: .5rem .25rem;
 }
 
-.side .panel:hover {
+.side .panel[href]:hover {
   box-shadow: 0 2px 3px rgba(16, 10, 9, 0.3);
 }
 

@@ -75,7 +75,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: $white;
+  background: rgba($white, .75);
+  box-shadow: inset 0 -1px rgba($lightgray, .25);
   padding: .75rem 1rem 0;
 
   @media (min-width: $tablet) {
@@ -278,7 +279,7 @@ header {
         &:nth-child(n+9) { transition-delay: $transition*.15; }
         &:nth-child(n+13) { transition-delay: $transition*.3; }
         &:nth-child(n+17) { transition-delay: $transition*.45; }
-        &:nth-child(n+21) { transition-delay: $transition*.6; }
+        &:nth-child(n+21) { transition-delay: $transition*.55; }
       }
     }
 
@@ -490,7 +491,7 @@ header {
     box-shadow: $shadow;
     margin: .5rem .25rem;
 
-    &:hover {
+    &[href]:hover {
       box-shadow: $shadow-hover;
     }
 
@@ -731,7 +732,6 @@ input[type="number"] {
     text-shadow: 0 0 0 $black;
 
     .panel:hover & {
-
       &.unsupported {
         transform: scale(.9);
         color: transparent;
