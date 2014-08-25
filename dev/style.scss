@@ -96,7 +96,16 @@ header {
     &:hover { text-decoration: underline; }
   }
 
-  iframe { max-width: 95px; } // Twitter button
+  iframe {
+    max-width: 95px;
+    animation: load 1s both;
+  } // Twitter button
+}
+
+@keyframes load {
+  from {
+    opacity: 0;
+  }
 }
 
 
@@ -381,8 +390,7 @@ header {
     transition-duration: 0;
   }
 
-  &:focus {
-    outline: 0;
+  &:focus { outline: 0;
   }
 }
 
@@ -560,6 +568,12 @@ h2 {
     color: $black;
     font-weight: 300;
     padding: 0 1rem 0 .5rem;
+  }
+
+  .side > & {
+    font-size: 1.4rem;
+    padding: .75rem 1rem .25rem .5rem;
+
   }
 }
 

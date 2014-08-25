@@ -104,6 +104,20 @@ header a:hover {
 
 header iframe {
   max-width: 95px;
+  -webkit-animation: load 1s both;
+  animation: load 1s both;
+}
+
+@-webkit-keyframes load {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes load {
+  from {
+    opacity: 0;
+  }
 }
 
 .demo-container {
@@ -869,6 +883,11 @@ h2:first-child {
   color: #100a09;
   font-weight: 300;
   padding: 0 1rem 0 .5rem;
+}
+
+.side > h2 {
+  font-size: 1.4rem;
+  padding: .75rem 1rem .25rem .5rem;
 }
 
 input[type="radio"],
