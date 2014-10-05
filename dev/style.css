@@ -75,7 +75,7 @@ header {
   justify-content: space-between;
   background: rgba(251, 252, 247, 0.75);
   box-shadow: inset 0 -1px rgba(211, 208, 201, 0.25);
-  padding: .75rem 1rem 0;
+  padding: .75rem 1rem .75rem;
 }
 
 @media (min-width: 800px) {
@@ -92,9 +92,9 @@ header a {
   text-decoration: none;
   color: inherit;
   padding: .25rem;
+  -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -139,12 +139,13 @@ header iframe {
   flex: 1;
   background: #fbfcf7;
   box-shadow: 0 1px 2px rgba(16, 10, 9, 0.15);
+  -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   position: relative;
   z-index: 100;
+  padding-top: .5rem;
 }
 
 @media (min-width: 800px) {
@@ -195,8 +196,8 @@ header iframe {
   cursor: grab;
   box-shadow: inset 0 0 0 10px;
   opacity: .8;
-  -webkit-transition: opacity 0.22s;
-  transition: opacity 0.22s;
+  -webkit-transition: opacity 0.25s;
+  transition: opacity 0.25s;
 }
 
 .handle:after {
@@ -303,9 +304,9 @@ ul {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 0;
-    -webkit-perspective: 400;
-    -ms-perspective: 400;
-    perspective: 400;
+    -webkit-perspective: 400px;
+    -ms-perspective: 400px;
+    perspective: 400px;
   }
 }
 
@@ -318,11 +319,11 @@ figure {
   width: 4.125rem;
   box-shadow: 0 1px 2px rgba(16, 10, 9, 0.15);
   border-radius: 2px;
-  -webkit-transition: background 0.22s, -webkit-transform 0.44s;
-  transition: background 0.22s, transform 0.44s;
+  -webkit-transition: background 0.25s, -webkit-transform 0.5s;
+  transition: background 0.25s, transform 0.5s;
+  -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -366,32 +367,32 @@ figure {
     -webkit-transform: translateZ(0) rotateX(0);
     -ms-transform: translateZ(0) rotateX(0);
     transform: translateZ(0) rotateX(0);
-    -webkit-transition: background 0.22s, -webkit-transform 0.33s cubic-bezier(0.15, 1, 0.3, 1.1);
-    transition: background 0.22s, transform 0.33s cubic-bezier(0.15, 1, 0.3, 1.1);
+    -webkit-transition: background 0.25s, -webkit-transform 0.375s cubic-bezier(0.15, 1, 0.3, 1.1);
+    transition: background 0.25s, transform 0.375s cubic-bezier(0.15, 1, 0.3, 1.1);
   }
 
   .shapes:hover figure:nth-child(n+9),
   .shapes:focus figure:nth-child(n+9) {
-    -webkit-transition-delay: 0.033s;
-    transition-delay: 0.033s;
+    -webkit-transition-delay: 0.0375s;
+    transition-delay: 0.0375s;
   }
 
   .shapes:hover figure:nth-child(n+13),
   .shapes:focus figure:nth-child(n+13) {
-    -webkit-transition-delay: 0.066s;
-    transition-delay: 0.066s;
+    -webkit-transition-delay: 0.075s;
+    transition-delay: 0.075s;
   }
 
   .shapes:hover figure:nth-child(n+17),
   .shapes:focus figure:nth-child(n+17) {
-    -webkit-transition-delay: 0.099s;
-    transition-delay: 0.099s;
+    -webkit-transition-delay: 0.1125s;
+    transition-delay: 0.1125s;
   }
 
   .shapes:hover figure:nth-child(n+21),
   .shapes:focus figure:nth-child(n+21) {
-    -webkit-transition-delay: 0.121s;
-    transition-delay: 0.121s;
+    -webkit-transition-delay: 0.1375s;
+    transition-delay: 0.1375s;
   }
 }
 
@@ -409,6 +410,11 @@ figure:active {
 figure.on figcaption,
 figure:active figcaption {
   color: #d3d0c9;
+}
+
+figure.disabled {
+  pointer-events: none;
+  opacity: .35;
 }
 
 figure .shape {
@@ -453,6 +459,7 @@ figure figcaption {
   font-size: 1.1em;
   overflow-x: hidden;
   font-family: monospace;
+  overflow-y: hidden;
 }
 
 @media (min-width: 800px) {
@@ -462,8 +469,9 @@ figure figcaption {
   }
 
   .clip-path:focus {
-    box-shadow: 0 0 .5rem gold;
     outline: 0;
+    box-shadow: 0 0 .5rem gold;
+    background: rgba(255, 215, 0, 0.3);
   }
 }
 
@@ -499,19 +507,19 @@ figure figcaption {
   background-size: 60%;
   background-position: center center;
   background-repeat: no-repeat;
-  -webkit-transition: opacity 0.22s, -webkit-transform 0.22s, background-size 0.22s;
-  transition: opacity 0.22s, transform 0.22s, background-size 0.22s;
+  -webkit-transition: opacity 0.25s, -webkit-transform 0.25s, background-size 0.25s;
+  transition: opacity 0.25s, transform 0.25s, background-size 0.25s;
+  -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   cursor: pointer;
 }
 
 .edit-in-codepen:hover {
   opacity: .8;
-  -webkit-transition-duration: 0.11s;
-  transition-duration: 0.11s;
+  -webkit-transition-duration: 0.125s;
+  transition-duration: 0.125s;
 }
 
 .edit-in-codepen:active {
@@ -538,23 +546,23 @@ figure figcaption {
 }
 
 .show:nth-last-of-type(1) .point.changing {
-  -webkit-animation-delay: 0.11s;
-  animation-delay: 0.11s;
+  -webkit-animation-delay: 0.125s;
+  animation-delay: 0.125s;
 }
 
 .show:nth-last-of-type(2) .point.changing {
-  -webkit-animation-delay: 0.22s;
-  animation-delay: 0.22s;
+  -webkit-animation-delay: 0.25s;
+  animation-delay: 0.25s;
 }
 
 .show:nth-last-of-type(3) .point.changing {
-  -webkit-animation-delay: 0.33s;
-  animation-delay: 0.33s;
+  -webkit-animation-delay: 0.375s;
+  animation-delay: 0.375s;
 }
 
 .show:nth-last-of-type(4) .point.changing {
-  -webkit-animation-delay: 0.44s;
-  animation-delay: 0.44s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
 
 .point {
@@ -587,8 +595,8 @@ figure figcaption {
 }
 
 .point.changing:after {
-  -webkit-animation: emph 1.1s;
-  animation: emph 1.1s;
+  -webkit-animation: emph 1.25s;
+  animation: emph 1.25s;
   -webkit-animation-delay: inherit;
   animation-delay: inherit;
 }
@@ -716,7 +724,7 @@ figure:nth-of-type(15) {
 .handle:nth-of-type(16),
 .point:nth-of-type(16),
 figure:nth-of-type(16) {
-  color: lightskyblue;
+  color: gold;
 }
 
 .handle:nth-of-type(17),
@@ -746,25 +754,25 @@ figure:nth-of-type(20) {
 .handle:nth-of-type(21),
 .point:nth-of-type(21),
 figure:nth-of-type(21) {
-  color: gold;
+  color: peru;
 }
 
 .handle:nth-of-type(22),
 .point:nth-of-type(22),
 figure:nth-of-type(22) {
-  color: blueviolet;
+  color: lightskyblue;
 }
 
 .handle:nth-of-type(23),
 .point:nth-of-type(23),
 figure:nth-of-type(23) {
-  color: peru;
+  color: lightseagreen;
 }
 
 .handle:nth-of-type(24),
 .point:nth-of-type(24),
 figure:nth-of-type(24) {
-  color: lightseagreen;
+  color: blueviolet;
 }
 
 .side {
@@ -817,8 +825,8 @@ figure:nth-of-type(24) {
     -webkit-transform: translate3d(0, -13.625rem, 0);
     -ms-transform: translate3d(0, -13.625rem, 0);
     transform: translate3d(0, -13.625rem, 0);
-    -webkit-transition: -webkit-transform 0.22s 0.11s cubic-bezier(0.15, 1, 0.3, 1.1);
-    transition: transform 0.22s 0.11s cubic-bezier(0.15, 1, 0.3, 1.1);
+    -webkit-transition: -webkit-transform 0.25s 0.125s cubic-bezier(0.15, 1, 0.3, 1.1);
+    transition: transform 0.25s 0.125s cubic-bezier(0.15, 1, 0.3, 1.1);
   }
 
   .options:before {
@@ -858,9 +866,9 @@ figure:nth-of-type(24) {
 
 h2 {
   display: inline-block;
+  -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   -webkit-box-flex: 4rem;
   -webkit-flex: 4rem auto;
@@ -886,8 +894,7 @@ h2:first-child {
 }
 
 .side > h2 {
-  font-size: 1.4rem;
-  padding: .75rem 1rem .25rem .5rem;
+  padding: .75rem 1rem .25rem 1rem;
 }
 
 input[type="radio"],
@@ -898,21 +905,23 @@ input[type="checkbox"] {
 label,
 input[type="number"],
 input[type="url"] {
+  display: inline-block;
   position: relative;
   text-align: center;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  min-width: 2rem;
+  min-width: 4rem;
   padding: .5rem .25rem;
+  border-radius: 2rem;
   box-shadow: inset 0 0.125rem #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
   cursor: pointer;
-  -webkit-transition: background 0.22s;
-  transition: background 0.22s;
+  -webkit-transition: background 0.25s;
+  transition: background 0.25s;
+  -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
@@ -929,11 +938,8 @@ input[type="url"]:hover {
 }
 
 label[for="webkit"]:before,
-label[for="ms"]:before,
 input[type="number"][for="webkit"]:before,
-input[type="number"][for="ms"]:before,
-input[type="url"][for="webkit"]:before,
-input[type="url"][for="ms"]:before {
+input[type="url"][for="webkit"]:before {
   content: "-";
   font-family: monospace;
   vertical-align: top;
@@ -942,15 +948,25 @@ input[type="url"][for="ms"]:before {
 label:first-of-type,
 input[type="number"]:first-of-type,
 input[type="url"]:first-of-type {
-  min-width: 4rem;
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
-  box-shadow: inset 0.125rem 0 #d3d0c9, inset 0 0.125rem #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
+  box-shadow: inset 0 0.125rem #d3d0c9, inset 0.125rem 0 #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
 }
 
-label:last-of-type,
-input[type="number"]:last-of-type,
-input[type="url"]:last-of-type {
+label.joined,
+input[type="number"].joined,
+input[type="url"].joined {
+  border-radius: 0;
+}
+
+label.joined:first-of-type,
+input[type="number"].joined:first-of-type,
+input[type="url"].joined:first-of-type {
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+
+label.joined:last-of-type,
+input[type="number"].joined:last-of-type,
+input[type="url"].joined:last-of-type {
   border-top-right-radius: 2rem;
   border-bottom-right-radius: 2rem;
 }
@@ -971,11 +987,32 @@ input[type="url"][type="url"]:focus {
   box-shadow: inset 0 0 0 0.125rem #100a09, 0 0 0 0.125rem #100a09;
 }
 
+input:checked + label:hover,
+label[type="number"]:focus:hover,
+label[type="url"]:focus:hover,
+input:checked + input[type="number"]:hover,
+input[type="number"][type="number"]:focus:hover,
+input[type="number"][type="url"]:focus:hover,
+input:checked + input[type="url"]:hover,
+input[type="url"][type="number"]:focus:hover,
+input[type="url"][type="url"]:focus:hover {
+  opacity: .8;
+}
+
+input[type="url"] {
+  display: block;
+  line-height: 40px;
+  height: 40px;
+  box-shadow: inset 0 0.125rem #d3d0c9, inset 0.125rem 0 #d3d0c9, inset -0.125rem 0 #d3d0c9, inset 0 -0.125rem #d3d0c9;
+}
+
 input[type="number"] {
   font-family: inherit;
   font-size: 1.1rem;
   border-radius: 2rem;
   box-shadow: inset 0 0 0 0.125rem #d3d0c9;
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -1005,11 +1042,22 @@ input[type="number"]:invalid {
   height: auto;
   outline: .25rem solid white;
   margin: .125rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
 }
 
-.backgrounds img.selected {
-  -webkit-animation: selected .4s both;
-  animation: selected .4s both;
+.backgrounds img:hover {
+  opacity: .9;
+}
+
+.backgrounds img:active {
+  opacity: .5;
+  -webkit-transition: 0;
+  transition: 0;
 }
 
 .backgrounds + input {
@@ -1035,9 +1083,73 @@ input[type="number"]:invalid {
   }
 }
 
+.no-support-message {
+  display: none;
+}
+
+.no-support .no-support-message {
+  display: block;
+}
+
+.cite.panel .twitter {
+  margin: .75rem 0 .5rem .5rem;
+}
+
+.cite.panel p {
+  font-size: .95rem;
+}
+
+.cite.panel a {
+  text-decoration: none;
+  font-weight: 500;
+  color: inherit;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.cite.panel:hover a {
+  color: #0b7fda;
+}
+
+.cite.panel:hover a:hover {
+  text-decoration: underline;
+}
+
+.warning.panel {
+  background: tomato;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.warning.panel:active {
+  background: tomato;
+}
+
+.warning.panel h1 {
+  font-weight: 300;
+  font-size: 2.5rem;
+  padding: 0 .5rem;
+}
+
+.warning.panel h1:before {
+  font: .7em Browsers;
+  content: "\e609";
+  padding-right: .5em;
+}
+
+.warning.panel + .browser-support {
+  background: rgba(255, 255, 255, 0.7);
+}
+
 .browser-support {
   color: inherit;
   text-decoration: none;
+}
+
+.no-support .browser-support.permanent {
+  display: none;
 }
 
 .browser-support h2 {
@@ -1049,11 +1161,12 @@ input[type="number"]:invalid {
 }
 
 .browser-support small {
-  text-align: right;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  text-align: right;
+  padding-left: 1em;
 }
 
 .browser-support small:before {
@@ -1065,7 +1178,8 @@ input[type="number"]:invalid {
 }
 
 .browser-support:hover small {
-  color: dodgerblue;
+  color: #0b7fda;
+  text-decoration: underline;
 }
 
 .browser-support:hover small:before {
@@ -1101,21 +1215,19 @@ input[type="number"]:invalid {
   text-align: center;
   padding: .25rem;
   color: #100a09;
-  -webkit-transition: color 0.22s, -webkit-transform 0.22s, text-shadow 0.22s;
-  transition: color 0.22s, transform 0.22s, text-shadow 0.22s;
+  -webkit-transition: color 0.25s, -webkit-transform 0.25s, text-shadow 0.25s;
+  transition: color 0.25s, transform 0.25s, text-shadow 0.25s;
+  -ms-user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  text-shadow: 0 0 0 #100a09;
 }
 
 .panel:hover .icon.unsupported {
   -webkit-transform: scale(0.9);
   -ms-transform: scale(0.9);
   transform: scale(0.9);
-  color: transparent;
-  text-shadow: 0 0 0.5em #100a09;
+  opacity: .15;
 }
 
 .icon:before {
@@ -1159,11 +1271,30 @@ input[type="number"]:invalid {
   content: "\00D7";
 }
 
+p {
+  font-size: 1.1rem;
+  line-height: 1.2;
+  padding: .5rem 0 0 .5rem;
+}
+
+p code {
+  vertical-align: baseline;
+  background: rgba(211, 208, 201, 0.2);
+}
+
 @font-face {
   font-family: "Alegreya Sans";
   font-style: normal;
   font-weight: 300;
   src: local("Alegreya Sans Light"), local("AlegreyaSans-Light"), url(http://fonts.gstatic.com/s/alegreyasans/v2/11EDm-lum6tskJMBbdy9aanUXp5W4FLE8OnWB9t-aHo.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Alegreya Sans';
+  font-style: italic;
+  font-weight: 300;
+  src: local("Alegreya Sans Light Italic"), local("AlegreyaSans-LightItalic"), url(http://fonts.gstatic.com/s/alegreyasans/v3/WfiXipsmjqRqsDBQ1bA9CjlgAWjU5_zqYf1mnuZ7Lrf3rGVtsTkPsbDajuO5ueQw.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {

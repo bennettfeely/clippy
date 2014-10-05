@@ -21,6 +21,7 @@
 
 
       <div class="demo-container">
+
         <section class="demo">
           <div id="box" class="box">
             <div class="clipboard"></div>
@@ -45,7 +46,30 @@
     </div>
 
     <div class="side">
-      <h2>Shapes</h2>
+
+      <span class="no-support-message">
+        <div class="warning browser-support grid panel">
+          <h1>No support</h1>
+
+          <p>CSS clip-path basic shapes do not work <span class="your-browser">in your browser</span>. Please try opening this page in another browser.</p>
+
+        </div>
+
+        <a href="http://caniuse.com/#search=clip-path" class="grid panel browser-support permanent">
+          <h2 class="block">Browser Support <small>caniuse.com</small></h2>
+
+          <div class="table">
+            <span class="icon chrome" data-version="24+"></span>
+            <span class="icon safari" data-version="8+"></span>
+            <span class="icon opera" data-version="15+"></span>
+            <span class="icon ie unsupported"></span>
+            <span class="icon firefox unsupported"></span>
+          </div>
+        </a>
+      </span>
+
+
+
       <section class="shapes vertical" tabindex="-1">
         <ul></ul>
       </section>
@@ -56,26 +80,21 @@
 
           <input name="prefix" value="5" type="checkbox" id="webkit" checked>
           <label for="webkit">webkit</label>
-
-          <!--
-          <input name="prefix" value="25" type="checkbox" id="ms">
-          <label for="ms">ms</label>
-          -->
         </div>
 
         <div class="grid panel flex">
           <h2>Snap</h2>
           <input name="grid" checked value="1" type="radio" id="grid-none">
-          <label for="grid-none">None</label>
+          <label class="joined" for="grid-none">None</label>
 
           <input name="grid" value="5" type="radio" id="grid-5">
-          <label for="grid-5">5<small>%</small></label>
+          <label class="joined" for="grid-5">5<small>%</small></label>
 
           <input name="grid" value="10" type="radio" id="grid-10">
-          <label for="grid-10">10<small>%</small></label>
+          <label class="joined" for="grid-10">10<small>%</small></label>
 
           <input name="grid" value="25" type="radio" id="grid-25">
-          <label for="grid-25">25<small>%</small></label>
+          <label class="joined" for="grid-25">25<small>%</small></label>
         </div>
 
         <div class="grid panel flex">
@@ -111,12 +130,30 @@
           </div>
         </a>
 
+        <div class="grid panel">
+          <h2>About Clip Paths</h2>
+
+          <p>The <code>clip-path</code> property allows you to make complex shapes in CSS by clipping an element to a basic shape (circle, ellipse, polygon, or inset), or to an SVG source. </p>
+          <p>CSS clip-path shapes can be animated or transitioned.</p>
+        </div>
+
+        <div class="grid panel cite">
+          <h2 class="block">Brought to you by Bennett Feely</h2>
+
+          <div class="twitter">
+            <a href="https://twitter.com/bennettfeely" class="twitter-follow-button" data-show-count="true">Follow @bennettfeely</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>Project is available on <a href="https://github.com/bennettfeely/Clippy">Github</a>. <br>This demo uses <a href="http://draggabilly.desandro.com/">Draggabilly</a> by <a href="http://http://desandro.com/">Dave Desandro</a>.</p>
+        </div>
       </section>
     </div>
 
 <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
 <script src="jquery.min.js"></script>
 <script src="draggabilly.min.js"></script>
+<script src="dev/jquery.browser.min.js"></script>
 <script src="dev/clip.js"></script>
 <!-- <script src="clip.min.js"></script> -->
 <!--

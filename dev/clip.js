@@ -1,16 +1,4 @@
 shape_array = {
-  "circle" : [{
-      name : "Circle",
-      radius : 50,
-      position : [50,50],
-      coords : [[100,50],[50,50]]
-  }],
-  "ellipse" : [{
-      name : "Ellipse",
-      radius : [25,40],
-      position : [50,50],
-      coords : [[50,50],[0,50],[0,50]]
-  }],
   "polygon" : [
     {
       name : "Triangle",
@@ -50,7 +38,7 @@ shape_array = {
     },
     {
       name : "Decagon",
-      coords : [[50,0],[80,10],[100,35],[100,70],[80,90],[50,100],[20,90],[0,65],[0,35],[20,10]]
+      coords : [[50,0],[80,10],[100,35],[100,70],[80,90],[50,100],[20,90],[0,70],[0,35],[20,10]]
     },
     {
       name : "Bevel",
@@ -97,6 +85,18 @@ shape_array = {
       coords : [[10,25],[35,25],[35,0],[65,0],[65,25],[90,25],[90,50],[65,50],[65,100],[35,100],[35,50],[10,50]]
     }
   ],
+  "circle" : [{
+      name : "Circle",
+      radius : 50,
+      position : [50,50],
+      coords : [[100,50],[50,50]]
+  }],
+  "ellipse" : [{
+      name : "Ellipse",
+      radius : [25,40],
+      position : [50,50],
+      coords : [[50,50],[0,50],[0,50]]
+  }],
   "inset" : [
     {
       name : "Inset",
@@ -136,27 +136,17 @@ var start = shape_array.polygon[0];
 
 $(function(){
 
+  detectSupport();
   sizes();
   init();
 
   // Reevaluates max width/height on window resize
   $(window).resize(sizes);
 
-  // Hide sidebar scroll shadow
-  $(document).scroll(function(){
-    var pos = $(this).scrollTop();
-    var bottom = $(this).height() - $side.outerHeight();
-    if(pos == bottom) {
-      $html.addClass("at-bottom");
-    } else {
-      $html.removeClass("at-bottom");
-    }
-  });
-
   // Switch grid size
   $('input[type="radio"]').change(function(){
-    var grid_x = $('input[name="grid"]:checked').val()*(width/100);
-    var grid_y = $('input[name="grid"]:checked').val()*(height/100);
+    var grid_x = $('input[name="grid"]:checked').val() * (width/100);
+    var grid_y = $('input[name="grid"]:checked').val() * (height/100);
 
     grid = [grid_x, grid_y];
 
@@ -176,12 +166,11 @@ $(function(){
     }
     */
 
-    if($("#webkit").is(':checked')) {
+    if($("#webkit").is(":checked")) {
       $(".webkit").addClass("show");
     } else {
       $(".webkit").removeClass("show");
     }
-
       scrollTop();
   });
 
@@ -193,9 +182,9 @@ $(function(){
       // This needs to be fixed for larger than mobile devices when making website responsive
 
       if($(window).width() < 800) {
-        var max_width = $(window).width() - 20;
+        var max_width = $(window).width() - 42;
       } else {
-        var max_width = $(".demo-container").width() - 20;
+        var max_width = $(".demo-container").width() - 42;
       }
 
       var min_width = 50;
@@ -208,9 +197,9 @@ $(function(){
     height = $demo_height.val();
 
       if($(window).width() < 800) {
-        var max_height = $(window).height() - $("header").outerHeight() - 36;
+        var max_height = $(window).height() - $("header").outerHeight() - 42;
       } else {
-        var max_height = $(".demo-container").height() - 20;
+        var max_height = $(".demo-container").height() - 42;
       }
 
       var min_height = 50;
@@ -230,11 +219,6 @@ $(function(){
   $(".backgrounds img").mousedown(function(){
     var url = $(this).attr("src");
 
-    $(this).addClass("selected");
-    setTimeout(function(){
-      $(".backgrounds img").removeClass("selected");
-    }, 400);
-
     setCustomBackground(url);
   });
 
@@ -249,6 +233,53 @@ $(function(){
   $codepen.click(codePen);
 });
 
+
+// Detect browser support the sinful way...
+function detectSupport() {
+  var browser = $.browser.name;
+  var version = $.browser.versionNumber;
+
+  if(browser == "chrome") {
+    if(version < 24) {
+      var browser = "Chrome";
+      noSupport(browser, version);
+    }
+  }
+
+  if(browser == "safari") {
+    if(version < 7) {
+      var browser = "Safari";
+      noSupport(browser, version);
+    }
+  }
+
+  if(browser == "opera") {
+    if(version < 15) {
+      var browser = "Opera";
+      noSupport(browser, version);
+    }
+  }
+
+  if(browser == "mozilla") {
+      var browser = "Firefox";
+      noSupport(browser, version);
+  }
+
+  if(browser == "msie") {
+      var browser = "Internet Explorer";
+      noSupport(browser, version);
+  }
+}
+
+
+
+function noSupport(browser, version) {
+  $html.addClass("no-support");
+
+  $(".your-browser").text(browser + ' ' + version);
+}
+
+
 function setCustomBackground(url) {
   var style = '.clipboard { background-image: url(' + url + '); }';
 
@@ -259,7 +290,9 @@ function setCustomBackground(url) {
 }
 
 function scrollTop() {
-  $(window).scrollTop(0);
+  if($(window).width() < 800) {
+    $(window).scrollTop(0);
+  }
 }
 
 
@@ -267,33 +300,6 @@ function init() {
   console.log("init();");
 
   type = start_type;
-
-  // Setup circles
-  $.each(shape_array.circle, function(i, shape){
-    type = "circle";
-
-    var radius = shape.radius + "%";
-    var x_pos = shape.position[0] + "%";
-    var y_pos = shape.position[1] + "%";
-
-    var clip_path = 'circle(' + radius + ' at ' + x_pos + ' ' + y_pos + ')';
-
-    appendFigure(clip_path, shape);
-  });
-
-  // Setup ellipses
-  $.each(shape_array.ellipse, function(i, shape){
-    type = "ellipse";
-
-    var radius_x = shape.radius[0] + "%";
-    var radius_y = shape.radius[1] + "%";
-    var x_pos = shape.position[0] + "%";
-    var y_pos = shape.position[1] + "%";
-
-    var clip_path = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + x_pos + ' ' + y_pos + ')';
-
-    appendFigure(clip_path, shape);
-  });
 
   // Setup polygons
   $.each(shape_array.polygon, function(i, shape){
@@ -338,11 +344,37 @@ function init() {
     appendFigure(clip_path, shape);
   });
 
+  // Setup circles
+  $.each(shape_array.circle, function(i, shape){
+    type = "circle";
+
+    var radius = shape.radius + "%";
+    var x_pos = shape.position[0] + "%";
+    var y_pos = shape.position[1] + "%";
+
+    var clip_path = 'circle(' + radius + ' at ' + x_pos + ' ' + y_pos + ')';
+
+    appendFigure(clip_path, shape);
+  });
+
+  // Setup ellipses
+  $.each(shape_array.ellipse, function(i, shape){
+    type = "ellipse";
+
+    var radius_x = shape.radius[0] + "%";
+    var radius_y = shape.radius[1] + "%";
+    var x_pos = shape.position[0] + "%";
+    var y_pos = shape.position[1] + "%";
+
+    var clip_path = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + x_pos + ' ' + y_pos + ')';
+
+    appendFigure(clip_path, shape);
+  });
+
   type = start_type;
 
   setupDemo(start_coords);
 }
-
 
 
 function appendFigure(clip_path, shape) {
@@ -350,6 +382,7 @@ function appendFigure(clip_path, shape) {
   // considering using some other element other than figure for buttons to be more semantic...
 
   console.log("appendFigure();");
+  console.log("shape.name == " + shape.name);
 
   var ms = '';
   var webkit = '';
@@ -360,20 +393,6 @@ function appendFigure(clip_path, shape) {
   }
   if($(".webkit.block").hasClass("show")) {
     var webkit = '-webkit-clip-path: ' + clip_path + ';';
-  }
-
-  if(type == "circle") {
-    var fig = '<figure data-name="Circle" data-type="circle">'
-              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
-              + '<figcaption>' + shape.name + '</figcaption>'
-            + '</figure>';
-  }
-
-  if(type == "ellipse") {
-    var fig = '<figure data-name="Ellipse" data-type="ellipse">'
-              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
-              + '<figcaption>' + shape.name + '</figcaption>'
-            + '</figure>';
   }
 
   if(type == "polygon") {
@@ -390,7 +409,22 @@ function appendFigure(clip_path, shape) {
             + '</figure>';
   }
 
+  if(type == "circle") {
+    var fig = '<figure class="disabled" data-name="Circle" data-type="circle">'
+              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<figcaption>' + shape.name + '</figcaption>'
+            + '</figure>';
+  }
+
+  if(type == "ellipse") {
+    var fig = '<figure class="disabled" data-name="Ellipse" data-type="ellipse">'
+              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<figcaption>' + shape.name + '</figcaption>'
+            + '</figure>';
+  }
+
   $shapes.append(fig);
+
 
   // Add .on class to the figure we are starting with
   $('[data-name="' + start.name + '"]').addClass("on");
