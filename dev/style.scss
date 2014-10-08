@@ -135,6 +135,7 @@ header {
 }
 
 .demo {
+  position: relative;
   padding: 0 0 1rem;
   overflow: hidden;
 }
@@ -211,6 +212,76 @@ header {
   }
 }
 
+.custom-notice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 1rem;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity $transition,
+    background $transition;
+  background: transparent;
+
+  .customizing-no-poly & { background: rgba(white, .25); }
+
+  .customizing & {
+    opacity: 1;
+  }
+
+  div {
+    width: 100%;
+    text-align: center;
+    background: rgba(255,255,255,.9);
+    padding: 1rem;
+    transition: opacity $transition;
+    opacity: 0;
+  }
+
+  .start-customizing & div { opacity: 1; }
+}
+
+.custom {
+  display: none;
+  width: 100%;
+  background: $black;
+  padding: .75rem;
+  color: white;
+
+  h2:first-child { color: $lightgray; }
+
+  .customizing & {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.finish {
+  font: inherit;
+  padding: .5rem 1rem;
+  border-radius: 5rem;
+  cursor: pointer;
+  flex: 1;
+  background: rgba(white, .25);
+  color: rgba(white, .9);
+  animation: pulse 2s ease-in-out infinite;
+
+  .customizing-no-poly & { animation: none; }
+
+  &:focus { outline: 0; }
+}
+
+
+
+
+@keyframes pulse { 50% { background: rgba(white, .35); } }
+
+
 .shapes {
   position: relative;
   max-width: 100%;
@@ -275,8 +346,7 @@ header {
     border-radius: $radius;
     transition:
       background $transition,
-      transform $transition*2;;
-
+      transform $transition*2;
     -ms-user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -286,10 +356,10 @@ header {
       flex: $figure-height;
       transform-origin: top center;
 
-      &:nth-child(n+9) { transform: translateZ(0) rotateX(-22.5deg); }
-      &:nth-child(n+13) { transform: translateZ(-1.5rem) rotateX(-45deg); }
-      &:nth-child(n+17) { transform: translateZ(-4.5rem) rotateX(-67.5deg); }
-      &:nth-child(n+21) { transform: translateZ(-10rem) rotateX(-90deg); }
+      &:nth-child(n+9) { transform: translateZ(0) rotateX(-18deg); }
+      &:nth-child(n+13) { transform: translateZ(-$figure-height*0.4) rotateX(-36deg); }
+      &:nth-child(n+17) { transform: translateZ(-$figure-height*1.3) rotateX(-54deg); }
+      &:nth-child(n+21) { transform: translateZ(-$figure-height*2) rotateX(-72deg); }
 
       .shapes:hover &,
       .shapes:focus & {
@@ -298,10 +368,10 @@ header {
           background $transition,
           transform $transition*1.5 $bounce;
 
-        &:nth-child(n+9) { transition-delay: $transition*.15; }
-        &:nth-child(n+13) { transition-delay: $transition*.3; }
-        &:nth-child(n+17) { transition-delay: $transition*.45; }
-        &:nth-child(n+21) { transition-delay: $transition*.55; }
+        &:nth-child(n+9) { transition-delay: $transition*.15; transition-delay: $transition * .1; }
+        &:nth-child(n+13) { transition-delay: $transition*.3; transition-delay: $transition * .2; }
+        &:nth-child(n+17) { transition-delay: $transition*.45; transition-delay: $transition * .3; }
+        &:nth-child(n+21) { transition-delay: $transition*.55; transition-delay: $transition * .4; }
       }
     }
 
@@ -413,8 +483,7 @@ header {
     transition-duration: 0;
   }
 
-  &:focus { outline: 0;
-  }
+  &:focus { outline: 0; }
 }
 
 .block {
@@ -477,7 +546,7 @@ header {
   }
 }
 
-$colors : tomato, mediumseagreen, dodgerblue, orange, orchid, lightgray, darkturquoise, palevioletred, limegreen, khaki, coral, slateblue, indianred, gray, plum, gold, lightgreen, lightsalmon, seagreen, tomato, peru, lightskyblue, lightseagreen, blueviolet;
+$colors : tomato, mediumseagreen, dodgerblue, orange, orchid, lightgray, darkturquoise, palevioletred, limegreen, khaki, coral, slateblue, indianred, gray, plum, gold, lightgreen, lightsalmon, seagreen, peru, tomato, lightskyblue, lightseagreen, blueviolet;
 
 .handle, .point, figure {
   @for $i from 1 through 24 {
@@ -494,34 +563,34 @@ $colors : tomato, mediumseagreen, dodgerblue, orange, orchid, lightgray, darktur
     max-height: 100%;
     padding: .5rem 0 0 .125rem;
   }
+}
 
-  .panel {
-    flex: auto;
-    display: block;
-    padding: 1rem 1rem 1rem .5rem;
-    background: white;
-    border-radius: $radius;
-    box-shadow: $shadow;
-    margin: .5rem .25rem;
+.panel {
+  flex: auto;
+  display: block;
+  padding: 1rem 1rem 1rem .5rem;
+  background: white;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  margin: .5rem .25rem;
 
-    &[href]:hover {
-      box-shadow: $shadow-hover;
-    }
-
-    &:first-of-type {
-      margin-top: .25rem;
-    }
+  &[href]:hover {
+    box-shadow: $shadow-hover;
   }
 
-  .flex {
-    display: flex;
-    align-items: center;
+  &:first-of-type {
+    margin-top: .25rem;
   }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
 }
 
 
 @media (min-width: $tablet) {
-  $hide : ($figure-height * 3) - .25rem;
+  $hide : $figure-height * 3 - .125rem;
 
   .options {
     position: relative;
@@ -529,6 +598,7 @@ $colors : tomato, mediumseagreen, dodgerblue, orange, orchid, lightgray, darktur
     transform: translate3d(0, -$hide, 0);
     transition:
       transform $transition $transition/2 $bounce;
+    padding-bottom: 1rem;
 
     &:before {
       @include overflow-shadow;
@@ -592,10 +662,12 @@ input[type="checkbox"] {
 
 label, input[type="number"], input[type="url"] {
   display: inline-block;
+  font: inherit;
   position: relative;
   text-align: center;
+  background: white;
   flex: 1;
-  min-width: 4rem;
+  min-width: 2rem;
   padding: .5rem .25rem;
   border-radius: 2rem;
   box-shadow:
@@ -604,9 +676,8 @@ label, input[type="number"], input[type="url"] {
     inset 0 -.125rem $lightgray;
   cursor: pointer;
   transition: background $transition;
-
--ms-user-select: none;
--webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -659,9 +730,7 @@ label, input[type="number"], input[type="url"] {
       inset 0 0 0 .125rem $black,
       0 0 0 .125rem $black;
 
-      &:hover {
-        opacity: .8;
-      }
+      &:hover { opacity: .8; }
   }
 }
 
@@ -769,10 +838,6 @@ input[type="number"] {
 
 .warning.panel {
   background: $red;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 
   &:active { background: $red; }
 
@@ -786,10 +851,6 @@ input[type="number"] {
       content: "\e609";
       padding-right: .5em;
     }
-  }
-
-  & + .browser-support {
-    background: rgba(white, .7);;
   }
 }
 

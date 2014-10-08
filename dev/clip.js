@@ -77,13 +77,13 @@ shape_array = {
       coords : [[50,0],[63,38],[100,38],[69,59],[82,100],[50,75],[18,100],[31,59],[0,38],[37,38]]
     },
     {
-      name : "Burst",
-      coords : [[50,100],[100,0],[0,50],[100,100],[50,0],[0,100],[100,50],[0,0]]
-    },
-    {
       name : "Cross",
       coords : [[10,25],[35,25],[35,0],[65,0],[65,25],[90,25],[90,50],[65,50],[65,100],[35,100],[35,50],[10,50]]
-    }
+    },
+    /*{
+      name : "Burst",
+      coords : [[50,100],[100,0],[0,50],[100,100],[50,0],[0,100],[100,50],[0,0]]
+    },*/
   ],
   "circle" : [{
       name : "Circle",
@@ -102,9 +102,14 @@ shape_array = {
       name : "Inset",
       coords : [5,20,15,10]
     }
+  ],
+  "custom" : [
+    {
+      name : "Custom Poly",
+      coords : [[10,75],[10,25],[35,0],[100,10],[90,30],[50,30],[40,40],[40,60],[50,70],[90,70],[100,90],[35,100]]
+    }
   ]
 };
-
 
 $html = $("html");
 $body = $("body");
@@ -145,8 +150,10 @@ $(function(){
 
   // Switch grid size
   $('input[type="radio"]').change(function(){
-    var grid_x = $('input[name="grid"]:checked').val() * (width/100);
-    var grid_y = $('input[name="grid"]:checked').val() * (height/100);
+    var value = $('input[name="grid"]:checked').val();
+
+    var grid_x = value * (width/100);
+    var grid_y = value * (height/100);
 
     grid = [grid_x, grid_y];
 
@@ -158,20 +165,16 @@ $(function(){
   // Add/remove prefixes
   // Classes determine if code block is displayed
   $('input[type="checkbox"]').change(function(){
-    /*
-    if($("#ms").is(':checked')) {
-      $(".ms").addClass("show");
-    } else {
-      $(".ms").removeClass("show");
-    }
-    */
 
     if($("#webkit").is(":checked")) {
       $(".webkit").addClass("show");
+
     } else {
       $(".webkit").removeClass("show");
+
     }
-      scrollTop();
+
+    scrollTop();
   });
 
   // Resize width/height of the demo
@@ -271,14 +274,11 @@ function detectSupport() {
   }
 }
 
-
-
 function noSupport(browser, version) {
   $html.addClass("no-support");
 
   $(".your-browser").text(browser + ' ' + version);
 }
-
 
 function setCustomBackground(url) {
   var style = '.clipboard { background-image: url(' + url + '); }';
@@ -344,6 +344,35 @@ function init() {
     appendFigure(clip_path, shape);
   });
 
+  // Setup custom
+  $.each(shape_array.custom, function(i, shape){
+    paths = '';
+
+    $.each(shape.coords, function(i, coord){
+      type = "custom";
+
+      var x = coord[0] + "%";
+      var y = coord[1] + "%";
+
+      var path = 'clip-path: polygon()';
+      var coord = '';
+
+      if(i == shape.coords.length - 1) {
+
+        // last coordinate to add, omits a comma at the end
+        paths += x + ' ' + y;
+
+        var clip_path = 'polygon(' + paths + ')';
+
+        appendFigure(clip_path, shape);
+
+      } else {
+        // loops through each coordinate and adds it to a list to add
+        paths += x + ' ' + y + ', ';
+      }
+    });
+  });
+
   // Setup circles
   $.each(shape_array.circle, function(i, shape){
     type = "circle";
@@ -381,9 +410,6 @@ function appendFigure(clip_path, shape) {
   // Add all the buttons to the .shapes container
   // considering using some other element other than figure for buttons to be more semantic...
 
-  console.log("appendFigure();");
-  console.log("shape.name == " + shape.name);
-
   var ms = '';
   var webkit = '';
   var unprefixed = 'clip-path: ' + clip_path;
@@ -397,6 +423,13 @@ function appendFigure(clip_path, shape) {
 
   if(type == "polygon") {
     var fig = '<figure data-name="' + shape.name + '" data-type="polygon" data-coords="' + shape.coords.join(" ") + '">'
+              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<figcaption>' + shape.name + '</figcaption>'
+            + '</figure>';
+  }
+
+  if(type == "custom") {
+    var fig = '<figure data-name="' + shape.name + '" data-type="custom" data-coords="' + shape.coords.join(" ") + '">'
               + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
@@ -436,6 +469,22 @@ function appendFigure(clip_path, shape) {
 
     type = $(this).attr("data-type");
 
+    // localStorage.setItem("clippy_type", type);
+
+    if(type == "inset") {
+      var shape = shape_array.inset[0];
+          start_coords = shape.coords;
+
+      setupDemo(shape.coords);
+    }
+
+    if(type == "custom") {
+      console.log("customizeer");
+      console.log("type -- > " + type);
+
+      setupDemo();
+    }
+
     if(type == "circle") {
       var shape = shape_array.circle[0];
 
@@ -464,13 +513,6 @@ function appendFigure(clip_path, shape) {
         }
       });
     }
-
-    if(type == "inset") {
-      var shape = shape_array.inset[0];
-          start_coords = shape.coords;
-
-      setupDemo(shape.coords);
-    }
   });
 }
 
@@ -480,139 +522,206 @@ function setupDemo(coords) {
 
   clearDemo();
 
-  // Run through each coordinate
-  $.each(coords, function(i, coord){
-    var x = coord[0];
-    var y = coord[1];
+  if(type == "custom") {
 
-    // Add unit to % coordinates
-    var code_x = x + "%";
-    var code_y = y + "%";
+      // Prepare for customizing
+      $html.addClass("customizing start-customizing customizing-no-poly");
+      $handles.empty();
+      $functions.append('polygon(<span class="function"></span>)');
 
-    // Convert % to px coordinates
-    var x_px = Math.round((x/100) * width);
-    var y_px = Math.round((y/100) * height);
+      clipIt();
 
-    // Setup Circle demo
-    if(type == "circle") {
+      var i = 0;
+      $demo.click(function(e) {
+        i++;
 
-      // Grab preset values
-      var shape = shape_array.circle[0];
-      var radius = shape.radius; // For 1:1 ratio
+        // Get where on demo the click is
+        var offset = $(this).offset();
+        var x_px = e.pageX - offset.left - 10;
+        var y_px = e.pageY - offset.top - 10;
 
-      // Adjust radius handle to edge of circle if ratio is not 1:1
-      if(width !== height) {
-        var radius_x_px = width * getRadiusModifier();
-      } else {
-        var radius_x_px = width;
-      }
+        // Keep clicks in bounds
+        if(x_px < 0) { var x_px = 0; }
+          if(x_px > width) { var x_px = width; }
+        if(y_px < 0) { var y_px = 0; }
+          if(y_px > height) { var y_px = height; }
 
-      // Setup radius handle
-      if(i == 0) { $handles.append('<div class="radius handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
+        // Convert px to % coordinates
+        var code_x = Math.round((x_px/width) * 100) + "%";
+        var code_y = Math.round((y_px/height) * 100) + "%";
 
-      // Setup center position handle
-      if(i == 1) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>') }
+        // Add the handle
+        $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>')
 
-      var position_x = shape.position[0];
-      var position_y = shape.position[1];
+        // Add comma if not the first
+        var $functions = $(".function", $functions);
+        if(i > 1) {
+          $functions.append(', <code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>');
+        } else {
+          $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>');
+          console.log("WHA?");
+          $html.removeClass("start-customizing");
+        }
 
-      // Add % units to preset values
-      var radius = radius + "%";
-      var position_x = position_x + "%";
-      var position_y = position_y + "%";
+        if(i > 2) {
+          $html.removeClass("customizing-no-poly");
+          clipIt();
 
-      if(i == coords.length - 1) {
+          $('.finish, [data-handle="1"]').click(function(){
+            finishCustomizing();
 
-        var radius = '<code class="point radius" data-point="0">' + radius + '</code>';
-        var position = '<code class="point position" data-point="1">' + position_x + ' ' + position_y + '</code>';
+            readyDrag();
+          });
 
-        var clip_path_function = 'circle(' + radius + ' at ' + position + ')';
-        $functions.append(clip_path_function);
+        }
+      });
 
-        clipIt();
-        readyDrag();
-      }
+    } else {
+
+      // Run through each coordinate for polygons, circles, ellipses, and inset
+      $.each(coords, function(i, coord){
+        var x = coord[0];
+        var y = coord[1];
+
+        // Add unit to % coordinates
+        var code_x = x + "%";
+        var code_y = y + "%";
+
+        // Convert % to px coordinates
+        var x_px = Math.round((x/100) * width);
+        var y_px = Math.round((y/100) * height);
+
+        console.log("type: " + type);
+
+        // Setup Circle demo
+        if(type == "circle") {
+
+          // Grab preset values
+          var shape = shape_array.circle[0];
+          var radius = shape.radius; // For 1:1 ratio
+
+          // Adjust radius handle to edge of circle if ratio is not 1:1
+          if(width !== height) {
+            var radius_x_px = width * getRadiusModifier();
+          } else {
+            var radius_x_px = width;
+          }
+
+          // Setup radius handle
+          if(i == 0) { $handles.append('<div class="radius handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
+
+          // Setup center position handle
+          if(i == 1) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>') }
+
+          var position_x = shape.position[0];
+          var position_y = shape.position[1];
+
+          // Add % units to preset values
+          var radius = radius + "%";
+          var position_x = position_x + "%";
+          var position_y = position_y + "%";
+
+          if(i == coords.length - 1) {
+
+            var radius = '<code class="point radius" data-point="0">' + radius + '</code>';
+            var position = '<code class="point position" data-point="1">' + position_x + ' ' + position_y + '</code>';
+
+            var clip_path_function = 'circle(' + radius + ' at ' + position + ')';
+            $functions.append(clip_path_function);
+
+            clipIt();
+            readyDrag();
+          }
+        }
+
+        // Setup ellipse demo
+        if(type == "ellipse") {
+
+          // Grab preset values
+          var shape = shape_array.ellipse[0];
+          var position = shape.position;
+            var position_x_px = (position[0]/100) * width;
+            var position_y_px = (position[1]/100) * height;
+
+          var radius = shape.radius;
+            var radius_x_px = (1 - radius[0]/100) * width;
+            var radius_y_px = (radius[1]/2/100) * height/2;
+
+          // Setup ellipse radius handles
+          if(i == 0) { $handles.append('<div class="radius_x handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
+          if(i == 1) { $handles.append('<div class="radius_y handle" data-handle="' + i + '" style="top: ' + radius_y_px + 'px; left: ' + position_x_px + 'px;"></div>') }
+
+          // Setup center position handle
+          if(i == 2) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + position_y_px + 'px; left: ' + position_x_px + 'px;"></div>') }
+
+          // Add % units to preset values
+          var radius_x = radius[0] + "%";
+          var radius_y = radius[1] + "%";
+          var position_x = shape.position[0] + "%";
+          var position_y = shape.position[1] + "%";
+
+          if(i == coords.length - 1) {
+            var radius_x = '<code class="point radius" data-point="0">' + radius_x + '</code>';
+            var radius_y = '<code class="point radius" data-point="1">' + radius_y + '</code>';
+            var position = '<code class="point position" data-point="2">' + position_x + ' ' + position_y + '</code>';
+
+            var clip_path_function = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + position + ')';
+            $functions.append(clip_path_function);
+
+            clipIt();
+            readyDrag();
+          }
+        }
+
+        if(type == "polygon") {
+          $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>')
+
+          if(i == coords.length - 1) {
+            $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>')
+            $functions.prepend("polygon(").append(")");
+
+            clipIt();
+            readyDrag();
+          } else {
+            $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>, ');
+          }
+        }
+
+        if(type == "inset") {
+
+          if(i == coords.length - 1) {
+
+            $handles.append('<div class="handle top horizontal bar" data-handle="0"></div>');
+            $handles.append('<div class="handle right vertical bar" data-handle="1"></div>');
+            $handles.append('<div class="handle bottom horizontal bar" data-handle="2"></div>');
+            $handles.append('<div class="handle left vertical bar" data-handle="3"></div>');
+
+            $unprefixed.attr("data-coords", coords[0] + ' ' + coords[1] + ' ' + coords[2] + ' ' + coords[3]);
+
+            setHandleBars();
+
+            var top_point = '<code class="point" data-point="0">' + coords[0] + '%</code> ';
+            var right_point = '<code class="point" data-point="1">' + coords[1] + '%</code> ';
+            var bottom_point = '<code class="point" data-point="2">' + coords[2] + '%</code> ';
+            var left_point = '<code class="point" data-point="3">' + coords[3] + '%</code>';
+
+            var clip_path_function = 'inset(' + top_point + right_point + bottom_point + left_point + ')';
+            $functions.append(clip_path_function);
+
+            clipIt();
+            readyDrag();
+          }
+        }
+      });
+
     }
+}
 
-    // Setup ellipse demo
-    if(type == "ellipse") {
+function finishCustomizing() {
+  // Reset from customizing option
+  $html.removeClass("customizing start-customizing");
+  $demo.unbind("click");
 
-      // Grab preset values
-      var shape = shape_array.ellipse[0];
-      var position = shape.position;
-        var position_x_px = (position[0]/100) * width;
-        var position_y_px = (position[1]/100) * height;
-
-      var radius = shape.radius;
-        var radius_x_px = (1 - radius[0]/100) * width;
-        var radius_y_px = (radius[1]/2/100) * height/2;
-
-      // Setup ellipse radius handles
-      if(i == 0) { $handles.append('<div class="radius_x handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + radius_x_px + 'px;"></div>') }
-      if(i == 1) { $handles.append('<div class="radius_y handle" data-handle="' + i + '" style="top: ' + radius_y_px + 'px; left: ' + position_x_px + 'px;"></div>') }
-
-      // Setup center position handle
-      if(i == 2) { $handles.append('<div class="position handle" data-handle="' + i + '" style="top: ' + position_y_px + 'px; left: ' + position_x_px + 'px;"></div>') }
-
-      // Add % units to preset values
-      var radius_x = radius[0] + "%";
-      var radius_y = radius[1] + "%";
-      var position_x = shape.position[0] + "%";
-      var position_y = shape.position[1] + "%";
-
-      if(i == coords.length - 1) {
-        var radius_x = '<code class="point radius" data-point="0">' + radius_x + '</code>';
-        var radius_y = '<code class="point radius" data-point="1">' + radius_y + '</code>';
-        var position = '<code class="point position" data-point="2">' + position_x + ' ' + position_y + '</code>';
-
-        var clip_path_function = 'ellipse(' + radius_x + ' ' + radius_y + ' at ' + position + ')';
-        $functions.append(clip_path_function);
-
-        clipIt();
-        readyDrag();
-      }
-    }
-
-    if(type == "polygon") {
-      $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>')
-
-      if(i == coords.length - 1) {
-        $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>')
-        $functions.prepend("polygon(").append(")");
-
-        clipIt();
-        readyDrag();
-      } else {
-        $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>, ');
-      }
-    }
-
-    if(type == "inset") {
-
-      if(i == coords.length - 1) {
-
-        $handles.append('<div class="handle top horizontal bar" data-handle="0"></div>');
-        $handles.append('<div class="handle right vertical bar" data-handle="1"></div>');
-        $handles.append('<div class="handle bottom horizontal bar" data-handle="2"></div>');
-        $handles.append('<div class="handle left vertical bar" data-handle="3"></div>');
-
-        $unprefixed.attr("data-coords", coords[0] + ' ' + coords[1] + ' ' + coords[2] + ' ' + coords[3]);
-
-        setHandleBars();
-
-        var top_point = '<code class="point" data-point="0">' + coords[0] + '%</code> ';
-        var right_point = '<code class="point" data-point="1">' + coords[1] + '%</code> ';
-        var bottom_point = '<code class="point" data-point="2">' + coords[2] + '%</code> ';
-        var left_point = '<code class="point" data-point="3">' + coords[3] + '%</code>';
-
-        var clip_path_function = 'inset(' + top_point + right_point + bottom_point + left_point + ')';
-        $functions.append(clip_path_function);
-
-        clipIt();
-        readyDrag();
-      }
-    }
-  });
 }
 
 
@@ -676,7 +785,7 @@ function readyDrag() {
   var $functions = $(".functions");
 
   // If we have a circle, ellipse, or polygon setup draggibilly normally
-  if(type == "circle" || type == "polygon") {
+  if(type == "circle" || type == "polygon" || type == "custom") {
 
     // We have already appended handles, now we will attach draggabilly to each of them
     for ( var i = 0, len = handles.length; i < len; i++ ) {
@@ -770,7 +879,7 @@ function readyDrag() {
         }
 
         // Dragging a polygon handle, easy...
-        if(type == "polygon") {
+        if(type == "polygon" || type == "custom") {
           setPoint(x, y);
         }
 
@@ -1020,19 +1129,6 @@ function setPoint(x, y) {
   if(x !== 0) { var x = x + "%"; }
   if(y !== 0) { var y = y + "%"; }
 
-  /*
-  //Use keywords if possible
-  if(type == "circle") {
-    if(y == 0) { var y = "top"; }
-    if(y == "50%") { var y = "center"; }
-    if(y == "100%") { var y = "bottom"; }
-
-    if(x == 0) { var x = "left"; }
-    if(x == "50%") { var x = "center"; }
-    if(x == "100%") { var x = "right"; }
-  }
-  */
-
   $point.text(x + ' ' + y);
 }
 
@@ -1048,6 +1144,8 @@ function clearDemo() {
 // Get the code in the code blocks and set the style inline on the clipboard
 function clipIt() {
   var clip_path = $(".show.block").text();
+
+  console.log(clip_path);
 
   $clipboard.attr('style', clip_path);
 }
