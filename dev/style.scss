@@ -7,7 +7,6 @@
   border: 0;
 }
 
-
 header, section, main, figure { display: block; }
 
 $red : #ff6347;
@@ -138,6 +137,10 @@ header {
   position: relative;
   padding: 0 0 1rem;
   overflow: hidden;
+
+  .customizing & {
+    cursor: crosshair;
+  }
 }
 
 .box {
@@ -174,11 +177,36 @@ header {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  cursor: grab;
   box-shadow: inset 0 0 0 10px;
   opacity: .8;
   transition:
     opacity $transition;
+  cursor: grab;
+
+  .customizing & { cursor: crosshair; }
+  .customizing:not(.customizing-no-poly) & {
+    &[data-handle="1"] {
+      cursor: pointer;
+
+      &:hover {
+        border-radius: $radius;
+        color: black;
+
+        &:before {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          content: "";
+          -webkit-clip-path: polygon(67% 30%, 43% 54%, 33% 42%, 24% 51%, 44% 72%, 76% 39%);
+          clip-path: polygon(67% 30%, 43% 54%, 33% 42%, 24% 51%, 44% 72%, 76% 39%);
+          background: $lightgray;
+        }
+      }
+    }
+  }
 
   &:after { // expand target area of handle
     display: block;
@@ -224,62 +252,91 @@ header {
   pointer-events: none;
   opacity: 0;
   transition:
-    opacity $transition,
     background $transition;
-  background: transparent;
+  background: rgba(white, 0);
 
-  .customizing-no-poly & { background: rgba(white, .25); }
-
-  .customizing & {
-    opacity: 1;
-  }
+  // .customizing-no-poly & { background: rgba(white, .5); }
+  .customizing & { opacity: 1; }
 
   div {
     width: 100%;
     text-align: center;
     background: rgba(255,255,255,.9);
     padding: 1rem;
+    margin: 0 2rem;
     transition: opacity $transition;
+    border-radius: $radius;
+    box-shadow: $shadow;
     opacity: 0;
   }
 
-  .start-customizing & div { opacity: 1; }
+  .start-customizing & div {
+    opacity: 1;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+.touchy {
+  &:after {
+    content: "Tap";
+
+    @media (min-width: $tablet) { content: "Click"; }
+  }
 }
 
 .custom {
   display: none;
-  width: 100%;
   background: $black;
   padding: .75rem;
   color: white;
+  align-items: center;
 
   h2:first-child { color: $lightgray; }
+}
 
-  .customizing & {
-    display: flex;
-    align-items: center;
+.customizing {
+  @media (max-width: $tablet) {
+    .main .custom {
+      display: flex;
+    }
+  }
+
+  @media (min-width: $tablet) {
+    .side .custom {
+      display: flex;
+      box-shadow: $shadow;
+      border-radius: $radius;
+      margin: .25rem;
+    }
   }
 }
 
 .finish {
   font: inherit;
-  padding: .5rem 1rem;
+  padding: .5rem;
   border-radius: 5rem;
   cursor: pointer;
   flex: 1;
-  background: rgba(white, .25);
+  background: rgba(white, .4);
   color: rgba(white, .9);
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse 1.5s ease-in-out infinite;
 
-  .customizing-no-poly & { animation: none; }
+  &:hover {
+    color: white;
+    background: rgba(white, .5);
+  }
+
+  &:after { content: "Finish " attr(data-shape); }
+
+  .customizing-no-poly & {
+    animation: none;
+
+    &:after { content: "Close editor"; }
+  }
 
   &:focus { outline: 0; }
 }
-
-
-
-
-@keyframes pulse { 50% { background: rgba(white, .35); } }
+  @keyframes pulse { 50% { opacity: .8; } }
 
 
 .shapes {
@@ -389,9 +446,14 @@ header {
       }
     }
 
+    @media (max-width: $tablet) {
+      &[data-type="custom"] { width: $figure-height * 1.25; }
+    }
+
     &.disabled {
       pointer-events: none;
       opacity: .35;
+      flex: .75;
     }
 
   .shape {
@@ -453,6 +515,8 @@ header {
 
   @media (min-width: $tablet) {
     margin-right: .5vw;
+    max-height: 160px;
+    overflow-y: auto;
   }
 }
 
@@ -507,6 +571,9 @@ header {
   display: inline-block;
   position: relative;
   vertical-align: baseline;
+  transition: opacity $transition * 2 $transition;
+
+  .customizing-no-poly & { opacity: .4; }
 
   &:after {
     $size : 80px;
@@ -546,7 +613,7 @@ header {
   }
 }
 
-$colors : tomato, mediumseagreen, dodgerblue, orange, orchid, lightgray, darkturquoise, palevioletred, limegreen, khaki, coral, slateblue, indianred, gray, plum, gold, lightgreen, lightsalmon, seagreen, peru, tomato, lightskyblue, lightseagreen, blueviolet;
+$colors : tomato, mediumseagreen, dodgerblue, orange, orchid, lightgray, darkturquoise, palevioletred, limegreen, khaki, coral, slateblue, indianred, gray, plum, gold, lightgreen, lightsalmon, peru, seagreen, tomato, lightskyblue, lightseagreen, blueviolet;
 
 .handle, .point, figure {
   @for $i from 1 through 24 {
@@ -598,7 +665,6 @@ $colors : tomato, mediumseagreen, dodgerblue, orange, orchid, lightgray, darktur
     transform: translate3d(0, -$hide, 0);
     transition:
       transform $transition $transition/2 $bounce;
-    padding-bottom: 1rem;
 
     &:before {
       @include overflow-shadow;
@@ -985,4 +1051,3 @@ p {
   font-weight: normal;
   font-style: normal;
 }
-

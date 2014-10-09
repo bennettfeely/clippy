@@ -160,6 +160,10 @@ header iframe {
   overflow: hidden;
 }
 
+.customizing .demo {
+  cursor: crosshair;
+}
+
 .box {
   position: relative;
   box-shadow: inset 0 0 0 10px #fbfcf7, inset 0 0 0 11px #d3d0c9;
@@ -192,13 +196,39 @@ header iframe {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab;
   box-shadow: inset 0 0 0 10px;
   opacity: .8;
   -webkit-transition: opacity 0.25s;
   transition: opacity 0.25s;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+
+.customizing .handle {
+  cursor: crosshair;
+}
+
+.customizing:not(.customizing-no-poly) .handle[data-handle="1"] {
+  cursor: pointer;
+}
+
+.customizing:not(.customizing-no-poly) .handle[data-handle="1"]:hover {
+  border-radius: 2px;
+  color: black;
+}
+
+.customizing:not(.customizing-no-poly) .handle[data-handle="1"]:hover:before {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  -webkit-clip-path: polygon(67% 30%, 43% 54%, 33% 42%, 24% 51%, 44% 72%, 76% 39%);
+  clip-path: polygon(67% 30%, 43% 54%, 33% 42%, 24% 51%, 44% 72%, 76% 39%);
+  background: #d3d0c9;
 }
 
 .handle:after {
@@ -254,13 +284,9 @@ header iframe {
   bottom: 1rem;
   pointer-events: none;
   opacity: 0;
-  -webkit-transition: opacity 0.25s, background 0.25s;
-  transition: opacity 0.25s, background 0.25s;
-  background: transparent;
-}
-
-.customizing-no-poly .custom-notice {
-  background: rgba(255, 255, 255, 0.25);
+  -webkit-transition: background 0.25s;
+  transition: background 0.25s;
+  background: rgba(255, 255, 255, 0);
 }
 
 .customizing .custom-notice {
@@ -272,56 +298,97 @@ header iframe {
   text-align: center;
   background: rgba(255, 255, 255, 0.9);
   padding: 1rem;
+  margin: 0 2rem;
   -webkit-transition: opacity 0.25s;
   transition: opacity 0.25s;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(16, 10, 9, 0.15);
   opacity: 0;
 }
 
 .start-customizing .custom-notice div {
   opacity: 1;
+  -webkit-animation: pulse 1.5s ease-in-out infinite;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.touchy:after {
+  content: "Tap";
+}
+
+@media (min-width: 800px) {
+  .touchy:after {
+    content: "Click";
+  }
 }
 
 .custom {
   display: none;
-  width: 100%;
   background: #100a09;
   padding: .75rem;
   color: white;
-}
-
-.custom h2:first-child {
-  color: #d3d0c9;
-}
-
-.customizing .custom {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
 }
 
+.custom h2:first-child {
+  color: #d3d0c9;
+}
+
+@media (max-width: 800px) {
+  .customizing .main .custom {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (min-width: 800px) {
+  .customizing .side .custom {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-shadow: 0 1px 2px rgba(16, 10, 9, 0.15);
+    border-radius: 2px;
+    margin: .25rem;
+  }
+}
+
 .finish {
   font: inherit;
-  padding: .5rem 1rem;
+  padding: .5rem;
   border-radius: 5rem;
   cursor: pointer;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 0.9);
-  -webkit-animation: pulse 2s ease-in-out infinite;
-  animation: pulse 2s ease-in-out infinite;
+  -webkit-animation: pulse 1.5s ease-in-out infinite;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.finish:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.finish:after {
+  content: "Finish " attr(data-shape);
 }
 
 .customizing-no-poly .finish {
   -webkit-animation: none;
   animation: none;
+}
+
+.customizing-no-poly .finish:after {
+  content: "Close editor";
 }
 
 .finish:focus {
@@ -330,13 +397,13 @@ header iframe {
 
 @-webkit-keyframes pulse {
   50% {
-    background: rgba(255, 255, 255, 0.35);
+    opacity: .8;
   }
 }
 
 @keyframes pulse {
   50% {
-    background: rgba(255, 255, 255, 0.35);
+    opacity: .8;
   }
 }
 
@@ -523,9 +590,19 @@ figure:active figcaption {
   color: #d3d0c9;
 }
 
+@media (max-width: 800px) {
+  figure[data-type="custom"] {
+    width: 5.78125rem;
+  }
+}
+
 figure.disabled {
   pointer-events: none;
   opacity: .35;
+  -webkit-box-flex: .75;
+  -webkit-flex: .75;
+  -ms-flex: .75;
+  flex: .75;
 }
 
 figure .shape {
@@ -609,6 +686,8 @@ figure figcaption {
 @media (min-width: 800px) {
   .css-code {
     margin-right: .5vw;
+    max-height: 160px;
+    overflow-y: auto;
   }
 }
 
@@ -680,6 +759,12 @@ figure figcaption {
   display: inline-block;
   position: relative;
   vertical-align: baseline;
+  -webkit-transition: opacity 0.5s 0.25s;
+  transition: opacity 0.5s 0.25s;
+}
+
+.customizing-no-poly .point {
+  opacity: .4;
 }
 
 .point:after {
@@ -853,13 +938,13 @@ figure:nth-of-type(18) {
 .handle:nth-of-type(19),
 .point:nth-of-type(19),
 figure:nth-of-type(19) {
-  color: seagreen;
+  color: peru;
 }
 
 .handle:nth-of-type(20),
 .point:nth-of-type(20),
 figure:nth-of-type(20) {
-  color: peru;
+  color: seagreen;
 }
 
 .handle:nth-of-type(21),
@@ -938,7 +1023,6 @@ figure:nth-of-type(24) {
     transform: translate3d(0, -13.75rem, 0);
     -webkit-transition: -webkit-transform 0.25s 0.125s cubic-bezier(0.15, 1, 0.3, 1.1);
     transition: transform 0.25s 0.125s cubic-bezier(0.15, 1, 0.3, 1.1);
-    padding-bottom: 1rem;
   }
 
   .options:before {

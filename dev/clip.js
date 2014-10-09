@@ -13,10 +13,6 @@ shape_array = {
       coords : [[50,0],[100,50],[50,100],[0,50]]
     },
     {
-      name : "Parallelogram",
-      coords : [[0,25],[100,0],[100,75],[0,100]]
-    },
-    {
       name : "Pentagon",
       coords : [[50,0],[100,33],[83.5,100],[16.5,100],[0,33]]
     },
@@ -105,7 +101,7 @@ shape_array = {
   ],
   "custom" : [
     {
-      name : "Custom Poly",
+      name : "Custom Polygon",
       coords : [[10,75],[10,25],[35,0],[100,10],[90,30],[50,30],[40,40],[40,60],[50,70],[90,70],[100,90],[35,100]]
     }
   ]
@@ -159,6 +155,8 @@ $(function(){
 
     scrollTop();
 
+    finishCustomizing();
+
     setupDemo(start_coords);
   });
 
@@ -168,12 +166,11 @@ $(function(){
 
     if($("#webkit").is(":checked")) {
       $(".webkit").addClass("show");
-
     } else {
       $(".webkit").removeClass("show");
-
     }
 
+    finishCustomizing();
     scrollTop();
   });
 
@@ -190,7 +187,7 @@ $(function(){
         var max_width = $(".demo-container").width() - 42;
       }
 
-      var min_width = 50;
+      var min_width = 100;
 
       if(width > max_width) { width = max_width; }
       if(width < min_width) { width = min_width; }
@@ -205,7 +202,7 @@ $(function(){
         var max_height = $(".demo-container").height() - 42;
       }
 
-      var min_height = 50;
+      var min_height = 100;
 
       if(height > max_height) { height = max_height; }
       if(height < min_height) { height = min_height; }
@@ -282,7 +279,6 @@ function noSupport(browser, version) {
 
 function setCustomBackground(url) {
   var style = '.clipboard { background-image: url(' + url + '); }';
-
   $("#custom_background").html(style);
 
   // Scroll to top of page
@@ -294,7 +290,6 @@ function scrollTop() {
     $(window).scrollTop(0);
   }
 }
-
 
 function init() {
   console.log("init();");
@@ -553,23 +548,29 @@ function setupDemo(coords) {
         // Add the handle
         $handles.append('<div class="handle" data-handle="' + i + '" style="top: ' + y_px + 'px; left: ' + x_px + 'px;"></div>')
 
-        // Add comma if not the first
+        // Add css point and detect if comma is necessary
         var $functions = $(".function", $functions);
         if(i > 1) {
+          // comma
           $functions.append(', <code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>');
         } else {
+          // no comma
           $functions.append('<code class="point" data-point="' + i + '">' + code_x + ' ' + code_y + '</code>');
-          console.log("WHA?");
           $html.removeClass("start-customizing");
         }
 
         if(i > 2) {
+          // We have at least 3 points and a polygon
+          // Tell the person the name of the shape they made for fun
+          var shapes = ["triangle", "quadrilateral", "pentagon", "hexagon", "heptagon", "octagon", "nonagon", "decagon", "hendecagon", "dodecagon", "tridecagon", "tetradecagon", "pentadecagon", "hexadecagon", "heptadecagon", "octadecagon", "enneadecagon", "icosagon", "polygon"];
+          $(".finish").attr("data-shape", shapes[i - 3]);
+
           $html.removeClass("customizing-no-poly");
           clipIt();
 
+          // End adding new points if finish button or first handle is clicked
           $('.finish, [data-handle="1"]').click(function(){
             finishCustomizing();
-
             readyDrag();
           });
 
@@ -577,6 +578,8 @@ function setupDemo(coords) {
       });
 
     } else {
+
+      finishCustomizing();
 
       // Run through each coordinate for polygons, circles, ellipses, and inset
       $.each(coords, function(i, coord){
@@ -717,11 +720,12 @@ function setupDemo(coords) {
     }
 }
 
+
 function finishCustomizing() {
   // Reset from customizing option
-  $html.removeClass("customizing start-customizing");
+  $html.removeClass("customizing start-customizing customizing-no-poly");
+  $(".finish").removeAttr("data-shape");
   $demo.unbind("click");
-
 }
 
 
@@ -729,7 +733,6 @@ function getRadiusModifier() {
   // For putting radius handler on edge of circle
   // Formula for percentage radius is sqrt(width^2 + height^2) / sqrt(2);
   // Returns a decimal value from 0 to 1
-
   var radius_modifier = (width/2 + (Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / Math.sqrt(2))/2) / width;
 
   return radius_modifier;
@@ -773,11 +776,9 @@ function setHandleBars(bar) {
 }
 
 
-
 function readyDrag() {
   // Utilizes the awesome draggabilly.js by Dave Desandro
-  // Works real well on touch devices
-
+  // Works well on touch devices
   console.log("readyDrag();");
 
   var box = document.querySelector("#box");
@@ -802,7 +803,7 @@ function readyDrag() {
         $point = $('[data-point="' + i + '"]');
         $point.addClass("changing");
 
-        // If we are changing a circle we are working differently than with polygon
+        // If we are changing a circle we are working a little differently than with polygon
         if(type == "circle") {
 
           special = instance.element.classList[0];
@@ -1132,6 +1133,7 @@ function setPoint(x, y) {
   $point.text(x + ' ' + y);
 }
 
+
 // Reset the demo
 function clearDemo() {
   console.log("clearDemo();");
@@ -1207,11 +1209,3 @@ function codePen() {
 
   $form.submit();
 }
-
-
-
-
-
-
-
-

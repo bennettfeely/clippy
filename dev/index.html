@@ -27,15 +27,15 @@
             <div class="handles"></div>
           </div>
           <div class="custom-notice">
-            <div>Press to add points to custom shape.</div>
+            <div><span class="touchy"></span> to add points <br>to custom polygon.</div>
           </div>
         </section>
       </div>
 
 
       <section class="custom">
-          <h2>Custom shape</h2>
-          <button class="finish">Finish adding points</button>
+        <h2>Custom shape</h2>
+        <button class="finish"></button>
       </section>
 
       <section class="shapes horizontal">
@@ -76,7 +76,10 @@
         </a>
       </span>
 
-
+      <section class="custom">
+        <h2>Custom shape</h2>
+        <button class="finish"></button>
+      </section>
 
       <section class="shapes vertical" tabindex="-1">
         <ul></ul>
@@ -90,20 +93,22 @@
           <label for="webkit">webkit</label>
         </div>
 
-        <div class="grid panel flex">
-          <h2>Snap</h2>
-          <input name="grid" checked value="1" type="radio" id="grid-none">
-          <label class="joined" for="grid-none">None</label>
+        <!--
+          <div class="grid panel flex">
+            <h2>Snap</h2>
+            <input name="grid" checked value="1" type="radio" id="grid-none">
+            <label class="joined" for="grid-none">None</label>
 
-          <input name="grid" value="5" type="radio" id="grid-5">
-          <label class="joined" for="grid-5">5<small>%</small></label>
+            <input name="grid" value="5" type="radio" id="grid-5">
+            <label class="joined" for="grid-5">5<small>%</small></label>
 
-          <input name="grid" value="10" type="radio" id="grid-10">
-          <label class="joined" for="grid-10">10<small>%</small></label>
+            <input name="grid" value="10" type="radio" id="grid-10">
+            <label class="joined" for="grid-10">10<small>%</small></label>
 
-          <input name="grid" value="25" type="radio" id="grid-25">
-          <label class="joined" for="grid-25">25<small>%</small></label>
-        </div>
+            <input name="grid" value="25" type="radio" id="grid-25">
+            <label class="joined" for="grid-25">25<small>%</small></label>
+          </div>
+        -->
 
         <div class="grid panel flex">
           <h2>Demo Size</h2>
@@ -126,6 +131,13 @@
             <style id="custom_background"></style>
         </div>
 
+        <div class="grid panel">
+          <h2>About Clip Paths</h2>
+
+          <p>The <code>clip-path</code> property allows you to make complex shapes in CSS by clipping an element to a basic shape (circle, ellipse, polygon, or inset), or to an SVG source. </p>
+          <p>CSS clip-path shapes can be animated or transitioned.</p>
+        </div>
+
         <a href="http://caniuse.com/#search=clip-path" class="grid panel browser-support permanent">
           <h2>Browser Support <small>caniuse.com</small></h2>
 
@@ -137,13 +149,6 @@
             <span class="icon firefox unsupported"></span>
           </div>
         </a>
-
-        <div class="grid panel">
-          <h2>About Clip Paths</h2>
-
-          <p>The <code>clip-path</code> property allows you to make complex shapes in CSS by clipping an element to a basic shape (circle, ellipse, polygon, or inset), or to an SVG source. </p>
-          <p>CSS clip-path shapes can be animated or transitioned.</p>
-        </div>
 
         <div class="grid panel cite">
           <h2 class="block">Brought to you by Bennett Feely</h2>
