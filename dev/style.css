@@ -455,8 +455,8 @@ header iframe {
 
 ul {
   width: 100%;
-  overflow-x: auto;
   padding: .25rem;
+  overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
 }
@@ -759,12 +759,10 @@ figure figcaption {
   display: inline-block;
   position: relative;
   vertical-align: baseline;
-  -webkit-transition: opacity 0.5s 0.25s;
-  transition: opacity 0.5s 0.25s;
 }
 
 .customizing-no-poly .point {
-  opacity: .4;
+  opacity: .5;
 }
 
 .point:after {

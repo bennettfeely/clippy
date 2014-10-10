@@ -75,11 +75,7 @@ shape_array = {
     {
       name : "Cross",
       coords : [[10,25],[35,25],[35,0],[65,0],[65,25],[90,25],[90,50],[65,50],[65,100],[35,100],[35,50],[10,50]]
-    },
-    /*{
-      name : "Burst",
-      coords : [[50,100],[100,0],[0,50],[100,100],[50,0],[0,100],[100,50],[0,0]]
-    },*/
+    }
   ],
   "circle" : [{
       name : "Circle",
@@ -117,13 +113,11 @@ $shapes = $(".shapes ul");
 $functions = $(".functions");
   $clip_path = $(".clip-path");
   $unprefixed = $(".unprefixed");
+$demo = $(".demo");
+$codepen = $(".edit-in-codepen");
 
 $demo_width = $("#demo_width");
 $demo_height = $("#demo_height");
-
-$demo = $(".demo");
-
-$codepen = $(".edit-in-codepen");
 
 var start = shape_array.polygon[0];
     start_type = "polygon",
@@ -145,7 +139,7 @@ $(function(){
   $(window).resize(sizes);
 
   // Switch grid size
-  $('input[type="radio"]').change(function(){
+  /* $('input[type="radio"]').change(function(){
     var value = $('input[name="grid"]:checked').val();
 
     var grid_x = value * (width/100);
@@ -158,7 +152,7 @@ $(function(){
     finishCustomizing();
 
     setupDemo(start_coords);
-  });
+  }); */
 
   // Add/remove prefixes
   // Classes determine if code block is displayed
@@ -176,11 +170,10 @@ $(function(){
 
   // Resize width/height of the demo
   $('input[type="number"]').change(function(){
+      var old_width = width;
+      var old_height = height;
 
-    width = $demo_width.val();
-      // max width is the width of the window
-      // This needs to be fixed for larger than mobile devices when making website responsive
-
+      width = $demo_width.val();
       if($(window).width() < 800) {
         var max_width = $(window).width() - 42;
       } else {
@@ -192,9 +185,7 @@ $(function(){
       if(width > max_width) { width = max_width; }
       if(width < min_width) { width = min_width; }
 
-      $demo_width.val(width);
-
-    height = $demo_height.val();
+      height = $demo_height.val();
 
       if($(window).width() < 800) {
         var max_height = $(window).height() - $("header").outerHeight() - 42;
@@ -207,12 +198,27 @@ $(function(){
       if(height > max_height) { height = max_height; }
       if(height < min_height) { height = min_height; }
 
+      // Calculate new position for each handle
+      $(".handle").each(function(){
+        var x_pct = parseInt($(this).css("left")) / old_width;
+        var y_pct = parseInt($(this).css("top")) / old_height;
+
+        var new_x = x_pct * width + "px";
+        var new_y = y_pct * height + "px";
+
+        // Reposition each handle
+        $(this).css({
+          "left" : new_x,
+          "top" : new_y
+        });
+      });
+
+      // Resize the demo
+      $demo_width.val(width);
       $demo_height.val(height);
 
       sizes();
       scrollTop();
-
-      setupDemo(start_coords);
   });
 
   // Change clipboard background image
@@ -458,7 +464,7 @@ function appendFigure(clip_path, shape) {
   $('[data-name="' + start.name + '"]').addClass("on");
 
   // listen for clicks on the figure buttons
-  $("figure").unbind().click(function(){
+  $("figure:not(.disabled)").unbind().click(function(){
     $("figure").removeClass("on");
     $(this).addClass("on");
 
@@ -522,13 +528,14 @@ function setupDemo(coords) {
       // Prepare for customizing
       $html.addClass("customizing start-customizing customizing-no-poly");
       $handles.empty();
-      $functions.append('polygon(<span class="function"></span>)');
+      $functions.html('polygon(<span class="function"></span>)');
 
       clipIt();
 
       var i = 0;
       $demo.click(function(e) {
         i++;
+
 
         // Get where on demo the click is
         var offset = $(this).offset();
