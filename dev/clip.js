@@ -166,6 +166,7 @@ $(function(){
 
     finishCustomizing();
     scrollTop();
+    clipIt();
   });
 
   // Resize width/height of the demo
