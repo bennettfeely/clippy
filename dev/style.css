@@ -171,6 +171,7 @@ header iframe {
   touch-action: none;
 }
 
+.shadowboard,
 .clipboard {
   position: absolute;
   top: 10px;
@@ -181,6 +182,13 @@ header iframe {
   background-image: url(pics/pittsburgh.jpg);
   background-size: cover;
   background-position: center center;
+}
+
+.shadowboard {
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.375s;
+  transition: opacity 0.375s;
 }
 
 .handles {
@@ -229,6 +237,14 @@ header iframe {
   -webkit-clip-path: polygon(67% 30%, 43% 54%, 33% 42%, 24% 51%, 44% 72%, 76% 39%);
   clip-path: polygon(67% 30%, 43% 54%, 33% 42%, 24% 51%, 44% 72%, 76% 39%);
   background: #d3d0c9;
+}
+
+.customizing:not(.customizing-no-poly) .handle[data-handle="1"]:active {
+  color: #555;
+}
+
+.customizing:not(.customizing-no-poly) .handle[data-handle="1"]:active:before {
+  background: white;
 }
 
 .handle:after {
@@ -547,30 +563,32 @@ figure {
 
   .shapes:hover figure:nth-child(n+9),
   .shapes:focus figure:nth-child(n+9) {
-    -webkit-transition-delay: 0.0375s;
-    transition-delay: 0.0375s;
+    -webkit-transition-delay: 0.025s;
     transition-delay: 0.025s;
   }
 
   .shapes:hover figure:nth-child(n+13),
   .shapes:focus figure:nth-child(n+13) {
-    -webkit-transition-delay: 0.075s;
-    transition-delay: 0.075s;
+    -webkit-transition-delay: 0.05s;
     transition-delay: 0.05s;
   }
 
   .shapes:hover figure:nth-child(n+17),
   .shapes:focus figure:nth-child(n+17) {
-    -webkit-transition-delay: 0.1125s;
-    transition-delay: 0.1125s;
+    -webkit-transition-delay: 0.075s;
     transition-delay: 0.075s;
   }
 
   .shapes:hover figure:nth-child(n+21),
   .shapes:focus figure:nth-child(n+21) {
-    -webkit-transition-delay: 0.1375s;
-    transition-delay: 0.1375s;
+    -webkit-transition-delay: 0.1s;
     transition-delay: 0.1s;
+  }
+
+  .shapes:hover figure:nth-child(n+25),
+  .shapes:focus figure:nth-child(n+25) {
+    -webkit-transition-delay: 0.125s;
+    transition-delay: 0.125s;
   }
 }
 
@@ -840,13 +858,13 @@ figure:nth-of-type(2) {
 .handle:nth-of-type(3),
 .point:nth-of-type(3),
 figure:nth-of-type(3) {
-  color: dodgerblue;
+  color: orange;
 }
 
 .handle:nth-of-type(4),
 .point:nth-of-type(4),
 figure:nth-of-type(4) {
-  color: orange;
+  color: dodgerblue;
 }
 
 .handle:nth-of-type(5),
@@ -876,13 +894,13 @@ figure:nth-of-type(8) {
 .handle:nth-of-type(9),
 .point:nth-of-type(9),
 figure:nth-of-type(9) {
-  color: limegreen;
+  color: khaki;
 }
 
 .handle:nth-of-type(10),
 .point:nth-of-type(10),
 figure:nth-of-type(10) {
-  color: khaki;
+  color: limegreen;
 }
 
 .handle:nth-of-type(11),
@@ -918,7 +936,7 @@ figure:nth-of-type(15) {
 .handle:nth-of-type(16),
 .point:nth-of-type(16),
 figure:nth-of-type(16) {
-  color: gold;
+  color: olivedrab;
 }
 
 .handle:nth-of-type(17),
@@ -936,25 +954,25 @@ figure:nth-of-type(18) {
 .handle:nth-of-type(19),
 .point:nth-of-type(19),
 figure:nth-of-type(19) {
-  color: peru;
+  color: gold;
 }
 
 .handle:nth-of-type(20),
 .point:nth-of-type(20),
 figure:nth-of-type(20) {
-  color: seagreen;
+  color: peru;
 }
 
 .handle:nth-of-type(21),
 .point:nth-of-type(21),
 figure:nth-of-type(21) {
-  color: tomato;
+  color: royalblue;
 }
 
 .handle:nth-of-type(22),
 .point:nth-of-type(22),
 figure:nth-of-type(22) {
-  color: lightskyblue;
+  color: sandybrown;
 }
 
 .handle:nth-of-type(23),
@@ -967,6 +985,24 @@ figure:nth-of-type(23) {
 .point:nth-of-type(24),
 figure:nth-of-type(24) {
   color: blueviolet;
+}
+
+.handle:nth-of-type(25),
+.point:nth-of-type(25),
+figure:nth-of-type(25) {
+  color: tomato;
+}
+
+.handle:nth-of-type(26),
+.point:nth-of-type(26),
+figure:nth-of-type(26) {
+  color: goldenrod;
+}
+
+.handle:nth-of-type(27),
+.point:nth-of-type(27),
+figure:nth-of-type(27) {
+  color: limegreen;
 }
 
 .side {
@@ -1016,9 +1052,9 @@ figure:nth-of-type(24) {
   .options {
     position: relative;
     background: #d3d0c9;
-    -webkit-transform: translate3d(0, -13.75rem, 0);
-    -ms-transform: translate3d(0, -13.75rem, 0);
-    transform: translate3d(0, -13.75rem, 0);
+    -webkit-transform: translate3d(0, -18.375rem, 0);
+    -ms-transform: translate3d(0, -18.375rem, 0);
+    transform: translate3d(0, -18.375rem, 0);
     -webkit-transition: -webkit-transform 0.25s 0.125s cubic-bezier(0.15, 1, 0.3, 1.1);
     transition: transform 0.25s 0.125s cubic-bezier(0.15, 1, 0.3, 1.1);
   }
@@ -1084,7 +1120,7 @@ h2:first-child {
   text-align: left;
   color: #100a09;
   font-weight: 300;
-  padding: 0 1rem 0 .5rem;
+  padding: 0 1.25rem 0 .5rem;
 }
 
 .side > h2 {
@@ -1221,6 +1257,10 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"]:invalid {
   background: rgba(178, 34, 34, 0.2);
   box-shadow: inset 0 0 0 0.125rem rgba(178, 34, 34, 0.5);
+}
+
+.shadowboard-toggle {
+  margin-top: 1rem;
 }
 
 .backgrounds {

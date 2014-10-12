@@ -9,6 +9,10 @@ shape_array = {
       coords : [[20,0],[80,0],[100,100],[0,100]]
     },
     {
+      name : "Parallelogram",
+      coords : [[25,0],[100,0],[75,100],[0,100]]
+    },
+    {
       name : "Rhombus",
       coords : [[50,0],[100,50],[50,100],[0,50]]
     },
@@ -75,6 +79,18 @@ shape_array = {
     {
       name : "Cross",
       coords : [[10,25],[35,25],[35,0],[65,0],[65,25],[90,25],[90,50],[65,50],[65,100],[35,100],[35,50],[10,50]]
+    },
+    {
+      name : "Message",
+      coords : [[0,0],[100,0],[100,75],[75,75],[75,100],[50,75],[0,75]]
+    },
+    {
+      name : "Close",
+      coords : [[20,0],[0,20],[30,50],[0,80],[20,100],[50,70],[80,100],[100,80],[70,50],[100,20],[80,0],[50,30]]
+    },
+    {
+      name : "Frame",
+      coords : [[0,0],[0,100],[25,100],[25,25],[75,25],[75,75],[25,75],[0,100],[100,100],[100,0]]
     }
   ],
   "circle" : [{
@@ -136,7 +152,13 @@ $(function(){
   init();
 
   // Reevaluates max width/height on window resize
-  $(window).resize(sizes);
+  $(window).resize(function(){
+    var old_width = width;
+    var old_height = height;
+
+    handleReposition(old_width, old_height);
+    sizes();
+  });
 
   // Switch grid size
   /* $('input[type="radio"]').change(function(){
@@ -160,13 +182,24 @@ $(function(){
 
     if($("#webkit").is(":checked")) {
       $(".webkit").addClass("show");
+      clipIt();
     } else {
       $(".webkit").removeClass("show");
     }
 
     finishCustomizing();
-    scrollTop();
     clipIt();
+    scrollTop();
+  });
+
+
+  // Turn on or off the shadowboard
+  $('input[type="radio"]').change(function(){
+    if($("#shadowboard-toggle-on").is(":checked")) {
+      $(".shadowboard").css("opacity", ".25");
+    } else {
+      $(".shadowboard").css("opacity", "0");
+    }
   });
 
   // Resize width/height of the demo
@@ -200,19 +233,7 @@ $(function(){
       if(height < min_height) { height = min_height; }
 
       // Calculate new position for each handle
-      $(".handle").each(function(){
-        var x_pct = parseInt($(this).css("left")) / old_width;
-        var y_pct = parseInt($(this).css("top")) / old_height;
-
-        var new_x = x_pct * width + "px";
-        var new_y = y_pct * height + "px";
-
-        // Reposition each handle
-        $(this).css({
-          "left" : new_x,
-          "top" : new_y
-        });
-      });
+      handleReposition(old_width, old_height);
 
       // Resize the demo
       $demo_width.val(width);
@@ -285,7 +306,7 @@ function noSupport(browser, version) {
 }
 
 function setCustomBackground(url) {
-  var style = '.clipboard { background-image: url(' + url + '); }';
+  var style = '.shadowboard, .clipboard { background-image: url(' + url + '); }';
   $("#custom_background").html(style);
 
   // Scroll to top of page
@@ -471,8 +492,6 @@ function appendFigure(clip_path, shape) {
 
     type = $(this).attr("data-type");
 
-    // localStorage.setItem("clippy_type", type);
-
     if(type == "inset") {
       var shape = shape_array.inset[0];
           start_coords = shape.coords;
@@ -481,9 +500,6 @@ function appendFigure(clip_path, shape) {
     }
 
     if(type == "custom") {
-      console.log("customizeer");
-      console.log("type -- > " + type);
-
       setupDemo();
     }
 
@@ -537,7 +553,6 @@ function setupDemo(coords) {
       $demo.click(function(e) {
         i++;
 
-
         // Get where on demo the click is
         var offset = $(this).offset();
         var x_px = e.pageX - offset.left - 10;
@@ -570,8 +585,108 @@ function setupDemo(coords) {
         if(i > 2) {
           // We have at least 3 points and a polygon
           // Tell the person the name of the shape they made for fun
-          var shapes = ["triangle", "quadrilateral", "pentagon", "hexagon", "heptagon", "octagon", "nonagon", "decagon", "hendecagon", "dodecagon", "tridecagon", "tetradecagon", "pentadecagon", "hexadecagon", "heptadecagon", "octadecagon", "enneadecagon", "icosagon", "polygon"];
+          var shapes = ["triangle",
+                        "quadrilateral",
+                        "pentagon",
+                        "hexagon",
+                        "heptagon",
+                        "octagon",
+                        "nonagon",
+                        "decagon",
+                        "hendecagon",
+                        "dodecagon",
+                        "tridecagon",
+                        "tetradecagon",
+                        "pentadecagon",
+                        "hexadecagon",
+                        "heptadecagon",
+                        "octadecagon",
+                        "nonadecagon",
+                        "icosagon",
+                        "icosagon",
+                        "icosikaihenagon",
+                        "icosikaidigon",
+                        "icosikaitrigon",
+                        "icosikaitetragon",
+                        "icosikaipentagon",
+                        "icosikaihexagon",
+                        "icosikaiheptagon",
+                        "icosikaioctagon",
+                        "icosikaienneagon",
+                        "triacontagon",
+                        "triacontakaihenagon",
+                        "triacontakaidigon",
+                        "triacontakaitrigon",
+                        "triacontakaitetragon",
+                        "triacontakaipentagon",
+                        "triacontakaihexagon",
+                        "triacontakaiheptagon",
+                        "triacontakaioctagon",
+                        "triacontakaienneagon",
+                        "tetracontagon",
+                        "tetracontakaihenagon",
+                        "tetracontakaidigon",
+                        "tetracontakaitrigon",
+                        "tetracontakaitetragon",
+                        "tetracontakaipentagon",
+                        "tetracontakaihexagon",
+                        "tetracontakaiheptagon",
+                        "tetracontakaioctagon",
+                        "tetracontakaienneagon",
+                        "pentacontagon",
+                        "pentacontakaihenagon",
+                        "pentacontakaidigon",
+                        "pentacontakaitrigon",
+                        "pentacontakaitetragon",
+                        "pentacontakaipentagon",
+                        "pentacontakaihexagon",
+                        "pentacontakaiheptagon",
+                        "pentacontakaioctagon",
+                        "pentacontakaienneagon",
+                        "hexacontagon",
+                        "hexacontakaihenagon",
+                        "hexacontakaidigon",
+                        "hexacontakaitrigon",
+                        "hexacontakaitetragon",
+                        "hexacontakaipentagon",
+                        "hexacontakaihexagon",
+                        "hexacontakaiheptagon",
+                        "hexacontakaioctagon",
+                        "hexacontakaienneagon",
+                        "heptacontagon",
+                        "heptacontakaihenagon",
+                        "heptacontakaidigon",
+                        "heptacontakaitrigon",
+                        "heptacontakaitetragon",
+                        "heptacontakaipentagon",
+                        "heptacontakaihexagon",
+                        "heptacontakaiheptagon",
+                        "heptacontakaioctagon",
+                        "heptacontakaienneagon",
+                        "octacontagon",
+                        "octacontakaihenagon",
+                        "octacontakaidigon",
+                        "octacontakaitrigon",
+                        "octacontakaitetragon",
+                        "octacontakaipentagon",
+                        "octacontakaihexagon",
+                        "octacontakaiheptagon",
+                        "octacontakaioctagon",
+                        "octacontakaienneagon",
+                        "enneacontagon",
+                        "enneacontakaihenagon",
+                        "enneacontakaidigon",
+                        "enneacontakaitrigon",
+                        "enneacontakaitetragon",
+                        "enneacontakaipentagon",
+                        "enneacontakaihexagon",
+                        "enneacontakaiheptagon",
+                        "enneacontakaioctagon",
+                        "enneacontakaienneagon",
+                        "hectogon"];
+
           $(".finish").attr("data-shape", shapes[i - 3]);
+
 
           $html.removeClass("customizing-no-poly");
           clipIt();
@@ -1159,6 +1274,24 @@ function clipIt() {
 
   $clipboard.attr('style', clip_path);
 }
+
+// If the demo area's size is changed we need to reposition each handle
+function handleReposition(old_width, old_height) {
+  $(".handle").each(function(){
+    var x_pct = parseInt($(this).css("left")) / old_width;
+    var y_pct = parseInt($(this).css("top")) / old_height;
+
+    var new_x = x_pct * width + "px";
+    var new_y = y_pct * height + "px";
+
+    // Reposition each handle
+    $(this).css({
+      "left" : new_x,
+      "top" : new_y
+    });
+  });
+}
+
 
 // Resize the demo box
 function sizes() {
