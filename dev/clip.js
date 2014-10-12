@@ -178,11 +178,10 @@ $(function(){
 
   // Add/remove prefixes
   // Classes determine if code block is displayed
-  $('input[type="checkbox"]').change(function(){
+  $("#webkit").change(function(){
 
-    if($("#webkit").is(":checked")) {
+    if($(this).is(":checked")) {
       $(".webkit").addClass("show");
-      clipIt();
     } else {
       $(".webkit").removeClass("show");
     }
@@ -193,14 +192,17 @@ $(function(){
   });
 
 
-  // Turn on or off the shadowboard
-  $('input[type="radio"]').change(function(){
-    if($("#shadowboard-toggle-on").is(":checked")) {
+  // Toggle showing background outside clip-path
+  $('#shadowboard-toggle').change(function(){
+    if($(this).is(":checked")) {
       $(".shadowboard").css("opacity", ".25");
     } else {
       $(".shadowboard").css("opacity", "0");
     }
+
+    scrollTop();
   });
+
 
   // Resize width/height of the demo
   $('input[type="number"]').change(function(){

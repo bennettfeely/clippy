@@ -479,8 +479,8 @@ ul {
 
 @media (max-width: 800px) {
   ul {
-    -webkit-animation: shapes-slide-left 0.7s 0.3s cubic-bezier(0.15, 1, 0.3, 1.1) both;
-    animation: shapes-slide-left 0.7s 0.3s cubic-bezier(0.15, 1, 0.3, 1.1) both;
+    -webkit-animation: shapes-slide-left 0.7s 0.5s cubic-bezier(0.15, 1, 0.3, 1.1) both;
+    animation: shapes-slide-left 0.7s 0.5s cubic-bezier(0.15, 1, 0.3, 1.1) both;
   }
 }
 
@@ -1167,6 +1167,18 @@ input[type="url"]:hover {
   background: #d3d0c9;
   -webkit-transition: background 0;
   transition: background 0;
+}
+
+label[for="shadowboard-toggle"]:before,
+input[type="number"][for="shadowboard-toggle"]:before,
+input[type="url"][for="shadowboard-toggle"]:before {
+  content: "Off";
+}
+
+input:checked + label[for="shadowboard-toggle"]:before,
+input:checked + input[type="number"][for="shadowboard-toggle"]:before,
+input:checked + input[type="url"][for="shadowboard-toggle"]:before {
+  content: "On";
 }
 
 label[for="webkit"]:before,

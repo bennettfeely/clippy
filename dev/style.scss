@@ -395,7 +395,7 @@ header {
     overflow-scrolling: touch;
 
     @media (max-width: $tablet) {
-      animation: shapes-slide-left .7s .3s $bounce both;
+      animation: shapes-slide-left .7s .5s $bounce both;
     }
 
     @media (min-width: $tablet) {
@@ -768,6 +768,11 @@ label, input[type="number"], input[type="url"] {
   &:hover {
     background: $lightgray;
     transition: background 0;
+  }
+
+  &[for="shadowboard-toggle"] {
+    &:before { content: "Off"; }
+    input:checked + &:before { content: "On"; }
   }
 
   &[for="webkit"] {
