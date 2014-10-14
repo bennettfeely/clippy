@@ -26,6 +26,7 @@ Clippy is a tool for generating values for shape functions for the new and cool 
 * `Done` Make a panel card with quick information about the `clip-path` property.
 * `Done` Add ability to make custom shapes
 * `Done` Add radius support for `inset` shape.
+* `Working on option to remove added point for custom `polygon()` (@razvancaliman suggestion)
 * `Working on` Fixing `circle()` shape with ratio that isn't 11
 * `Looking into` Support values out of bounds (@thebabydino suggestion)
 * `Looking into` Add HTML5 localstorage to save things.
