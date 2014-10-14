@@ -1,7 +1,7 @@
 [Clippy](http://bennettfeely.com/clippy)
 ======
 
-<img width="300" height="225" src="https://d13yacurqjgara.cloudfront.net/users/19965/screenshots/1757798/screen_shot_2014-10-08_at_4.39.02_pm.png" />
+<img width="300" height="225" style="margin-right:10px;" src="https://d13yacurqjgara.cloudfront.net/users/19965/screenshots/1757798/screen_shot_2014-10-08_at_4.39.02_pm.png" />
 <img width="300" height="225" src="https://d13yacurqjgara.cloudfront.net/users/19965/screenshots/1672225/screen_shot_2014-08-05_at_4.26.43_pm.png" />
 
 Shape up your website with CSS clip-paths!
