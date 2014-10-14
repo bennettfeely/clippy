@@ -156,6 +156,7 @@ $(function(){
   sizes();
   init();
 
+
   // Reevaluates max width/height on window resize
   $(window).resize(function(){
     var old_width = width;
@@ -164,6 +165,7 @@ $(function(){
     handleReposition(old_width, old_height);
     sizes();
   });
+
 
   // Switch grid size
   /* $('input[type="radio"]').change(function(){
@@ -180,6 +182,7 @@ $(function(){
 
     setupDemo(start_coords);
   }); */
+
 
   // Add/remove prefixes
   // Classes determine if code block is displayed
@@ -298,40 +301,37 @@ function detectSupport() {
   if(browser == "chrome") {
     var browser = "Chrome";
     if(version < 24) {
-      noSupport(browser, version);
+      $html.addClass("no-support");
     }
   }
 
   if(browser == "safari") {
     var browser = "Safari";
     if(version < 7) {
-      noSupport(browser, version);
+      $html.addClass("no-support");
     }
   }
 
   if(browser == "opera") {
     var browser = "Opera";
     if(version < 15) {
-      noSupport(browser, version);
+      $html.addClass("no-support");
     }
   }
 
   if(browser == "mozilla") {
       var browser = "Firefox";
-      noSupport(browser, version);
+      $html.addClass("no-support");
   }
 
   if(browser == "msie") {
       var browser = "Internet Explorer";
-      noSupport(browser, version);
+      $html.addClass("no-support");
   }
 
   $(".your-browser").text(browser + ' ' + version);
 }
 
-function noSupport(browser, version) {
-  $html.addClass("no-support");
-}
 
 function setCustomBackground(url) {
   var style = '.shadowboard, .clipboard { background-image: url(' + url + '); }';
@@ -341,11 +341,13 @@ function setCustomBackground(url) {
   scrollTop();
 }
 
+
 function scrollTop() {
   if($(window).width() < 800) {
     $(window).scrollTop(0);
   }
 }
+
 
 function init() {
   console.log("init();");
