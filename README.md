@@ -23,13 +23,13 @@ Clippy is a tool for generating values for shape functions for the new and cool 
 
 #### To do
 
-* `Done`: Make a panel card with quick information about the `clip-path` property.
-* `Done`: Add ability to make custom shapes
-* `Done`: Add radius support for `inset` shape.
-* `Working on`: Fixing `circle()` shape with ratio that isn't 1:1
-* `Looking into`: Support values out of bounds (@thebabydino suggestion)
-* `Looking into`: Add HTML5 localstorage to save things.
-* `Looking into`: See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions)
+* `Done` Make a panel card with quick information about the `clip-path` property.
+* `Done` Add ability to make custom shapes
+* `Done` Add radius support for `inset` shape.
+* `Working on` Fixing `circle()` shape with ratio that isn't 11
+* `Looking into` Support values out of bounds (@thebabydino suggestion)
+* `Looking into` Add HTML5 localstorage to save things.
+* `Looking into` See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions)
 
 ***
 
@@ -39,6 +39,6 @@ Clippy is a tool for generating values for shape functions for the new and cool 
 
 ***
 
-#### List of Polygon names (1-100 sides)
+#### List of names of polygons (3-100 sides)
 
-triangle, quadrilateral, pentagon, hexagon, heptagon, octagon, nonagon, decagon, hendecagon, dodecagon, tridecagon, tetradecagon, pentadecagon, hexadecagon, heptadecagon, octadecagon, nonadecagon, icosagon, icosagon, icosikaihenagon, icosikaidigon, icosikaitrigon, icosikaitetragon, icosikaipentagon, icosikaihexagon, icosikaiheptagon, icosikaioctagon, icosikaienneagon, triacontagon, triacontakaihenagon, triacontakaidigon, triacontakaitrigon, triacontakaitetragon, triacontakaipentagon, triacontakaihexagon, triacontakaiheptagon, triacontakaioctagon, triacontakaienneagon, tetracontagon, tetracontakaihenagon, tetracontakaidigon, tetracontakaitrigon, tetracontakaitetragon, tetracontakaipentagon, tetracontakaihexagon, tetracontakaiheptagon, tetracontakaioctagon, tetracontakaienneagon, pentacontagon, pentacontakaihenagon, pentacontakaidigon, pentacontakaitrigon, pentacontakaitetragon, pentacontakaipentagon, pentacontakaihexagon, pentacontakaiheptagon, pentacontakaioctagon, pentacontakaienneagon, hexacontagon, hexacontakaihenagon, hexacontakaidigon, hexacontakaitrigon, hexacontakaitetragon, hexacontakaipentagon, hexacontakaihexagon, hexacontakaiheptagon, hexacontakaioctagon, hexacontakaienneagon, heptacontagon, heptacontakaihenagon, heptacontakaidigon, heptacontakaitrigon, heptacontakaitetragon, heptacontakaipentagon, heptacontakaihexagon, heptacontakaiheptagon, heptacontakaioctagon, heptacontakaienneagon, octacontagon, octacontakaihenagon, octacontakaidigon, octacontakaitrigon, octacontakaitetragon, octacontakaipentagon, octacontakaihexagon, octacontakaiheptagon, octacontakaioctagon, octacontakaienneagon, enneacontagon, enneacontakaihenagon, enneacontakaidigon, enneacontakaitrigon, enneacontakaitetragon, enneacontakaipentagon, enneacontakaihexagon, enneacontakaiheptagon, enneacontakaioctagon, enneacontakaienneagon, hectogon
+Triangle, Quadrilateral, Pentagon, Hexagon, Heptagon, Octagon, Nonagon, Decagon, Hendecagon, Dodecagon, Tridecagon, Tetradecagon, Pentadecagon, Hexadecagon, Heptadecagon, Octadecagon, Nonadecagon, Icosagon, Icosagon, Icosikaihenagon, Icosikaidigon, Icosikaitrigon, Icosikaitetragon, Icosikaipentagon, Icosikaihexagon, Icosikaiheptagon, Icosikaioctagon, Icosikaienneagon, Triacontagon, Triacontakaihenagon, Triacontakaidigon, Triacontakaitrigon, Triacontakaitetragon, Triacontakaipentagon, Triacontakaihexagon, Triacontakaiheptagon, Triacontakaioctagon, Triacontakaienneagon, Tetracontagon, Tetracontakaihenagon, Tetracontakaidigon, Tetracontakaitrigon, Tetracontakaitetragon, Tetracontakaipentagon, Tetracontakaihexagon, Tetracontakaiheptagon, Tetracontakaioctagon, Tetracontakaienneagon, Pentacontagon, Pentacontakaihenagon, Pentacontakaidigon, Pentacontakaitrigon, Pentacontakaitetragon, Pentacontakaipentagon, Pentacontakaihexagon, Pentacontakaiheptagon, Pentacontakaioctagon, Pentacontakaienneagon, Hexacontagon, Hexacontakaihenagon, Hexacontakaidigon, Hexacontakaitrigon, Hexacontakaitetragon, Hexacontakaipentagon, Hexacontakaihexagon, Hexacontakaiheptagon, Hexacontakaioctagon, Hexacontakaienneagon, Heptacontagon, Heptacontakaihenagon, Heptacontakaidigon, Heptacontakaitrigon, Heptacontakaitetragon, Heptacontakaipentagon, Heptacontakaihexagon, Heptacontakaiheptagon, Heptacontakaioctagon, Heptacontakaienneagon, Octacontagon, Octacontakaihenagon, Octacontakaidigon, Octacontakaitrigon, Octacontakaitetragon, Octacontakaipentagon, Octacontakaihexagon, Octacontakaiheptagon, Octacontakaioctagon, Octacontakaienneagon, Enneacontagon, Enneacontakaihenagon, Enneacontakaidigon, Enneacontakaitrigon, Enneacontakaitetragon, Enneacontakaipentagon, Enneacontakaihexagon, Enneacontakaiheptagon, Enneacontakaioctagon, Enneacontakaienneagon, Hectogon
