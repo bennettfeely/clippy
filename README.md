@@ -20,11 +20,11 @@ Clippy is a tool for generating values for shape functions for the new and cool 
 
 #### To do
 
-* ✓ Make a panel card with quick information about the `clip-path` property.
-* ✓ Add ability to make custom shapes
-* ✓ Add radius support for `inset` shape.
-* Looking into: Add HTML5 localstorage to save things.
-* Looking into: See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions)
+* `Done`: Make a panel card with quick information about the `clip-path` property.
+* `Done`: Add ability to make custom shapes
+* `Done`: Add radius support for `inset` shape.
+* `Looking into`: Add HTML5 localstorage to save things.
+* `Looking into`: See how Clippy could be used with [CSS Shapes module](http://dev.w3.org/csswg/css-shapes/#basic-shape-functions)
 
 ***
 
