@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="insetting">
 <head>
   <meta charset="UTF-8">
   <title>Clippy — CSS clip-path Creator</title>
@@ -34,9 +34,17 @@
       </div>
 
 
-      <section class="custom">
+      <section class="dark-panel custom">
         <h2>Custom shape</h2>
         <button class="finish"></button>
+      </section>
+
+      <section class="dark-panel inset">
+        <div class="flex">
+          <h2>Round edges</h2>
+          <input value="5% 20% 0 10%" class="inset-round" type="text">
+        </div>
+        <p>The <code>inset()</code> shape optionally allows values similar to <code>border-radius</code> for rounded edges. This new feature may be buggy in <span class="your-browser">your browser</span>.</p>
       </section>
 
       <section class="shapes horizontal">
@@ -60,7 +68,7 @@
         <div class="warning browser-support grid panel fade-content">
           <h1>No support</h1>
 
-          <p>CSS clip-path basic shapes do not work <span class="your-browser">in your browser</span>. Please try opening this page in another browser.</p>
+          <p>Sorry but the CSS clip-path property does not support basic shapes in <span class="your-browser">your browser</span>. Please try opening this page in another browser.</p>
 
         </div>
 
@@ -77,7 +85,15 @@
         </a>
       </span>
 
-      <section class="custom">
+      <section class="dark-panel inset">
+        <div class="flex">
+          <h2>Round edges</h2>
+          <input value="5% 20% 0 10%" class="inset-round" type="text">
+        </div>
+        <p>The <code>inset()</code> shape optionally allows values similar to <code>border-radius</code> for rounded edges. This new feature may be buggy in <span class="your-browser">your browser</span>.</p>
+      </section>
+
+      <section class="dark-panel custom">
         <h2>Custom shape</h2>
         <button class="finish"></button>
       </section>

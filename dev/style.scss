@@ -38,6 +38,27 @@ $tablet : 800px;
   pointer-events: none;
 }
 
+@mixin user-select {
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@mixin user-drag {
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+}
+
+@mixin no-tap {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  tap-highlight-color: rgba(0,0,0,0);
+  touch-callout: none;
+}
+
 
 html, body {
   position: relative;
@@ -91,10 +112,7 @@ header {
     text-decoration: none;
     color: inherit;
     padding: .25rem;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+    @include user-select;
 
     &:hover { text-decoration: underline; }
   }
@@ -102,14 +120,9 @@ header {
   iframe {
     max-width: 95px;
     animation: load 1s both;
-  } // Twitter button
-}
-
-@keyframes load {
-  from {
-    opacity: 0;
   }
 }
+  @keyframes load { from { opacity: 0; } }
 
 
 .demo-container {
@@ -119,13 +132,10 @@ header {
   flex: 1;
   background: $white;
   box-shadow: $shadow;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
   position: relative;
   z-index: 100;
   padding-top: .5rem;
+  @include user-select;
 
   @media (min-width: $tablet) {
     border-radius: 0 0 $radius $radius;
@@ -298,15 +308,39 @@ header {
   }
 }
 
-.custom {
+.dark-panel {
   display: none;
   background: $black;
   padding: .75rem;
   color: white;
   align-items: center;
 
+  p {
+    color: $lightgray;
+    margin: .5rem 0;
+  }
+
   h2:first-child { color: $lightgray; }
 }
+
+
+.insetting {
+  @media (max-width: $tablet) {
+    .main .inset {
+      display: block;
+    }
+  }
+
+  @media (min-width: $tablet) {
+    .side .inset {
+      display: block;
+      box-shadow: $shadow;
+      border-radius: $radius;
+      margin: .25rem;
+    }
+  }
+}
+
 
 .customizing {
   @media (max-width: $tablet) {
@@ -325,19 +359,24 @@ header {
   }
 }
 
-.finish {
+.finish, .inset-round {
   font: inherit;
   padding: .5rem;
   border-radius: 5rem;
   cursor: pointer;
   flex: 1;
-  background: rgba(white, .4);
+  background: rgba(white, .35);
   color: rgba(white, .9);
-  animation: pulse 1.5s ease-in-out infinite;
 
   &:hover {
     color: white;
-    background: rgba(white, .5);
+    background: rgba(white, .4);
+  }
+
+  &:active {
+    animation: none;
+    background: rgba(white, .2);
+    color: rgba(white, .4);
   }
 
   &:after { content: "Finish " attr(data-shape); }
@@ -350,7 +389,32 @@ header {
 
   &:focus { outline: 0; }
 }
-  @keyframes pulse { 50% { opacity: .8; } }
+
+.inset-round {
+  font-family: monospace;
+  text-align: center;
+  cursor: text;
+  color: $lightgray;
+  background: black;
+  box-shadow: inset 0 0 0 .125rem rgba($lightgray, .5);
+  animation: glow 1.5s ease-in-out infinite;
+  opacity: .5;
+
+  &:hover {
+    background: transparent;
+    color: $lightgray;
+    animation: none;
+    opacity: .75;
+  }
+
+  &:focus {
+    color: $lightgray;
+    box-shadow: inset 0 0 0 .125rem rgba($lightgray, .5);
+    animation: none;
+    opacity: 1;
+  }
+}
+  @keyframes glow { 50% { opacity: .75; } }
 
 
 .shapes {
@@ -403,6 +467,7 @@ header {
       flex-wrap: wrap;
       padding: 0;
       perspective: 400px;
+      overflow-x: hidden;
     }
   }
 
@@ -418,10 +483,7 @@ header {
     transition:
       background $transition,
       transform $transition*2;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+    @include user-select;
 
     @media (min-width: $tablet) {
       flex: $figure-height;
@@ -431,6 +493,7 @@ header {
       &:nth-child(n+13) { transform: translateZ(-$figure-height*0.4) rotateX(-36deg); }
       &:nth-child(n+17) { transform: translateZ(-$figure-height*1.3) rotateX(-54deg); }
       &:nth-child(n+21) { transform: translateZ(-$figure-height*2) rotateX(-72deg); }
+      &:nth-child(n+25) { transform: translateZ(-$figure-height*2.5) rotateX(-85deg); }
 
       .shapes:hover &,
       .shapes:focus & {
@@ -468,8 +531,9 @@ header {
     &.disabled {
       pointer-events: none;
       opacity: .35;
-      flex: .75;
     }
+
+    &:nth-last-of-type(-n+2) { flex: .75; }
 
   .shape {
     display: inline-block;
@@ -545,11 +609,8 @@ header {
     opacity $transition,
     transform $transition,
     background-size $transition;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
   cursor: pointer;
+  @include user-select;
 
   &:hover {
     opacity: .8;
@@ -707,10 +768,6 @@ $colors : tomato, mediumseagreen, orange, dodgerblue, orchid, lightgray, darktur
 
 h2 {
   display: inline-block;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
   flex: 4rem auto;
   font-size: 1.2rem;
   font-weight: 500;
@@ -718,6 +775,7 @@ h2 {
   min-width: 1em;
   text-align: center;
   color: darken($lightgray, 10%);
+  @include user-select;
 
   &.block { display: block; }
 
@@ -756,14 +814,8 @@ label, input[type="number"], input[type="url"] {
     inset 0 -.125rem $lightgray;
   cursor: pointer;
   transition: background $transition;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  tap-highlight-color: rgba(0,0,0,0);
-  -webkit-touch-callout:none;
-  touch-callout:none;
+  @include no-tap;
+  @include user-select;
 
   &:hover {
     background: $lightgray;
@@ -816,6 +868,7 @@ label, input[type="number"], input[type="url"] {
       0 0 0 .125rem $black;
 
       &:hover { opacity: .8; }
+      &:active { opacity: 1; }
   }
 }
 
@@ -845,12 +898,6 @@ input[type="number"] {
     appearance: none;
     margin: 0;
   }
-
-  &:invalid {
-    background: rgba(firebrick, .2);
-    box-shadow:
-      inset 0 0 0 .125rem rgba(firebrick, .5);
-  }
 }
 
 .shadowboard-toggle {
@@ -871,10 +918,8 @@ input[type="number"] {
     outline: .25rem solid white;
     margin: .125rem;
     transition: $transition*2;
-    -webkit-user-drag: none;
-    -moz-user-drag: none;
-    -ms-user-drag: none;
-    user-drag: none;
+    -ms-interpolation-mode: bicubic;
+    @include user-drag;
 
     &:hover {
       opacity: .9;
@@ -908,6 +953,8 @@ input[type="number"] {
 
 
 .cite.panel {
+  @include user-select;
+
   .twitter { margin: .75rem 0 .5rem .5rem; }
 
   p { font-size: .95rem; }
@@ -994,10 +1041,7 @@ input[type="number"] {
     color $transition,
     transform $transition,
     text-shadow $transition;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+  @include user-select;
 
   .panel:hover & {
     &.unsupported {
@@ -1036,11 +1080,6 @@ p {
   font-size: 1.1rem;
   line-height: 1.2;
   padding: .5rem 0 0 .5rem;
-
-  code {
-    vertical-align: baseline;
-    background: rgba($lightgray, .2);
-  }
 }
 
 

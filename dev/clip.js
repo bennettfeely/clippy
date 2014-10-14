@@ -90,31 +90,35 @@ shape_array = {
     },
     {
       name : "Frame",
-      coords : [[0,0],[0,100],[25,100],[25,25],[75,25],[75,75],[25,75],[0,100],[100,100],[100,0]]
+      coords : [[0,0],[0,100],[25,100],[25,25],[75,25],[75,75],[25,75],[25,100],[100,100],[100,0]]
     }
   ],
   "circle" : [{
       name : "Circle",
       radius : 50,
       position : [50,50],
-      coords : [[100,50],[50,50]]
+      coords : [[100,50],[50,50]],
+      disabled : false
   }],
   "ellipse" : [{
       name : "Ellipse",
       radius : [25,40],
       position : [50,50],
-      coords : [[50,50],[0,50],[0,50]]
+      coords : [[50,50],[0,50],[0,50]],
+      disabled : false
   }],
   "inset" : [
     {
       name : "Inset",
-      coords : [5,20,15,10]
+      coords : [5,20,15,10],
+      disabled : false
     }
   ],
   "custom" : [
     {
       name : "Custom Polygon",
-      coords : [[10,75],[10,25],[35,0],[100,10],[90,30],[50,30],[40,40],[40,60],[50,70],[90,70],[100,90],[35,100]]
+      coords : [[10,75],[10,25],[35,0],[100,10],[90,30],[50,30],[40,40],[40,60],[50,70],[90,70],[100,90],[35,100]],
+      disabled : false
     }
   ]
 };
@@ -131,6 +135,7 @@ $functions = $(".functions");
   $unprefixed = $(".unprefixed");
 $demo = $(".demo");
 $codepen = $(".edit-in-codepen");
+$inset_round = $("#inset_round");
 
 $demo_width = $("#demo_width");
 $demo_height = $("#demo_height");
@@ -245,6 +250,27 @@ $(function(){
       scrollTop();
   });
 
+
+  // Change of radius value of inset shape
+  $(".inset-round").focus(function(){
+      var val = $(this).val();
+      if(val == "5% 20% 0 10%") { $(this).val(""); }
+
+      $(this).blur(function(){
+        var val = $(this).val();
+
+        if(val !== "") {
+          $(".round-value").text(' round ' + val);
+        } else {
+          $(".round-value").text("");
+          $(this).val("5% 20% 0 10%");
+        }
+
+        clipIt();
+      });
+  });
+
+
   // Change clipboard background image
   $(".backgrounds img").mousedown(function(){
     var url = $(this).attr("src");
@@ -270,22 +296,22 @@ function detectSupport() {
   var version = $.browser.versionNumber;
 
   if(browser == "chrome") {
+    var browser = "Chrome";
     if(version < 24) {
-      var browser = "Chrome";
       noSupport(browser, version);
     }
   }
 
   if(browser == "safari") {
+    var browser = "Safari";
     if(version < 7) {
-      var browser = "Safari";
       noSupport(browser, version);
     }
   }
 
   if(browser == "opera") {
+    var browser = "Opera";
     if(version < 15) {
-      var browser = "Opera";
       noSupport(browser, version);
     }
   }
@@ -299,12 +325,12 @@ function detectSupport() {
       var browser = "Internet Explorer";
       noSupport(browser, version);
   }
+
+  $(".your-browser").text(browser + ' ' + version);
 }
 
 function noSupport(browser, version) {
   $html.addClass("no-support");
-
-  $(".your-browser").text(browser + ' ' + version);
 }
 
 function setCustomBackground(url) {
@@ -439,6 +465,10 @@ function appendFigure(clip_path, shape) {
   var webkit = '';
   var unprefixed = 'clip-path: ' + clip_path;
 
+  if(shape.disabled == true) {
+    var disabled = 'class="disabled" ';
+  } else { var disabled = ""; }
+
   if($(".ms.block").hasClass("show")) {
     var ms = '-ms-clip-path: ' + clip_path + ';';
   }
@@ -447,35 +477,35 @@ function appendFigure(clip_path, shape) {
   }
 
   if(type == "polygon") {
-    var fig = '<figure data-name="' + shape.name + '" data-type="polygon" data-coords="' + shape.coords.join(" ") + '">'
+    var fig = '<figure ' + disabled + 'data-name="' + shape.name + '" data-type="polygon" data-coords="' + shape.coords.join(" ") + '">'
               + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "custom") {
-    var fig = '<figure data-name="' + shape.name + '" data-type="custom" data-coords="' + shape.coords.join(" ") + '">'
+    var fig = '<figure ' + disabled + 'data-name="' + shape.name + '" data-type="custom" data-coords="' + shape.coords.join(" ") + '">'
               + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "inset") {
-    var fig = '<figure data-name="' + shape.name + '" data-type="inset" data-coords="' + shape.coords.join(" ") + '">'
+    var fig = '<figure ' + disabled + 'data-name="' + shape.name + '" data-type="inset" data-coords="' + shape.coords.join(" ") + '">'
               + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "circle") {
-    var fig = '<figure class="disabled" data-name="Circle" data-type="circle">'
+    var fig = '<figure ' + disabled + 'data-name="Circle" data-type="circle">'
               + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "ellipse") {
-    var fig = '<figure class="disabled" data-name="Ellipse" data-type="ellipse">'
+    var fig = '<figure ' + disabled + 'data-name="Ellipse" data-type="ellipse">'
               + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
@@ -549,10 +579,17 @@ function setupDemo(coords) {
       $handles.empty();
       $functions.html('polygon(<span class="function"></span>)');
 
+      // Close customization if finish button is clicked
+      $('.finish').click(function(){
+        finishCustomizing();
+        readyDrag();
+      });
+
       clipIt();
 
       var i = 0;
       $demo.click(function(e) {
+
         i++;
 
         // Get where on demo the click is
@@ -693,8 +730,8 @@ function setupDemo(coords) {
           $html.removeClass("customizing-no-poly");
           clipIt();
 
-          // End adding new points if finish button or first handle is clicked
-          $('.finish, [data-handle="1"]').click(function(){
+          // End adding new points if first handle is clicked
+          $('[data-handle="1"]').click(function(){
             finishCustomizing();
             readyDrag();
           });
@@ -764,7 +801,6 @@ function setupDemo(coords) {
 
         // Setup ellipse demo
         if(type == "ellipse") {
-
           // Grab preset values
           var shape = shape_array.ellipse[0];
           var position = shape.position;
@@ -815,7 +851,9 @@ function setupDemo(coords) {
           }
         }
 
+
         if(type == "inset") {
+          $html.addClass("insetting");
 
           if(i == coords.length - 1) {
 
@@ -833,7 +871,7 @@ function setupDemo(coords) {
             var bottom_point = '<code class="point" data-point="2">' + coords[2] + '%</code> ';
             var left_point = '<code class="point" data-point="3">' + coords[3] + '%</code>';
 
-            var clip_path_function = 'inset(' + top_point + right_point + bottom_point + left_point + ')';
+            var clip_path_function = 'inset(' + top_point + right_point + bottom_point + left_point + '<span class="round-value"></span>)';
             $functions.append(clip_path_function);
 
             clipIt();
@@ -910,7 +948,7 @@ function readyDrag() {
   var handles = box.querySelectorAll(".handle");
   var $functions = $(".functions");
 
-  // If we have a circle, ellipse, or polygon setup draggibilly normally
+  // If we have a circle, custom, or polygon setup draggibilly normally
   if(type == "circle" || type == "polygon" || type == "custom") {
 
     // We have already appended handles, now we will attach draggabilly to each of them
@@ -1058,14 +1096,29 @@ function readyDrag() {
         start_y_px = instance.position.y;
 
         start_pos_x = $position.position().left;
+          start_pos_x_pct = (start_pos_x * 100)/width;
         start_pos_y = $position.position().top;
+          start_pos_y_pct = (start_pos_y * 100)/height;
 
         if(bar == "position") {
           start_radius_x_px = [$radius_x.position().left, $radius_x.position().top];
           start_radius_y_px = [$radius_y.position().left, $radius_y.position().top];
 
-        }
+          var radius_x_point = $('.unprefixed [data-point="0"]').text();
+              radius_x_pct = parseInt(radius_x_point.replace('%',''));
 
+          var radius_y_point = $('.unprefixed [data-point="1"]').text();
+              radius_y_pct = parseInt(radius_y_point.replace('%',''));
+
+          var position_point = $('.unprefixed [data-point="2"]').text();
+          var position_pct_array = position_point.replace('%','').split(" ");
+            var position_x_pct = parseInt(position_pct_array[0]);
+            var position_y_pct = parseInt(position_pct_array[1]);
+
+          console.log(radius_x_pct);
+          console.log(radius_y_pct);
+
+        }
 
       }).on("dragMove", function(instance, e, pointer) {
 
@@ -1078,15 +1131,17 @@ function readyDrag() {
 
         if(bar == "radius_x") {
           // Set % from center center position as absolute number
-          var x_pct = Math.floor(Math.abs(start_pos_x - x) / width*100) + "%";
+          var x_pct = Math.floor(Math.abs(start_pos_x - x) / width*100);
+          var x_pct = x_pct + "%";
 
           $point.text(x_pct);
         }
         if(bar == "radius_y") {
           // Set % from center center position as absolute number
-          var y_pct = Math.floor(Math.abs(start_pos_y - y) / height*100) + "%";
+          var y_pct = Math.floor(Math.abs(start_pos_y - y) / height*100);
+          var y_pct = y_pct + "%";
 
-          $point.text(y_pct );
+          $point.text(y_pct);
         }
 
         if(bar == "position") {
@@ -1100,12 +1155,16 @@ function readyDrag() {
           var move_radius_y_y_px = (start_radius_y_px[1] - move_y);
 
           // Prevent handle overflow
-          if(move_radius_x_x_px < 0) { var move_radius_x_x_px = 0; }
+          var alt_x_px = x - ((radius_x_pct/100) * width);
+          var alt_y_px = y + ((radius_y_pct/100) * height);
+
+          console.log("alt_x_px" + alt_x_px);
+          console.log("alt_y_px" + alt_y_px);
+
+          if(move_radius_x_x_px > width && (alt_x_px > 0)) { var move_radius_x_x_px = alt_x_px; }
           if(move_radius_x_x_px > width) { var move_radius_x_x_px = width; }
-
+          if(move_radius_y_y_px < 0 && (alt_y_px < height)) { var move_radius_y_y_px = alt_y_px; }
           if(move_radius_y_y_px < 0) { var move_radius_y_y_px = 0; }
-          if(move_radius_y_y_px > height) { var move_radius_y_y_px = height; }
-
 
           // Move the handles
           $radius_x.css({
@@ -1239,7 +1298,6 @@ function getRadius(x2, x, y2, y) {
 
 function setPoint(x, y) {
   // Changes the coordinates of a single point in the code block
-
   // Snap to the edges of demo
   // Consider using something like this instead of draggabilly's built-in grid[]
   var snap = 1;
@@ -1263,6 +1321,11 @@ function setPoint(x, y) {
 function clearDemo() {
   console.log("clearDemo();");
 
+  // Reset from inset function
+  $html.removeClass("insetting");
+  $(".inset-round").val("5% 20% 0 10%");
+
+  // Empty the demo
   $handles.empty();
   $functions.empty();
 }
