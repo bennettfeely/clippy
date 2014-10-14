@@ -1,6 +1,10 @@
 [Clippy](http://bennettfeely.com/clippy)
 ======
 
+![Large screen view of Clippy](https://d13yacurqjgara.cloudfront.net/users/19965/screenshots/1757798/screen_shot_2014-10-08_at_4.39.02_pm.png)
+
+![Small screen view of Clippy](https://d13yacurqjgara.cloudfront.net/users/19965/screenshots/1672225/screen_shot_2014-08-05_at_4.26.43_pm.png)
+
 Shape up your website with CSS clip-paths!
 
 Clippy is a tool for generating values for shape functions for the new and cool CSS clip-path property. The property accepts several basic shapes that will be able to create with Clippy and their current implementation status:
