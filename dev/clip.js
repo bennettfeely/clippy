@@ -854,6 +854,48 @@ function readyDrag() {
   var handles = box.querySelectorAll(".handle");
   var $functions = $(".functions");
 
+
+
+  // Remove handle and point option
+  if(type == "polygon" || type == "custom") {
+
+    $(".handle").html('<div class="delete-point"></div>');
+    $(".handle").mousedown(function(){
+      var count = $(".handle").length;
+
+      // If we have at least a triangle it's okay to remove a point
+      if(count > 3) {
+        var $this = $(this);
+        var point = $(this).attr("data-handle");
+
+        $this.addClass("show-delete");
+
+        $(".delete-point", $this).mousedown(function(){
+          // Get rid of the handle and point
+          $this.remove();
+          $('[data-point="' + point + '"]').remove();
+
+          // Removing the trailing commas, this is pretty hacky but it would be a lot of work to do it the right way
+          var functions_html = $(".functions").html();
+          var fixed_html = functions_html.replace("(, ", "(").replace(", , ", ", ").replace(", )", ")");
+          $(".functions").html(fixed_html);
+
+          clipIt();
+        });
+
+
+        $this.mouseup(function(){
+          setTimeout(function(){
+            $this.removeClass("show-delete");
+          }, 3000);
+        });
+      }
+
+    });
+
+  }
+
+
   // If we have a circle, custom, or polygon setup draggibilly normally
   if(type == "circle" || type == "polygon" || type == "custom") {
 
