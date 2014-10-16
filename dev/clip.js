@@ -868,6 +868,7 @@ function readyDrag() {
         var $this = $(this);
         var point = $(this).attr("data-handle");
 
+        $(".handle").removeClass("show-delete");
         $this.addClass("show-delete");
 
         $(".delete-point", $this).mousedown(function(){
@@ -882,7 +883,6 @@ function readyDrag() {
 
           clipIt();
         });
-
 
         $this.mouseup(function(){
           setTimeout(function(){
