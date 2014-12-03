@@ -98,7 +98,7 @@ shape_array = {
       radius : 50,
       position : [50,50],
       coords : [[100,50],[50,50]],
-      disabled : true
+      disabled : false
   }],
   "ellipse" : [{
       name : "Ellipse",
@@ -145,12 +145,13 @@ var start = shape_array.polygon[0];
     start_coords = start.coords,
     start_name = start.name,
 
+    mobile_px_breakpoint = 800,
     width = 280,
     height = 280,
     grid = [0,0];
 
 
-$(function(){
+$(function() {
 
   detectSupport();
   sizes();
@@ -158,7 +159,7 @@ $(function(){
 
 
   // Reevaluates max width/height on window resize
-  $(window).resize(function(){
+  $(window).resize(function() {
     var old_width = width;
     var old_height = height;
 
@@ -168,7 +169,7 @@ $(function(){
 
 
   // Switch grid size
-  /* $('input[type="radio"]').change(function(){
+  /* $('input[type="radio"]').change(function() {
     var value = $('input[name="grid"]:checked').val();
 
     var grid_x = value * (width/100);
@@ -186,7 +187,7 @@ $(function(){
 
   // Add/remove prefixes
   // Classes determine if code block is displayed
-  $("#webkit").change(function(){
+  $("#webkit").change(function() {
 
     if($(this).is(":checked")) {
       $(".webkit").addClass("show");
@@ -201,7 +202,7 @@ $(function(){
 
 
   // Toggle showing background outside clip-path
-  $('#shadowboard-toggle').change(function(){
+  $('#shadowboard-toggle').change(function() {
     if($(this).is(":checked")) {
       $(".shadowboard").css("opacity", ".25");
     } else {
@@ -213,7 +214,7 @@ $(function(){
 
 
   // Resize width/height of the demo
-  $('input[type="number"]').change(function(){
+  $('input[type="number"]').change(function() {
       var old_width = width;
       var old_height = height;
 
@@ -255,11 +256,11 @@ $(function(){
 
 
   // Change of radius value of inset shape
-  $(".inset-round").focus(function(){
+  $(".inset-round").focus(function() {
       var val = $(this).val();
       if(val == "5% 20% 0 10%") { $(this).val(""); }
 
-      $(this).blur(function(){
+      $(this).blur(function() {
         var val = $(this).val();
 
         if(val !== "") {
@@ -275,14 +276,14 @@ $(function(){
 
 
   // Change clipboard background image
-  $(".backgrounds img").mousedown(function(){
+  $(".backgrounds img").mousedown(function() {
     var url = $(this).attr("src");
 
     setCustomBackground(url);
   });
 
   // Change clipboard background to custom url
-  $("#custom_url").blur(function(){
+  $("#custom_url").blur(function() {
     var url = $(this).val();
 
     if(url !== '') { setCustomBackground(url); }
@@ -320,13 +321,13 @@ function detectSupport() {
   }
 
   if(browser == "mozilla") {
-      var browser = "Firefox";
-      $html.addClass("no-support");
+    var browser = "Firefox";
+    $html.addClass("no-support");
   }
 
   if(browser == "msie") {
-      var browser = "Internet Explorer";
-      $html.addClass("no-support");
+    var browser = "Internet Explorer";
+    $html.addClass("no-support");
   }
 
   $(".your-browser").text(browser + ' ' + version);
@@ -343,7 +344,8 @@ function setCustomBackground(url) {
 
 
 function scrollTop() {
-  if($(window).width() < 800) {
+  // Only if we are on the small screen
+  if($(window).width() < mobile_px_breakpoint) {
     $(window).scrollTop(0);
   }
 }
@@ -520,7 +522,7 @@ function appendFigure(clip_path, shape) {
   $('[data-name="' + start.name + '"]').addClass("on");
 
   // listen for clicks on the figure buttons
-  $("figure:not(.disabled)").unbind().click(function(){
+  $("figure:not(.disabled)").unbind().click(function() {
     $("figure").removeClass("on");
     $(this).addClass("on");
 
@@ -582,7 +584,7 @@ function setupDemo(coords) {
       $functions.html('polygon(<span class="function"></span>)');
 
       // Close customization if finish button is clicked
-      $('.finish').click(function(){
+      $('.finish').click(function() {
         finishCustomizing();
         readyDrag();
       });
@@ -637,7 +639,7 @@ function setupDemo(coords) {
           clipIt();
 
           // End adding new points if first handle is clicked
-          $('[data-handle="1"]').click(function(){
+          $('[data-handle="1"]').click(function() {
             finishCustomizing();
             readyDrag();
           });
@@ -860,7 +862,7 @@ function readyDrag() {
   if(type == "polygon" || type == "custom") {
 
     $(".handle").html('<div class="delete-point"></div>');
-    $(".handle").mousedown(function(){
+    $(".handle").mousedown(function() {
       var count = $(".handle").length;
 
       // If we have at least a triangle it's okay to remove a point
@@ -871,7 +873,7 @@ function readyDrag() {
         $(".handle").removeClass("show-delete");
         $this.addClass("show-delete");
 
-        $(".delete-point", $this).mousedown(function(){
+        $(".delete-point", $this).mousedown(function() {
           // Get rid of the handle and point
           $this.remove();
           $('[data-point="' + point + '"]').remove();
@@ -884,8 +886,8 @@ function readyDrag() {
           clipIt();
         });
 
-        $this.mouseup(function(){
-          setTimeout(function(){
+        $this.mouseup(function() {
+          setTimeout(function() {
             $this.removeClass("show-delete");
           }, 3000);
         });
@@ -1290,7 +1292,7 @@ function clipIt() {
 
 // If the demo area's size is changed we need to reposition each handle
 function handleReposition(old_width, old_height) {
-  $(".handle").each(function(){
+  $(".handle").each(function() {
     var x_pct = parseInt($(this).css("left")) / old_width;
     var y_pct = parseInt($(this).css("top")) / old_height;
 
