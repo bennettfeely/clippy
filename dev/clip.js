@@ -214,7 +214,11 @@ $(function() {
 
 
   // Resize width/height of the demo
+<<<<<<< HEAD
   $('input[type="number"]').change(function() {
+=======
+  $('input[type="number"]').on('input',function(){
+>>>>>>> FETCH_HEAD
       var old_width = width;
       var old_height = height;
 
