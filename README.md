@@ -23,6 +23,7 @@ Clippy is a tool for generating values for shape functions for the new and cool 
 
 #### To do
 
+* `Done` Enabled `ellipse()` shape.
 * `Done` Button to remove an added point for `polygon()` shapes (@razvancaliman suggestion)
 * `Done` Make a panel card with quick information about the `clip-path` property.
 * `Done` Add ability to make custom shapes
