@@ -98,14 +98,14 @@ shape_array = {
       radius : 50,
       position : [50,50],
       coords : [[100,50],[50,50]],
-      disabled : false
+      disabled : true
   }],
   "ellipse" : [{
       name : "Ellipse",
       radius : [25,40],
       position : [50,50],
       coords : [[50,50],[0,50],[0,50]],
-      disabled : true
+      disabled : false
   }],
   "inset" : [
     {
@@ -167,24 +167,6 @@ $(function() {
     sizes();
   });
 
-
-  // Switch grid size
-  /* $('input[type="radio"]').change(function() {
-    var value = $('input[name="grid"]:checked').val();
-
-    var grid_x = value * (width/100);
-    var grid_y = value * (height/100);
-
-    grid = [grid_x, grid_y];
-
-    scrollTop();
-
-    finishCustomizing();
-
-    setupDemo(start_coords);
-  }); */
-
-
   // Add/remove prefixes
   // Classes determine if code block is displayed
   $("#webkit").change(function() {
@@ -214,11 +196,7 @@ $(function() {
 
 
   // Resize width/height of the demo
-<<<<<<< HEAD
-  $('input[type="number"]').change(function() {
-=======
-  $('input[type="number"]').on('input',function(){
->>>>>>> FETCH_HEAD
+  $('input[type="number"]').change(function(){
       var old_width = width;
       var old_height = height;
 
@@ -469,52 +447,49 @@ function appendFigure(clip_path, shape) {
   // Add all the buttons to the .shapes container
   // considering using some other element other than figure for buttons to be more semantic...
 
-  var ms = '';
   var webkit = '';
   var unprefixed = 'clip-path: ' + clip_path;
 
+  // Disable the element if we are not ready for it to be enabled
   if(shape.disabled == true) {
     var disabled = 'class="disabled" ';
   } else { var disabled = ""; }
 
-  if($(".ms.block").hasClass("show")) {
-    var ms = '-ms-clip-path: ' + clip_path + ';';
-  }
   if($(".webkit.block").hasClass("show")) {
     var webkit = '-webkit-clip-path: ' + clip_path + ';';
   }
 
   if(type == "polygon") {
     var fig = '<figure ' + disabled + 'data-name="' + shape.name + '" data-type="polygon" data-coords="' + shape.coords.join(" ") + '">'
-              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "custom") {
     var fig = '<figure ' + disabled + 'data-name="' + shape.name + '" data-type="custom" data-coords="' + shape.coords.join(" ") + '">'
-              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "inset") {
     var fig = '<figure ' + disabled + 'data-name="' + shape.name + '" data-type="inset" data-coords="' + shape.coords.join(" ") + '">'
-              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "circle") {
     var fig = '<figure ' + disabled + 'data-name="Circle" data-type="circle">'
-              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
 
   if(type == "ellipse") {
     var fig = '<figure ' + disabled + 'data-name="Ellipse" data-type="ellipse">'
-              + '<div style="' + ms + ' ' + ' ' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
+              + '<div style="' + webkit + ' ' + ' ' + unprefixed + '" class="shape ' + shape.name + '"></div>'
               + '<figcaption>' + shape.name + '</figcaption>'
             + '</figure>';
   }
@@ -860,8 +835,6 @@ function readyDrag() {
   var handles = box.querySelectorAll(".handle");
   var $functions = $(".functions");
 
-
-
   // Remove handle and point option
   if(type == "polygon" || type == "custom") {
 
@@ -896,9 +869,7 @@ function readyDrag() {
           }, 3000);
         });
       }
-
     });
-
   }
 
 
@@ -1068,10 +1039,6 @@ function readyDrag() {
           var position_pct_array = position_point.replace('%','').split(" ");
             var position_x_pct = parseInt(position_pct_array[0]);
             var position_y_pct = parseInt(position_pct_array[1]);
-
-          console.log(radius_x_pct);
-          console.log(radius_y_pct);
-
         }
 
       }).on("dragMove", function(instance, e, pointer) {
@@ -1085,14 +1052,14 @@ function readyDrag() {
 
         if(bar == "radius_x") {
           // Set % from center center position as absolute number
-          var x_pct = Math.floor(Math.abs(start_pos_x - x) / width*100);
+          var x_pct = Math.floor(Math.abs(start_pos_x - x) / width * 100);
           var x_pct = x_pct + "%";
 
           $point.text(x_pct);
         }
         if(bar == "radius_y") {
           // Set % from center center position as absolute number
-          var y_pct = Math.floor(Math.abs(start_pos_y - y) / height*100);
+          var y_pct = Math.floor(Math.abs(start_pos_y - y) / height * 100);
           var y_pct = y_pct + "%";
 
           $point.text(y_pct);
@@ -1115,10 +1082,22 @@ function readyDrag() {
           console.log("alt_x_px" + alt_x_px);
           console.log("alt_y_px" + alt_y_px);
 
-          if(move_radius_x_x_px > width && (alt_x_px > 0)) { var move_radius_x_x_px = alt_x_px; }
-          if(move_radius_x_x_px > width) { var move_radius_x_x_px = width; }
-          if(move_radius_y_y_px < 0 && (alt_y_px < height)) { var move_radius_y_y_px = alt_y_px; }
-          if(move_radius_y_y_px < 0) { var move_radius_y_y_px = 0; }
+          if(move_radius_x_x_px > width && (alt_x_px > 0)) {
+            var move_radius_x_x_px = alt_x_px;
+          }
+          if(move_radius_x_x_px > width) {
+            var move_radius_x_x_px = width;
+          }
+          /*
+          if(move_radius_y_y_px < 0 && (alt_y_px < height)) {
+            var move_radius_y_y_px = alt_y_px;
+            var move_radius_y_y_px = move_radius_y_y_px;
+          }
+          if(move_radius_y_y_px < 0) {
+            var move_radius_y_y_px = 0;
+            var move_radius_y_y_px = move_radius_y_y_px;
+          }
+          */
 
           // Move the handles
           $radius_x.css({
