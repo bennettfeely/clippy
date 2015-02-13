@@ -146,6 +146,10 @@ header iframe {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  tap-highlight-color: transparent;
+  touch-callout: none;
 }
 
 @media (min-width: 800px) {
@@ -596,15 +600,11 @@ header iframe {
 ul {
   width: 100%;
   padding: .25rem;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
 }
 
 @media (max-width: 800px) {
   ul {
-    -webkit-animation: shapes-slide-left 0.7s 0.5s cubic-bezier(0.15, 1, 0.3, 1.1) both;
-    animation: shapes-slide-left 0.7s 0.5s cubic-bezier(0.15, 1, 0.3, 1.1) both;
+    white-space: nowrap;
   }
 }
 
@@ -625,6 +625,11 @@ ul {
   }
 }
 
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+}
+
 figure {
   display: inline-block;
   text-align: center;
@@ -640,6 +645,10 @@ figure {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  tap-highlight-color: transparent;
+  touch-callout: none;
 }
 
 @media (min-width: 800px) {
@@ -773,21 +782,6 @@ figure figcaption {
   white-space: nowrap;
   margin-top: .5rem;
   padding: 0 .25rem;
-}
-
-@-webkit-keyframes shapes-slide-left {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-  }
-}
-
-@keyframes shapes-slide-left {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    -ms-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-  }
 }
 
 .clip-path {

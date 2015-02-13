@@ -136,6 +136,7 @@ header {
   z-index: 100;
   padding-top: .5rem;
   @include user-select;
+  @include no-tap;
 
   @media (min-width: $tablet) {
     border-radius: 0 0 $radius $radius;
@@ -511,12 +512,9 @@ header {
   ul {
     width: 100%;
     padding: .25rem;
-    overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
 
     @media (max-width: $tablet) {
-      animation: shapes-slide-left .7s .5s $bounce both;
+      white-space: nowrap;
     }
 
     @media (min-width: $tablet) {
@@ -527,6 +525,8 @@ header {
       overflow-x: hidden;
     }
   }
+
+  .flickity-viewport { overflow: hidden; position: relative; }
 
   figure {
     display: inline-block;
@@ -541,6 +541,7 @@ header {
       background $transition,
       transform $transition*2;
     @include user-select;
+    @include no-tap;
 
     @media (min-width: $tablet) {
       flex: $figure-height;
@@ -611,9 +612,6 @@ header {
   }
 }
 
-@keyframes shapes-slide-left {
-  from { transform: translate3d(100%,0,0); }
-}
 
 .clip-path {
   display: flex;
