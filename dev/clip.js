@@ -74,7 +74,7 @@ shape_array = {
     },
     {
       name : "Star",
-      coords : [[50,0],[63,38],[100,38],[69,59],[82,100],[50,75],[18,100],[31,59],[0,38],[37,38]]
+      coords : [[50,0],[61,35],[98,35],[68,57],[79,91],[50,70],[21,91],[32,57],[2,35],[39,35]]
     },
     {
       name : "Cross",
@@ -154,7 +154,6 @@ var start = shape_array.polygon[0];
 
 $(function() {
 
-  detectSupport();
   sizes();
   init();
 
@@ -275,46 +274,6 @@ $(function() {
   // Edit in Codepen
   $codepen.click(codePen);
 });
-
-
-// Detect browser support the sinful way...
-function detectSupport() {
-  var browser = $.browser.name;
-  var version = $.browser.versionNumber;
-
-  if(browser == "chrome") {
-    var browser = "Chrome";
-    if(version < 24) {
-      $html.addClass("no-support");
-    }
-  }
-
-  if(browser == "safari") {
-    var browser = "Safari";
-    if(version < 7) {
-      $html.addClass("no-support");
-    }
-  }
-
-  if(browser == "opera") {
-    var browser = "Opera";
-    if(version < 15) {
-      $html.addClass("no-support");
-    }
-  }
-
-  if(browser == "mozilla") {
-    var browser = "Firefox";
-    $html.addClass("no-support");
-  }
-
-  if(browser == "msie") {
-    var browser = "Internet Explorer";
-    $html.addClass("no-support");
-  }
-
-  $(".your-browser").text(browser + ' ' + version);
-}
 
 
 function setCustomBackground(url) {

@@ -1499,7 +1499,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .cite.panel:hover a {
-  color: #0b7fda;
+  color: #0B7FDA;
 }
 
 .cite.panel:hover a:hover {
@@ -1507,11 +1507,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .warning.panel {
-  background: tomato;
+  background: #ff6347;
 }
 
 .warning.panel:active {
-  background: tomato;
+  background: #ff6347;
 }
 
 .warning.panel h1 {
@@ -1561,7 +1561,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .browser-support:hover small {
-  color: #0b7fda;
+  color: #0B7FDA;
   text-decoration: underline;
 }
 
@@ -1650,8 +1650,8 @@ input[type="number"]::-webkit-outer-spin-button {
   opacity: .3;
 }
 
-.icon.unsupported:after {
-  content: "\00D7";
+.icon [data-version=""]:after {
+  content: "/u00D7";
 }
 
 p {
@@ -1689,3 +1689,5 @@ p {
   font-weight: normal;
   font-style: normal;
 }
+
+/*# sourceMappingURL=style.css.map */

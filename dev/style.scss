@@ -1125,8 +1125,10 @@ input[type="number"] {
 
   &.unsupported {
     opacity: .3;
+  }
 
-    &:after { content: "\00D7"; }
+  [data-version=""]:after {
+    content: "/u00D7";
   }
 }
 
