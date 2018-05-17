@@ -1322,7 +1322,7 @@ function codePen() {
 
   var JSONstring = JSON.stringify(data).replace(/"/g, "&quot;").replace(/'/g, "&apos;");
 
-  var $form = $('<form action="http://codepen.io/pen/define" method="POST" target="_blank">'
+  var $form = $('<form action="https://codepen.io/pen/define" method="POST" target="_blank">'
            + '<input type="hidden" name="data" value=\'' + JSONstring + '\'>'
            + '</form>');
 
