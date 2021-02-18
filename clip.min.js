@@ -1629,14 +1629,14 @@ function readyDrag() {
           // snap to edges
           var snap = 1;
 
-          var x = ((x / width) * 100).toFixed(0);
+          var x = ((x / width) * 100).toFixed(1);
           if (x < snap) {
             var x = 0;
           }
           if (x > 100 - snap) {
             var x = 100;
           }
-          var y = ((y / height) * 100).toFixed(0);
+          var y = ((y / height) * 100).toFixed(1);
           if (y < snap) {
             var y = 0;
           }
@@ -1720,14 +1720,14 @@ function setPoint(x, y) {
   // Consider using something like this instead of draggabilly's built-in grid[]
   var snap = 1;
 
-  var x = ((x / width) * 100).toFixed(0);
+  var x = ((x / width) * 100).toFixed(1);
   if (x < snap) {
     var x = 0;
   }
   if (x > 100 - snap) {
     var x = 100;
   }
-  var y = ((y / height) * 100).toFixed(0);
+  var y = ((y / height) * 100).toFixed(1);
   if (y < snap) {
     var y = 0;
   }
