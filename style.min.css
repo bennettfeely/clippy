@@ -866,6 +866,10 @@ figure figcaption {
   flex: 1;
 }
 
+.btn-copy {
+  cursor: pointer;
+}
+
 @media (min-width: 800px) {
   .css-code {
     margin-right: 0.5vw;
